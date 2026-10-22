@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Maintenance | Sportix</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --sx-blue: #0f766e;
+            --sx-blue-deep: #075a55;
+            --sx-lime: #b8d38f;
+            --sx-lime-deep: #718a49;
+            --sx-ink: #20272a;
+            --sx-bg: #f6f4ee;
+            --sx-panel: #ffffff;
+            --sx-depth: #cdd1c7;
+            --sx-text-soft: #5b616c;
+            --sx-text-muted: #858b93;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--sx-bg);
+            color: var(--sx-ink);
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .maintenance-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 640px;
+            padding: 24px;
+            text-align: center;
+            perspective: 1000px;
+        }
+
+        /* Ilustrasi Roda Gigi */
+        .illustration {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            height: 120px;
+        }
+
+        .gear-wrapper {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--sx-panel);
+            border: 3px solid #1f2632;
+            box-shadow: 0 8px 0 var(--sx-depth);
+        }
+
+        .gear-main {
+            z-index: 2;
+            width: 88px;
+            height: 88px;
+            border-radius: 22px;
+            animation: spin 8s linear infinite;
+        }
+
+        .gear-secondary {
+            z-index: 1;
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: var(--sx-lime);
+            box-shadow: 0 6px 0 var(--sx-lime-deep);
+            transform: translate(60px, -40px);
+            animation: spin-reverse 6s linear infinite;
+        }
+
+        .gear-main svg {
+            width: 44px;
+            height: 44px;
+            color: var(--sx-blue);
+        }
+
+        .gear-secondary svg {
+            width: 32px;
+            height: 32px;
+            color: #1f2632;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-reverse {
+            100% { transform: translate(60px, -40px) rotate(-360deg); }
+        }
+
+        /* Tipografi */
+        .title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--sx-ink);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--sx-text-soft);
+            max-width: 440px;
+            margin: 0 auto 32px;
+        }
+
+        /* Hitungan Mundur */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .countdown-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            background: var(--sx-panel);
+            border: 3px solid #1f2632;
+            border-radius: 16px;
+            box-shadow: 0 5px 0 var(--sx-depth);
+        }
+
+        .countdown-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--sx-blue);
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--sx-text-muted);
+            margin-top: 4px;
+        }
+
+        /* Tombol */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--sx-blue);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            text-decoration: none;
+            border: 3px solid #1f2632;
+            border-radius: 14px;
+            box-shadow: 0 6px 0 var(--sx-blue-deep);
+            cursor: pointer;
+            transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms ease;
+        }
+
+        .btn:hover {
+            background: #13847b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 var(--sx-blue-deep);
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 var(--sx-blue-deep);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 200ms ease;
+        }
+
+        .btn:hover svg {
+            transform: rotate(180deg);
+        }
+
+        /* Dekorasi Latar */
+        .shape {
+            position: absolute;
+            z-index: 1;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(40px);
+            opacity: 0.4;
+        }
+
+        .shape-1 {
+            top: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(184, 211, 143, 0.6);
+        }
+
+        .shape-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(15, 118, 110, 0.15);
+        }
+
+        /* Responsif */
+        @media (max-width: 480px) {
+            .countdown {
+                gap: 10px;
+            }
+            .countdown-box {
+                width: 60px;
+                height: 60px;
+                border-radius: 12px;
+            }
+            .countdown-num {
+                font-size: 22px;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+
+    <main class="maintenance-container">
+        
+        <div class="illustration">
+            <div class="gear-wrapper gear-secondary">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </div>
+            
+            <div class="gear-wrapper gear-main">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="title">Sedang Ada Peningkatan Sistem</h1>
+        <p class="subtitle">Kami sedang melakukan pemeliharaan rutin untuk memberikan pengalaman booking lapangan yang lebih baik. Kami akan segera kembali!</p>
+
+        <div class="countdown">
+            <div class="countdown-box">
+                <span class="countdown-num" id="days">00</span>
+                <span class="countdown-label">Hari</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="hours">00</span>
+                <span class="countdown-label">Jam</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="minutes">00</span>
+                <span class="countdown-label">Menit</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="seconds">00</span>
+                <span class="countdown-label">Detik</span>
+            </div>
+        </div>
+
+        <button onclick="location.reload()" class="btn">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Coba Muat Ulang
+        </button>
+    </main>
+
+    <script>
+        // Cek apakah ada waktu target yang tersimpan di localStorage
+        let targetDateString = localStorage.getItem("maintenance_target_date");
+        let targetDate;
+
+        if (targetDateString) {
+            // Jika sudah ada, gunakan waktu yang tersimpan
+            targetDate = new Date(targetDateString);
+            
+            // (Opsional) Jika waktunya sudah lewat, kita bisa reset ke 24 jam lagi
+            if (targetDate.getTime() < new Date().getTime()) {
+                targetDate = new Date();
+                targetDate.setHours(targetDate.getHours() + 24);
+                localStorage.setItem("maintenance_target_date", targetDate.toISOString());
+            }
+        } else {
+            // Jika belum ada, buat baru (24 jam dari sekarang) lalu simpan
+            targetDate = new Date();
+            targetDate.setHours(targetDate.getHours() + 24);
+            localStorage.setItem("maintenance_target_date", targetDate.toISOString());
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            if (distance < 0) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Efek Paralaks Mouse pada Ilustrasi
+        const illustration = document.querySelector('.illustration');
+        const container = document.querySelector('.maintenance-container');
+
+        container.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 30;
+            const y = (window.innerHeight / 2 - e.pageY) / 30;
+
+            illustration.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            illustration.style.transform = `translateX(0) translateY(0)`;
+            illustration.style.transition = 'transform 0.5s ease';
+        });
+
+        container.addEventListener('mouseenter', () => {
+            illustration.style.transition = 'none';
+        });
+    </script>
+</body>
+</html>
