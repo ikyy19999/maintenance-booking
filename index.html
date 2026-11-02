@@ -1,11 +1,12 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1112">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Sportix sedang melakukan migrasi server terjadwal pada 3 November 2026 pukul 00.00–03.00 WIB.">
+
   <title>Pemeliharaan Sistem | Sportix</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,16 +16,23 @@
   <style>
     :root {
       color-scheme: dark;
+
       --bg: #0b1112;
-      --panel: #111a1b;
-      --text: #edf5f1;
-      --muted: #91a19e;
-      --line: rgba(210, 237, 224, .13);
+      --surface: #121c1c;
+      --surface-soft: #182524;
+      --text: #f1f6ef;
+      --muted: #9caea6;
       --teal: #0d9488;
       --lime: #bef264;
+      --line: rgba(216, 241, 226, .14);
+
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
@@ -34,9 +42,11 @@
 
     body {
       margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: var(--font-body);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -45,10 +55,30 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .25;
+      z-index: -1;
+      background:
+        radial-gradient(
+          ellipse at 76% 34%,
+          rgba(13, 148, 136, .10),
+          transparent 45%
+        ),
+        radial-gradient(
+          ellipse at 12% 85%,
+          rgba(190, 242, 100, .035),
+          transparent 40%
+        );
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .2;
       background-image: radial-gradient(
-        #a8c8bb .5px,
-        transparent .5px
+        rgba(219, 245, 229, .24) .55px,
+        transparent .55px
       );
       background-size: 7px 7px;
       mask-image: linear-gradient(
@@ -68,134 +98,175 @@
       font: inherit;
     }
 
+    ::selection {
+      background: var(--lime);
+      color: #0b1112;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--lime);
+      outline-offset: 5px;
+    }
+
     .shell {
-      width: min(1320px, calc(100% - 48px));
-      margin: auto;
+      width: min(1400px, calc(100% - 64px));
       min-height: 100svh;
+      margin-inline: auto;
       display: flex;
       flex-direction: column;
-      position: relative;
     }
 
     /* header */
 
-    header {
-      height: 100px;
+    .header {
+      min-height: 96px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 20px;
       border-bottom: 1px solid var(--line);
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      font: 700 27px 'Space Grotesk', sans-serif;
-      letter-spacing: -1.7px;
-    }
-
-    .brand svg {
-      width: 34px;
-      height: 34px;
-    }
-
-    .header-note {
+    .header-index {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 12px;
-      color: #b2c2bc;
-      letter-spacing: .12em;
+      color: #8fa39a;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
 
-    .pulse {
-      width: 7px;
-      height: 7px;
+    .header-index::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--lime);
+    }
+
+    .header-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: #d4e3d8;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      flex: none;
       border-radius: 50%;
       background: var(--lime);
       box-shadow: 0 0 0 5px rgba(190, 242, 100, .09);
-      animation: breathe 2.4s infinite;
+      animation: statusPulse 2.4s ease-in-out infinite;
     }
 
-    @keyframes breathe {
+    @keyframes statusPulse {
       50% {
-        box-shadow: 0 0 0 9px rgba(190, 242, 100, 0);
+        box-shadow: 0 0 0 10px rgba(190, 242, 100, 0);
       }
     }
 
-    /* main layout */
+    /* main */
 
-    main {
+    .main {
       flex: 1;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
       align-items: center;
-      gap: 6%;
-      padding: 70px 0 88px;
+      gap: clamp(35px, 5vw, 90px);
+      padding: 76px 0 90px;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
     }
 
     .eyebrow {
       display: flex;
       align-items: center;
       gap: 14px;
+      color: var(--lime);
+      font-family: var(--font-display);
       font-size: 11px;
       font-weight: 700;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--lime);
     }
 
     .eyebrow::before {
       content: "";
-      width: 30px;
-      height: 1px;
+      width: 32px;
+      height: 2px;
       background: var(--lime);
     }
 
-    h1 {
-      font: 500 clamp(3.4rem, 6.2vw, 7.2rem)/.99
-        'Space Grotesk', sans-serif;
-      letter-spacing: -.075em;
+    .headline {
+      max-width: 750px;
       margin: 32px 0 28px;
-      max-width: 700px;
+      font-family: var(--font-display);
+      font-size: clamp(3.7rem, 6.6vw, 7.6rem);
+      font-weight: 600;
+      line-height: .97;
+      letter-spacing: -.085em;
     }
 
-    h1 em {
-      font-style: normal;
+    .headline-line {
+      display: block;
+    }
+
+    .headline-accent {
       color: var(--lime);
     }
 
     .lead {
       max-width: 520px;
-      color: #a4b4af;
-      line-height: 1.85;
-      font-size: 16px;
       margin: 0;
+      color: #aebfb5;
+      font-size: 15px;
+      line-height: 1.9;
     }
 
-    /* transaction notice */
+    /* brutalist notice */
 
     .notice {
-      margin-top: 34px;
-      padding: 18px 0;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      max-width: 530px;
-      display: flex;
-      gap: 15px;
-      align-items: flex-start;
+      position: relative;
+      max-width: 550px;
+      margin-top: 38px;
+      padding: 22px 24px;
+      border: 1px solid rgba(190, 242, 100, .3);
+      border-left: 4px solid var(--lime);
+      background: rgba(190, 242, 100, .045);
     }
 
-    .notice svg {
-      flex: none;
-      margin-top: 2px;
+    .notice-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 11px;
+      color: var(--lime);
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .notice-label svg {
+      width: 16px;
+      height: 16px;
     }
 
     .notice p {
       margin: 0;
-      color: #c4d0ca;
+      color: #c3d2c9;
       font-size: 13px;
       line-height: 1.8;
     }
@@ -207,293 +278,477 @@
     .notice a {
       color: var(--lime);
       text-decoration: underline;
-      text-underline-offset: 3px;
+      text-underline-offset: 4px;
+      overflow-wrap: anywhere;
     }
 
     /* actions */
 
     .actions {
-      margin-top: 34px;
       display: flex;
-      gap: 18px;
       align-items: center;
       flex-wrap: wrap;
+      gap: 22px;
+      margin-top: 34px;
     }
 
-    .cta {
+    .button-primary {
       display: inline-flex;
-      gap: 16px;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 53px;
+      padding: 0 20px;
       background: var(--lime);
-      color: #0b1511;
-      padding: 15px 19px;
-      border-radius: 6px;
+      border: 1px solid var(--lime);
+      color: #0b1712;
       font-size: 13px;
       font-weight: 700;
-      transition: transform .25s, background .25s;
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
     }
 
-    .cta:hover {
-      transform: translateY(-3px);
-      background: #d2ff85;
+    .button-primary:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 rgba(190, 242, 100, .22);
+      background: #d2ff86;
     }
 
-    .secondary {
-      font-size: 13px;
-      color: #aebdb7;
-      text-decoration: underline;
-      text-underline-offset: 5px;
+    .button-primary svg {
+      width: 17px;
+      height: 17px;
+      transition: transform .25s ease;
     }
 
-    /* migration diagram */
+    .button-primary:hover svg {
+      transform: translate(3px, -3px);
+    }
+
+    .schedule {
+      color: #98aa9f;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* visual */
 
     .visual {
       min-width: 0;
+      position: relative;
     }
 
-    .diagram {
+    .visual-frame {
       position: relative;
+      isolation: isolate;
       overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background:
-        radial-gradient(
-          circle at 50% 47%,
-          rgba(13, 148, 136, .14),
-          transparent 45%
-        ),
-        linear-gradient(150deg, #152021, #0d1415 65%);
-      aspect-ratio: 1.12;
+      min-height: 500px;
       display: flex;
       flex-direction: column;
-      padding: 28px;
+      padding: 27px;
+      border: 1px solid rgba(211, 245, 222, .23);
+      border-radius: 24px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(35, 62, 56, .42),
+          rgba(12, 22, 22, .85) 65%
+        );
+      box-shadow:
+        0 25px 75px rgba(0, 0, 0, .22),
+        inset 0 1px 0 rgba(255, 255, 255, .12);
     }
 
-    .diagram::before {
+    /* liquid glass reflection */
+
+    .visual-frame::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -55%;
+      left: -25%;
+      width: 110%;
+      height: 100%;
+      border-radius: 50%;
+      transform: rotate(-20deg);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, .075),
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .visual-frame::after {
       content: "";
       position: absolute;
       inset: 0;
-      opacity: .23;
+      z-index: -1;
+      opacity: .25;
+      pointer-events: none;
       background-image:
         linear-gradient(
-          rgba(178, 217, 202, .09) 1px,
+          rgba(173, 220, 195, .09) 1px,
           transparent 1px
         ),
         linear-gradient(
           90deg,
-          rgba(178, 217, 202, .09) 1px,
+          rgba(173, 220, 195, .09) 1px,
           transparent 1px
         );
       background-size: 38px 38px;
       mask-image: radial-gradient(
-        circle,
+        ellipse at center,
         #000,
-        transparent 78%
+        transparent 76%
       );
     }
 
-    .diagram-top,
-    .diagram-bottom {
+    .visual-top,
+    .visual-bottom {
       position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font: 500 10px 'Space Grotesk', sans-serif;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: #a1b7ad;
-    }
-
-    .diagram-top span:last-child {
-      color: var(--lime);
-    }
-
-    .network {
-      flex: 1;
-      min-height: 220px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .network svg {
-      width: 100%;
-      max-width: 590px;
-      overflow: visible;
-    }
-
-    .server {
-      filter: drop-shadow(
-        0 8px 24px rgba(0, 0, 0, .2)
-      );
-    }
-
-    .transfer-dot {
-      filter: drop-shadow(0 0 6px #bef264);
-    }
-
-    .diagram-bottom {
-      border-top: 1px solid var(--line);
-      padding-top: 17px;
-    }
-
-    .diagram-bottom span:last-child {
-      color: #e3eee6;
-    }
-
-    /* maintenance metrics */
-
-    .metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      margin-top: 14px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      overflow: hidden;
-    }
-
-    .metric {
-      background: #111a1b;
-      padding: 23px 25px;
-    }
-
-    .metric-label {
-      color: #8fa39b;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      margin-bottom: 10px;
-    }
-
-    .metric-value {
-      font: 500 clamp(24px, 3vw, 37px)
-        'Space Grotesk', sans-serif;
-      letter-spacing: -.06em;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .metric-value small {
-      font: 400 12px 'DM Sans', sans-serif;
-      letter-spacing: 0;
-      color: #9aada4;
-    }
-
-    .metric-caption {
-      font-size: 11px;
-      color: #82958d;
-      margin-top: 8px;
-    }
-
-    /* footer */
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 27px 0 35px;
+      z-index: 3;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 15px;
-      color: #84958e;
+      color: #a9bdb0;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .visual-top strong {
+      color: var(--lime);
+      font-weight: 600;
+    }
+
+    .visual-bottom {
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .visual-bottom span:last-child {
+      color: #d1e2d5;
+    }
+
+    /* network stage */
+
+    .network-stage {
+      position: relative;
+      flex: 1;
+      min-height: 345px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 0;
+    }
+
+    .network-glow {
+      position: absolute;
+      width: 65%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(13, 148, 136, .16);
+      filter: blur(65px);
+      pointer-events: none;
+    }
+
+    .network-svg {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 660px;
+      overflow: visible;
+    }
+
+    .server-old,
+    .server-new {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .packet {
+      filter: drop-shadow(0 0 7px rgba(190, 242, 100, .9));
+    }
+
+    /* glass floating panel */
+
+    .glass-label {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      bottom: 19px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: max-content;
+      max-width: 90%;
+      padding: 12px 17px;
+      border: 1px solid rgba(230, 255, 235, .2);
+      border-radius: 12px;
+      background: rgba(31, 53, 47, .5);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .12),
+        0 12px 30px rgba(0, 0, 0, .15);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      color: #e2eee4;
+      font-family: var(--font-display);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .glass-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--lime);
+    }
+
+    /* metrics */
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .metric {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      padding: 25px 24px;
+      border: 1px solid rgba(215, 243, 223, .16);
+      border-radius: 16px;
+      background: linear-gradient(
+        145deg,
+        rgba(37, 57, 50, .65),
+        rgba(19, 31, 29, .85)
+      );
+      box-shadow:
+        inset 2px 2px 3px rgba(255, 255, 255, .035),
+        inset -5px -5px 12px rgba(0, 0, 0, .15),
+        0 10px 28px rgba(0, 0, 0, .12);
+    }
+
+    .metric::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45px;
+      height: 45px;
+      border-top: 1px solid rgba(190, 242, 100, .3);
+      border-right: 1px solid rgba(190, 242, 100, .3);
+      border-top-right-radius: 16px;
+      pointer-events: none;
+    }
+
+    .metric-label {
+      margin-bottom: 13px;
+      color: #9aafa1;
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      color: #f0f7ee;
+      font-family: var(--font-display);
+      font-size: clamp(25px, 3vw, 39px);
+      font-weight: 600;
+      letter-spacing: -.06em;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-value small {
+      color: #9eb3a4;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .metric-caption {
+      margin-top: 10px;
+      color: #82998b;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    /* footer */
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 27px 0 34px;
+      border-top: 1px solid var(--line);
+      color: #879b8f;
       font-size: 12px;
     }
 
-    footer strong {
-      font-weight: 500;
-      color: #bdcdc3;
+    .footer strong {
+      color: #c1d1c5;
+      font-weight: 600;
     }
 
-    footer a {
+    .footer a {
       text-decoration: underline;
       text-underline-offset: 4px;
+      overflow-wrap: anywhere;
     }
 
     /* responsive */
 
-    @media (max-width: 950px) {
-      main {
+    @media (max-width: 1050px) {
+      .main {
         grid-template-columns: 1fr;
-        gap: 50px;
-        padding: 64px 0;
+        gap: 55px;
+        padding: 65px 0 75px;
       }
 
-      h1 {
-        max-width: 650px;
+      .headline {
+        max-width: 800px;
+        font-size: clamp(4rem, 9vw, 7rem);
       }
 
       .visual {
-        max-width: 720px;
         width: 100%;
-      }
-
-      .diagram {
-        aspect-ratio: 1.4;
+        max-width: 760px;
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .shell {
-        width: min(100% - 32px, 1320px);
+        width: calc(100% - 32px);
       }
 
-      header {
-        height: 76px;
+      .header {
+        min-height: 75px;
       }
 
-      .brand {
-        font-size: 23px;
-      }
-
-      .header-note {
+      .header-index {
         font-size: 9px;
-        letter-spacing: .06em;
+        letter-spacing: .08em;
       }
 
-      main {
-        padding: 50px 0 60px;
-        gap: 40px;
+      .header-index::before {
+        width: 17px;
       }
 
-      h1 {
-        font-size: clamp(3.2rem, 14vw, 5.2rem);
-        margin: 25px 0;
+      .header-status {
+        font-size: 9px;
+        letter-spacing: .05em;
+      }
+
+      .main {
+        gap: 42px;
+        padding: 48px 0 58px;
+      }
+
+      .headline {
+        margin: 26px 0;
+        font-size: clamp(3.3rem, 13vw, 5.2rem);
+        letter-spacing: -.075em;
       }
 
       .lead {
         font-size: 14px;
+        line-height: 1.85;
       }
 
-      .diagram {
+      .notice {
+        margin-top: 30px;
+        padding: 19px 18px;
+      }
+
+      .actions {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 17px;
+      }
+
+      .visual-frame {
+        min-height: 365px;
         padding: 17px;
-        aspect-ratio: 1.1;
+        border-radius: 18px;
       }
 
-      .network {
-        min-height: 180px;
+      .visual-top,
+      .visual-bottom {
+        font-size: 8px;
+        letter-spacing: .06em;
       }
 
-      .diagram-top,
-      .diagram-bottom {
+      .network-stage {
+        min-height: 270px;
+        padding: 15px 0;
+      }
+
+      .glass-label {
+        bottom: 10px;
+        padding: 10px 12px;
         font-size: 9px;
       }
 
+      .metrics {
+        gap: 9px;
+      }
+
       .metric {
-        padding: 18px 14px;
+        padding: 20px 14px;
+        border-radius: 12px;
+      }
+
+      .metric-label {
+        min-height: 27px;
+        font-size: 9px;
+        letter-spacing: .06em;
       }
 
       .metric-value {
-        font-size: 27px;
+        font-size: clamp(23px, 6vw, 30px);
       }
 
-      footer {
-        align-items: flex-start;
+      .metric-caption {
+        font-size: 10px;
+      }
+
+      .footer {
         flex-direction: column;
-        line-height: 1.7;
+        align-items: flex-start;
+        line-height: 1.8;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .header-index {
+        display: none;
+      }
+
+      .header {
+        justify-content: flex-end;
+      }
+
+      .visual-frame {
+        min-height: 315px;
+      }
+
+      .network-stage {
+        min-height: 225px;
       }
     }
 
@@ -502,6 +757,7 @@
       *::before,
       *::after {
         animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
         scroll-behavior: auto !important;
       }
@@ -510,329 +766,483 @@
 </head>
 
 <body>
+
   <div class="shell">
 
-    <!-- header -->
-    <header>
-      <a href="/" class="brand" aria-label="Sportix, beranda">
-        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path
-            d="M30 8H15C9 8 7 12 7 16s3 7 9 7h8c6 0 9 3 9 8s-4 7-10 7H10"
-            stroke="#bef264"
-            stroke-width="5"
-            stroke-linecap="square"
-          />
-          <path
-            d="M10 2h13"
-            stroke="#0d9488"
-            stroke-width="5"
-          />
-        </svg>
-        sportix
-      </a>
+    <!-- HEADER -->
+    <header class="header">
 
-      <div class="header-note">
-        <span class="pulse" aria-hidden="true"></span>
+      <div class="header-index">
+        Infrastructure / 001
+      </div>
+
+      <div class="header-status">
+        <span class="status-dot" aria-hidden="true"></span>
         <span>Pemeliharaan Terjadwal</span>
       </div>
+
     </header>
 
-    <main>
+    <!-- MAIN -->
+    <main class="main">
 
-      <!-- left content -->
+      <!-- CONTENT -->
       <section class="content" aria-labelledby="headline">
 
         <div class="eyebrow">
-          System Update / 001
+          System Migration / 2026
         </div>
 
-        <h1 id="headline">
-          Sedang<br>
-          berpindah ke<br>
-          <em>level baru.</em>
+        <h1 class="headline" id="headline">
+          <span class="headline-line">Sedang</span>
+          <span class="headline-line">berpindah</span>
+          <span class="headline-line">ke <span class="headline-accent">level baru.</span></span>
         </h1>
 
         <p class="lead">
           Kami sedang memigrasikan server Sportix untuk
-          menghadirkan pengalaman yang lebih stabil dan
-          responsif. Layanan akan kembali setelah proses
-          pemeliharaan selesai.
+          menghadirkan pengalaman yang lebih stabil,
+          cepat, dan responsif. Layanan akan kembali
+          setelah proses pemeliharaan selesai.
         </p>
 
         <div class="notice">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#bef264"
-            stroke-width="1.5"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="9"/>
-            <path
-              d="M12 7v5m0 4h.01"
+
+          <div class="notice-label">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
               stroke-linecap="round"
-            />
-          </svg>
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5"/>
+              <path d="M12 16h.01"/>
+            </svg>
+
+            Informasi Penting
+          </div>
 
           <p>
             <strong>
-              Transaksi atau pembayaran mengalami kendala?
+              Mengalami kendala transaksi atau pembayaran?
             </strong>
             <br>
-            Jika Anda bertransaksi selama pemeliharaan,
-            hubungi kami melalui
+            Jika Anda melakukan transaksi selama periode
+            pemeliharaan dan mengalami kendala, silakan
+            hubungi tim dukungan kami melalui
             <a href="mailto:support@madebyrizky.id">
               support@madebyrizky.id
-            </a>
-            untuk bantuan pengecekan.
+            </a>.
+            Kami akan membantu melakukan pengecekan
+            dan penanganan lebih lanjut.
           </p>
+
         </div>
 
         <div class="actions">
+
           <a
-            class="cta"
             href="mailto:support@madebyrizky.id?subject=Bantuan%20Transaksi%20Sportix"
+            class="button-primary"
           >
             Hubungi Dukungan
-            <span aria-hidden="true">↗</span>
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 19 19 5"/>
+              <path d="M8 5h11v11"/>
+            </svg>
           </a>
 
-          <span class="secondary">
-            3 November 2026 · 00.00–03.00 WIB
-          </span>
+          <div class="schedule">
+            3 November 2026<br>
+            00.00–03.00 WIB
+          </div>
+
         </div>
 
       </section>
 
-      <!-- right visualization -->
+      <!-- VISUAL -->
       <section
         class="visual"
-        aria-label="Visualisasi migrasi server dan estimasi waktu pemeliharaan"
+        aria-label="Visualisasi ilustratif migrasi server Sportix"
       >
 
-        <div class="diagram">
+        <div class="visual-frame">
 
-          <div class="diagram-top">
-            <span>Infrastructure / Migration</span>
-            <span>● Transfer Aktif*</span>
+          <div class="visual-top">
+            <span>Server Infrastructure</span>
+            <strong>Migration Sequence</strong>
           </div>
 
-          <div class="network">
+          <div class="network-stage">
+
+            <div class="network-glow"></div>
 
             <svg
-              viewBox="0 0 600 350"
+              class="network-svg"
+              viewBox="0 0 640 380"
               role="img"
-              aria-label="Ilustrasi aliran data dari server lama menuju server baru"
+              aria-label="Ilustrasi perpindahan data dari server lama menuju server baru"
             >
 
               <defs>
-                <linearGradient
-                  id="pathGradient"
-                  x1="0"
-                  y1="0"
-                  x2="1"
-                  y2="0"
-                >
-                  <stop stop-color="#315b55"/>
-                  <stop offset="1" stop-color="#bef264"/>
-                </linearGradient>
 
+                <!-- clay body gradient -->
                 <linearGradient
-                  id="serverFill"
+                  id="clayBody"
                   x1="0"
                   y1="0"
                   x2="1"
                   y2="1"
                 >
-                  <stop stop-color="#223331"/>
-                  <stop offset="1" stop-color="#14201f"/>
+                  <stop offset="0%" stop-color="#38594d"/>
+                  <stop offset="45%" stop-color="#203a32"/>
+                  <stop offset="100%" stop-color="#10231f"/>
                 </linearGradient>
+
+                <linearGradient
+                  id="clayNew"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="1"
+                >
+                  <stop offset="0%" stop-color="#456e54"/>
+                  <stop offset="48%" stop-color="#234a3a"/>
+                  <stop offset="100%" stop-color="#112b24"/>
+                </linearGradient>
+
+                <linearGradient
+                  id="connectionGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stop-color="#547d6d"/>
+                  <stop offset="50%" stop-color="#0d9488"/>
+                  <stop offset="100%" stop-color="#bef264"/>
+                </linearGradient>
+
+                <filter
+                  id="clayShadow"
+                  x="-50%"
+                  y="-50%"
+                  width="200%"
+                  height="200%"
+                >
+                  <feDropShadow
+                    dx="0"
+                    dy="14"
+                    stdDeviation="13"
+                    flood-color="#000000"
+                    flood-opacity=".32"
+                  />
+                </filter>
+
+                <filter
+                  id="packetGlow"
+                  x="-200%"
+                  y="-200%"
+                  width="500%"
+                  height="500%"
+                >
+                  <feGaussianBlur
+                    stdDeviation="4"
+                    result="blur"
+                  />
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+
               </defs>
 
-              <!-- network rings -->
+              <!-- orbital rings -->
               <circle
-                cx="300"
-                cy="175"
-                r="125"
+                class="orbit orbit-one"
+                cx="320"
+                cy="184"
+                r="150"
                 fill="none"
-                stroke="#739e87"
+                stroke="#9dc9a5"
                 stroke-opacity=".11"
+                stroke-width="1"
                 stroke-dasharray="3 10"
               />
 
               <circle
-                cx="300"
-                cy="175"
-                r="88"
+                class="orbit orbit-two"
+                cx="320"
+                cy="184"
+                r="112"
                 fill="none"
-                stroke="#739e87"
+                stroke="#9dc9a5"
                 stroke-opacity=".09"
               />
 
-              <!-- data path -->
-              <path
-                id="transferPath"
-                d="M187 175 C250 175 350 175 413 175"
-                stroke="url(#pathGradient)"
-                stroke-width="2"
+              <circle
+                cx="320"
+                cy="184"
+                r="64"
                 fill="none"
-                stroke-dasharray="5 8"
+                stroke="#9dc9a5"
+                stroke-opacity=".06"
               />
 
-              <!-- old server -->
-              <g class="server" transform="translate(72 102)">
+              <!-- connection -->
+              <path
+                id="dataPath"
+                d="M211 184 C270 184 370 184 429 184"
+                fill="none"
+                stroke="url(#connectionGradient)"
+                stroke-width="2"
+                stroke-dasharray="5 9"
+                stroke-linecap="round"
+              />
+
+              <!-- OLD SERVER -->
+              <g
+                class="server-old"
+                transform="translate(75 96)"
+                filter="url(#clayShadow)"
+              >
+
+                <!-- clay server body -->
                 <rect
-                  width="115"
-                  height="146"
-                  rx="10"
-                  fill="url(#serverFill)"
-                  stroke="#55766a"
-                  stroke-opacity=".6"
+                  x="0"
+                  y="0"
+                  width="136"
+                  height="176"
+                  rx="22"
+                  fill="url(#clayBody)"
+                  stroke="#739789"
+                  stroke-opacity=".55"
+                  stroke-width="1.5"
                 />
 
-                <rect
-                  x="15" y="22"
-                  width="85" height="28"
-                  rx="4"
-                  fill="#0b1515"
-                  stroke="#3e6258"
+                <!-- soft highlight -->
+                <path
+                  d="M22 8 H111"
+                  stroke="#c8e3cf"
+                  stroke-opacity=".18"
+                  stroke-width="3"
+                  stroke-linecap="round"
                 />
 
-                <rect
-                  x="15" y="59"
-                  width="85" height="28"
-                  rx="4"
-                  fill="#0b1515"
-                  stroke="#3e6258"
-                />
+                <!-- rack slots -->
+                <g>
+                  <rect
+                    x="18" y="28"
+                    width="100" height="32"
+                    rx="9"
+                    fill="#11221d"
+                    stroke="#4d7160"
+                  />
 
-                <rect
-                  x="15" y="96"
-                  width="85" height="28"
-                  rx="4"
-                  fill="#0b1515"
-                  stroke="#3e6258"
-                />
+                  <rect
+                    x="18" y="72"
+                    width="100" height="32"
+                    rx="9"
+                    fill="#11221d"
+                    stroke="#4d7160"
+                  />
 
-                <g fill="#718c80">
-                  <circle cx="29" cy="36" r="3"/>
-                  <circle cx="29" cy="73" r="3"/>
-                  <circle cx="29" cy="110" r="3"/>
+                  <rect
+                    x="18" y="116"
+                    width="100" height="32"
+                    rx="9"
+                    fill="#11221d"
+                    stroke="#4d7160"
+                  />
                 </g>
 
-                <path
-                  d="M43 36h40M43 73h40M43 110h40"
-                  stroke="#48665a"
-                  stroke-width="2"
-                />
+                <!-- old status lights -->
+                <g fill="#789587">
+                  <circle cx="36" cy="44" r="4"/>
+                  <circle cx="36" cy="88" r="4"/>
+                  <circle cx="36" cy="132" r="4"/>
+                </g>
+
+                <g
+                  stroke="#567264"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <path d="M51 44h46"/>
+                  <path d="M51 88h46"/>
+                  <path d="M51 132h46"/>
+                </g>
+
               </g>
 
-              <!-- new server -->
-              <g class="server" transform="translate(413 102)">
+              <!-- NEW SERVER -->
+              <g
+                class="server-new"
+                transform="translate(429 96)"
+                filter="url(#clayShadow)"
+              >
+
+                <!-- clay server body -->
                 <rect
-                  width="115"
-                  height="146"
-                  rx="10"
-                  fill="url(#serverFill)"
+                  x="0"
+                  y="0"
+                  width="136"
+                  height="176"
+                  rx="22"
+                  fill="url(#clayNew)"
                   stroke="#bef264"
-                  stroke-opacity=".75"
+                  stroke-opacity=".7"
+                  stroke-width="1.5"
                 />
 
-                <rect
-                  x="15" y="22"
-                  width="85" height="28"
-                  rx="4"
-                  fill="#10221d"
-                  stroke="#598c64"
+                <!-- reflection -->
+                <path
+                  d="M22 8 H111"
+                  stroke="#e4ffce"
+                  stroke-opacity=".34"
+                  stroke-width="3"
+                  stroke-linecap="round"
                 />
 
-                <rect
-                  x="15" y="59"
-                  width="85" height="28"
-                  rx="4"
-                  fill="#10221d"
-                  stroke="#598c64"
-                />
+                <!-- rack slots -->
+                <g>
+                  <rect
+                    x="18" y="28"
+                    width="100" height="32"
+                    rx="9"
+                    fill="#10271e"
+                    stroke="#729f70"
+                  />
 
-                <rect
-                  x="15" y="96"
-                  width="85" height="28"
-                  rx="4"
-                  fill="#10221d"
-                  stroke="#598c64"
-                />
+                  <rect
+                    x="18" y="72"
+                    width="100" height="32"
+                    rx="9"
+                    fill="#10271e"
+                    stroke="#729f70"
+                  />
 
-                <g fill="#bef264">
-                  <circle class="server-light" cx="29" cy="36" r="3"/>
-                  <circle class="server-light" cx="29" cy="73" r="3"/>
-                  <circle class="server-light" cx="29" cy="110" r="3"/>
+                  <rect
+                    x="18" y="116"
+                    width="100" height="32"
+                    rx="9"
+                    fill="#10271e"
+                    stroke="#729f70"
+                  />
                 </g>
 
-                <path
-                  d="M43 36h40M43 73h40M43 110h40"
-                  stroke="#739f6d"
-                  stroke-width="2"
-                />
+                <!-- animated lights -->
+                <g fill="#bef264">
+                  <circle class="server-light" cx="36" cy="44" r="4"/>
+                  <circle class="server-light" cx="36" cy="88" r="4"/>
+                  <circle class="server-light" cx="36" cy="132" r="4"/>
+                </g>
+
+                <g
+                  stroke="#84ac77"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <path d="M51 44h46"/>
+                  <path d="M51 88h46"/>
+                  <path d="M51 132h46"/>
+                </g>
+
               </g>
 
-              <!-- animated data packets -->
-              <circle
-                class="transfer-dot"
-                cx="187"
-                cy="175"
-                r="5"
-                fill="#bef264"
-              />
-
-              <circle
-                class="transfer-dot"
-                cx="187"
-                cy="175"
-                r="2"
-                fill="#fff"
-              />
+              <!-- moving packets -->
+              <g class="packet" filter="url(#packetGlow)">
+                <circle
+                  class="packet-core"
+                  cx="211"
+                  cy="184"
+                  r="5"
+                  fill="#bef264"
+                />
+                <circle
+                  class="packet-inner"
+                  cx="211"
+                  cy="184"
+                  r="2"
+                  fill="#ffffff"
+                />
+              </g>
 
               <!-- labels -->
               <g
-                fill="#a3b8ac"
-                font-family="DM Sans, sans-serif"
-                font-size="12"
-                text-anchor="middle"
-              >
-                <text x="129" y="278">SERVER LAMA</text>
-                <text x="470" y="278">SERVER BARU</text>
-              </g>
-
-              <g
-                fill="#6c9e8b"
                 font-family="Space Grotesk, sans-serif"
-                font-size="10"
+                font-size="12"
+                font-weight="600"
                 text-anchor="middle"
-                letter-spacing="2"
+                letter-spacing="1.6"
               >
-                <text x="300" y="148">
-                  DATA TRANSFER
+                <text
+                  x="143"
+                  y="310"
+                  fill="#a3b9aa"
+                >
+                  SOURCE NODE
+                </text>
+
+                <text
+                  x="497"
+                  y="310"
+                  fill="#c9f39b"
+                >
+                  TARGET NODE
                 </text>
               </g>
 
+              <text
+                x="320"
+                y="155"
+                text-anchor="middle"
+                font-family="Space Grotesk, sans-serif"
+                font-size="10"
+                font-weight="600"
+                letter-spacing="2"
+                fill="#7eae96"
+              >
+                DATA TRANSFER
+              </text>
+
             </svg>
+
+            <div class="glass-label">
+              Migrasi Infrastruktur Berlangsung*
+            </div>
+
           </div>
 
-          <div class="diagram-bottom">
-            <span>Visualisasi Ilustratif*</span>
-            <span>Sportix Infrastructure</span>
+          <div class="visual-bottom">
+            <span>*Visualisasi Ilustratif</span>
+            <span>Sportix / Infrastructure</span>
           </div>
 
         </div>
 
-        <!-- schedule and countdown -->
+        <!-- METRICS -->
         <div class="metrics">
 
           <div class="metric">
+
             <div class="metric-label">
-              Estimasi layanan kembali
+              Estimasi Layanan Kembali
             </div>
 
             <div class="metric-value">
@@ -842,19 +1252,19 @@
             <div class="metric-caption">
               Selasa, 3 November 2026
             </div>
+
           </div>
 
           <div class="metric">
-            <div
-              class="metric-label"
-              id="countLabel"
-            >
-              Sisa waktu terjadwal
+
+            <div class="metric-label" id="countLabel">
+              Sisa Waktu Terjadwal
             </div>
 
             <div
               class="metric-value"
               id="countdown"
+              role="timer"
               aria-live="off"
             >
               --:--:--
@@ -866,15 +1276,18 @@
             >
               Estimasi, bukan status server real-time
             </div>
+
           </div>
 
         </div>
 
       </section>
+
     </main>
 
-    <!-- footer -->
-    <footer>
+    <!-- FOOTER -->
+    <footer class="footer">
+
       <span>
         © <span id="year">2026</span> Sportix.
         <strong>Two Paths, One Play.</strong>
@@ -886,11 +1299,12 @@
           support@madebyrizky.id
         </a>
       </span>
+
     </footer>
 
   </div>
 
-  <!-- gsap -->
+  <!-- GSAP -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
     defer
@@ -901,21 +1315,18 @@
       'use strict';
 
       /*
-       * maintenance schedule
+       * sportix maintenance
        * timezone: asia/jakarta (wib)
        */
 
-      const start = Date.parse(
-        '2026-11-03T00:00:00+07:00'
-      );
-
-      const end = Date.parse(
-        '2026-11-03T03:00:00+07:00'
-      );
+      const MAINTENANCE = {
+        start: Date.parse('2026-11-03T00:00:00+07:00'),
+        end: Date.parse('2026-11-03T03:00:00+07:00')
+      };
 
       const countdown = document.getElementById('countdown');
-      const label = document.getElementById('countLabel');
-      const caption = document.getElementById('countCaption');
+      const countLabel = document.getElementById('countLabel');
+      const countCaption = document.getElementById('countCaption');
 
       document.getElementById('year').textContent =
         new Date().getFullYear();
@@ -927,27 +1338,19 @@
       function updateCountdown() {
         const now = Date.now();
 
-        if (now >= end) {
+        if (now >= MAINTENANCE.end) {
           countdown.textContent = '00:00:00';
-          label.textContent = 'Jadwal pemeliharaan berakhir';
-          caption.textContent =
-            'Layanan mungkin masih dalam proses verifikasi';
+          countLabel.textContent = 'Jadwal Pemeliharaan Berakhir';
+          countCaption.textContent =
+            'Layanan mungkin masih dalam tahap verifikasi';
           return;
         }
 
-        const remaining = Math.max(0, end - now);
+        const diff = Math.max(0, MAINTENANCE.end - now);
 
-        const hours = Math.floor(
-          remaining / 3600000
-        );
-
-        const minutes = Math.floor(
-          (remaining % 3600000) / 60000
-        );
-
-        const seconds = Math.floor(
-          (remaining % 60000) / 1000
-        );
+        const hours = Math.floor(diff / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
 
         countdown.textContent = [
           hours,
@@ -957,24 +1360,25 @@
           .map(value => String(value).padStart(2, '0'))
           .join(':');
 
-        if (now < start) {
-          label.textContent =
-            'Waktu menuju estimasi selesai';
-
-          caption.textContent =
-            'Pemeliharaan dijadwalkan mulai 00.00 WIB';
+        if (now < MAINTENANCE.start) {
+          countLabel.textContent = 'Menuju Estimasi Selesai';
+          countCaption.textContent =
+            'Pemeliharaan dimulai pukul 00.00 WIB';
+        } else {
+          countLabel.textContent = 'Sisa Waktu Terjadwal';
+          countCaption.textContent =
+            'Estimasi, bukan status server real-time';
         }
       }
 
       updateCountdown();
-
       setInterval(updateCountdown, 1000);
 
       /*
-       * gsap animations
+       * GSAP motion
        */
 
-      function animate() {
+      function initAnimations() {
         if (
           !window.gsap ||
           window.matchMedia(
@@ -986,40 +1390,135 @@
 
         const gsap = window.gsap;
 
-        // content entrance
-        gsap.from('.content > *', {
-          opacity: 0,
-          y: 24,
-          duration: .85,
-          stagger: .12,
-          ease: 'power3.out'
+        // entrance timeline
+        const intro = gsap.timeline({
+          defaults: {
+            ease: 'power3.out'
+          }
         });
 
-        // visualization entrance
-        gsap.from('.visual', {
-          opacity: 0,
-          y: 25,
-          duration: 1.1,
-          delay: .2,
-          ease: 'power3.out'
-        });
+        intro
+          .from('.header-index, .header-status', {
+            opacity: 0,
+            y: -12,
+            duration: .65,
+            stagger: .1
+          })
+          .from('.eyebrow', {
+            opacity: 0,
+            y: 16,
+            duration: .65
+          }, '-=.25')
+          .from('.headline-line', {
+            opacity: 0,
+            y: 55,
+            duration: .95,
+            stagger: .12
+          }, '-=.35')
+          .from('.lead', {
+            opacity: 0,
+            y: 20,
+            duration: .75
+          }, '-=.45')
+          .from('.notice, .actions', {
+            opacity: 0,
+            y: 18,
+            duration: .7,
+            stagger: .12
+          }, '-=.35')
+          .from('.visual-frame', {
+            opacity: 0,
+            y: 30,
+            scale: .97,
+            duration: 1.1
+          }, '-=1.1')
+          .from('.metric', {
+            opacity: 0,
+            y: 18,
+            duration: .65,
+            stagger: .12
+          }, '-=.55');
 
-        // server migration packets
-        gsap.to('.transfer-dot', {
-          attr: {
-            cx: 413
-          },
-          duration: 2.7,
+        // packet movement
+        const packetMotion = gsap.timeline({
           repeat: -1,
-          ease: 'power1.inOut',
-          repeatDelay: .45
+          repeatDelay: .35
         });
 
-        // new server indicator lights
+        packetMotion
+          .set('.packet', {
+            opacity: 0
+          })
+          .set('.packet-core, .packet-inner', {
+            attr: {
+              cx: 211
+            }
+          })
+          .to('.packet', {
+            opacity: 1,
+            duration: .2
+          })
+          .to('.packet-core, .packet-inner', {
+            attr: {
+              cx: 429
+            },
+            duration: 2.5,
+            ease: 'power1.inOut'
+          }, 0)
+          .to('.packet', {
+            opacity: 0,
+            duration: .3
+          }, 2.25);
+
+        // target server lights
         gsap.to('.server-light', {
-          opacity: .25,
-          duration: .7,
-          stagger: .16,
+          opacity: .22,
+          duration: .65,
+          stagger: .17,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+
+        // gentle server breathing
+        gsap.to('.server-new', {
+          y: -5,
+          duration: 2.8,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+
+        gsap.to('.server-old', {
+          opacity: .72,
+          duration: 3.2,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+
+        // subtle network movement
+        gsap.to('.orbit-one', {
+          rotation: 360,
+          svgOrigin: '320 184',
+          duration: 65,
+          repeat: -1,
+          ease: 'none'
+        });
+
+        gsap.to('.orbit-two', {
+          rotation: -360,
+          svgOrigin: '320 184',
+          duration: 90,
+          repeat: -1,
+          ease: 'none'
+        });
+
+        // soft ambient glow
+        gsap.to('.network-glow', {
+          scale: 1.18,
+          opacity: .55,
+          duration: 4,
           yoyo: true,
           repeat: -1,
           ease: 'sine.inOut'
@@ -1027,16 +1526,17 @@
       }
 
       if (document.readyState === 'complete') {
-        animate();
+        initAnimations();
       } else {
         window.addEventListener(
           'load',
-          animate,
+          initAnimations,
           { once: true }
         );
       }
 
     })();
   </script>
+
 </body>
 </html>
