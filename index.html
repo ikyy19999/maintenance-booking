@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Sportix — Migrasi Server</title>
+  <title>Sportix — Pemulihan Sistem</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -36,261 +36,119 @@
       --radius-xl: 32px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      min-height: 100%;
-      background: var(--sx-bg);
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { min-height: 100%; background: var(--sx-bg); scroll-behavior: smooth; }
     body {
       min-height: 100vh;
       background: var(--sx-bg);
       color: var(--sx-ink);
       font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 15px;
-      font-weight: 420;
-      line-height: 1.55;
-      letter-spacing: -0.006em;
-      text-rendering: optimizeLegibility;
+      font-size: 15px; font-weight: 420; line-height: 1.55; letter-spacing: -0.006em;
       -webkit-font-smoothing: antialiased;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
+      display: flex; flex-direction: column; overflow-x: hidden;
     }
 
     .migration-shell {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px 60px;
-      position: relative;
-      z-index: 1;
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px 20px 60px; position: relative; z-index: 1;
     }
 
     .migration-shell::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(13, 148, 136, 0.06), transparent 60%),
-        radial-gradient(ellipse 60% 50% at 85% 80%, rgba(190, 242, 100, 0.08), transparent 55%);
-      pointer-events: none;
-      z-index: 0;
+      content: ''; position: fixed; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(13, 148, 136, 0.06), transparent 60%),
+                  radial-gradient(ellipse 60% 50% at 85% 80%, rgba(190, 242, 100, 0.08), transparent 55%);
+      pointer-events: none; z-index: 0;
     }
 
     .migration-card {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 720px;
-      padding: 52px 44px 48px;
-      border: 2px solid var(--sx-line);
-      border-radius: var(--radius-xl);
-      background: var(--sx-panel);
-      box-shadow:
-        var(--clay-hi),
-        0 8px 0 var(--sx-depth),
-        var(--clay-3);
-      text-align: center;
-      overflow: hidden;
+      position: relative; z-index: 2; width: 100%; max-width: 720px; padding: 52px 44px 48px;
+      border: 2px solid var(--sx-line); border-radius: var(--radius-xl); background: var(--sx-panel);
+      box-shadow: var(--clay-hi), 0 8px 0 var(--sx-depth), var(--clay-3);
+      text-align: center; overflow: hidden;
     }
 
     .migration-card::before {
-      content: '';
-      position: absolute;
-      top: -70px;
-      right: -50px;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: var(--sx-lime);
-      opacity: 0.18;
-      pointer-events: none;
+      content: ''; position: absolute; top: -70px; right: -50px; width: 180px; height: 180px;
+      border-radius: 50%; background: var(--sx-lime); opacity: 0.18; pointer-events: none;
     }
 
     .migration-card::after {
-      content: '';
-      position: absolute;
-      bottom: -60px;
-      left: -40px;
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: var(--sx-orange);
-      opacity: 0.12;
-      pointer-events: none;
+      content: ''; position: absolute; bottom: -60px; left: -40px; width: 140px; height: 140px;
+      border-radius: 50%; background: var(--sx-orange); opacity: 0.12; pointer-events: none;
     }
 
-    .logo-row {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 28px;
-      position: relative;
-      z-index: 2;
-    }
-
+    .logo-row { display: flex; justify-content: center; margin-bottom: 28px; position: relative; z-index: 2; }
     .brand-logo-text {
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      color: var(--sx-blue);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 26px; font-weight: 800; letter-spacing: -0.04em; color: var(--sx-blue);
+      display: flex; align-items: center; gap: 10px;
     }
-
     .brand-logo-text .logo-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--sx-lime);
-      border: 2px solid var(--sx-ink);
-      display: inline-block;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--sx-lime);
+      border: 2px solid var(--sx-ink); display: inline-block;
     }
 
     .icon-badge {
-      width: 76px;
-      height: 76px;
-      border: 2px solid var(--sx-ink);
-      border-radius: 22px;
-      background: var(--sx-blue);
-      box-shadow:
-        inset 0 2px 0 rgba(255, 255, 255, 0.4),
-        0 5px 0 var(--sx-blue-deep);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 26px;
-      position: relative;
-      z-index: 2;
-      color: #fff;
+      width: 76px; height: 76px; border: 2px solid var(--sx-ink); border-radius: 22px;
+      background: var(--sx-blue); box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), 0 5px 0 var(--sx-blue-deep);
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 26px;
+      position: relative; z-index: 2; color: #fff;
     }
 
-    .icon-badge svg {
-      width: 34px;
-      height: 34px;
-      stroke-width: 1.8;
-    }
+    .icon-badge svg { width: 34px; height: 34px; stroke-width: 1.8; }
 
     .heading {
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(28px, 5vw, 38px);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 1.15;
-      color: var(--sx-ink);
-      margin-bottom: 14px;
-      position: relative;
-      z-index: 2;
+      font-size: clamp(28px, 5vw, 38px); font-weight: 800; letter-spacing: -0.045em;
+      line-height: 1.15; color: var(--sx-ink); margin-bottom: 14px; position: relative; z-index: 2;
     }
 
-    .heading .accent {
-      color: var(--sx-blue);
-    }
+    .heading .accent { color: var(--sx-blue); }
 
     .subtext {
-      font-size: clamp(14px, 1.6vw, 15.5px);
-      color: #5b616c;
-      line-height: 1.7;
-      max-width: 520px;
-      margin: 0 auto 32px;
-      position: relative;
-      z-index: 2;
+      font-size: clamp(14px, 1.6vw, 15.5px); color: #5b616c; line-height: 1.7;
+      max-width: 520px; margin: 0 auto 32px; position: relative; z-index: 2;
     }
 
     .migration-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 36px;
-      position: relative;
-      z-index: 2;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 36px; position: relative; z-index: 2;
     }
 
     .server-node {
-      width: 68px;
-      height: 68px;
-      border: 2px solid var(--sx-line);
-      border-radius: 18px;
-      background: var(--sx-panel-soft);
-      box-shadow:
-        inset 0 2px 3px rgba(26, 29, 31, 0.06),
-        0 3px 0 var(--sx-depth);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--sx-ink);
-      position: relative;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 68px; height: 68px; border: 2px solid var(--sx-line); border-radius: 18px;
+      background: var(--sx-panel-soft); box-shadow: inset 0 2px 3px rgba(26, 29, 31, 0.06), 0 3px 0 var(--sx-depth);
+      display: flex; align-items: center; justify-content: center; color: var(--sx-ink);
+      position: relative; transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .server-node svg {
-      width: 28px;
-      height: 28px;
-      stroke-width: 1.8;
-    }
+    .server-node svg { width: 28px; height: 28px; stroke-width: 1.8; }
 
     .server-node.active-source {
-      border-color: var(--sx-blue);
-      background: rgba(13, 148, 136, 0.08);
-      box-shadow:
-        inset 0 2px 3px rgba(13, 148, 136, 0.1),
-        0 3px 0 var(--sx-blue-deep);
-      color: var(--sx-blue);
+      border-color: var(--sx-blue); background: rgba(13, 148, 136, 0.08);
+      box-shadow: inset 0 2px 3px rgba(13, 148, 136, 0.1), 0 3px 0 var(--sx-blue-deep); color: var(--sx-blue);
     }
 
     .server-node.active-target {
-      border-color: var(--sx-lime-deep);
-      background: rgba(190, 242, 100, 0.15);
-      box-shadow:
-        inset 0 2px 3px rgba(132, 204, 22, 0.1),
-        0 3px 0 var(--sx-lime-deep);
-      color: #4d7c0f;
+      border-color: var(--sx-lime-deep); background: rgba(190, 242, 100, 0.15);
+      box-shadow: inset 0 2px 3px rgba(132, 204, 22, 0.1), 0 3px 0 var(--sx-lime-deep); color: #4d7c0f;
     }
 
     .server-node .node-label {
-      position: absolute;
-      bottom: -22px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #858b93;
-      white-space: nowrap;
+      font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+      color: #858b93; white-space: nowrap;
     }
 
     .migration-path {
-      flex: 1;
-      max-width: 130px;
-      height: 4px;
-      border-radius: 4px;
-      background: var(--sx-line);
-      position: relative;
-      overflow: hidden;
+      flex: 1; max-width: 130px; height: 4px; border-radius: 4px;
+      background: var(--sx-line); position: relative; overflow: hidden;
     }
 
     .migration-path::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 0%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, var(--sx-blue), var(--sx-lime));
+      content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 0%;
+      border-radius: 4px; background: linear-gradient(90deg, var(--sx-blue), var(--sx-lime));
       animation: migrateProgress 3.5s ease-in-out infinite;
     }
 
@@ -303,18 +161,10 @@
     }
 
     .data-packet {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translate(-50%, -50%);
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      background: var(--sx-lime);
-      border: 1.5px solid var(--sx-ink);
-      box-shadow: 0 2px 0 var(--sx-lime-deep);
-      animation: packetMove 3.5s ease-in-out infinite;
-      z-index: 3;
+      position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%);
+      width: 10px; height: 10px; border-radius: 3px; background: var(--sx-lime);
+      border: 1.5px solid var(--sx-ink); box-shadow: 0 2px 0 var(--sx-lime-deep);
+      animation: packetMove 3.5s ease-in-out infinite; z-index: 3;
     }
 
     @keyframes packetMove {
@@ -328,120 +178,56 @@
     }
 
     .eta-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-      position: relative;
-      z-index: 2;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      flex-wrap: wrap; margin-bottom: 28px; position: relative; z-index: 2;
     }
 
     .eta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      border: 2px solid var(--sx-line);
-      border-radius: 30px;
-      background: var(--sx-panel);
-      box-shadow:
-        inset 0 2px 0 rgba(255, 255, 255, 0.9),
-        0 3px 0 var(--sx-depth);
+      display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px;
+      border: 2px solid var(--sx-line); border-radius: 30px; background: var(--sx-panel);
+      box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.9), 0 3px 0 var(--sx-depth);
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--sx-ink);
+      font-size: 13.5px; font-weight: 700; letter-spacing: -0.01em; color: var(--sx-ink);
     }
 
     .eta-pill .pill-icon {
-      width: 22px;
-      height: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 7px;
-      background: var(--sx-yellow);
-      border: 1.5px solid var(--sx-ink);
-      box-shadow: 0 2px 0 var(--sx-yellow-deep);
-      flex-shrink: 0;
+      width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+      border-radius: 7px; background: var(--sx-yellow); border: 1.5px solid var(--sx-ink);
+      box-shadow: 0 2px 0 var(--sx-yellow-deep); flex-shrink: 0;
     }
 
-    .eta-pill .pill-icon svg {
-      width: 12px;
-      height: 12px;
-      stroke-width: 2.5;
-      color: var(--sx-ink);
-    }
+    .eta-pill .pill-icon svg { width: 12px; height: 12px; stroke-width: 2.5; color: var(--sx-ink); }
 
     .eta-pill.accent-blue {
-      border-color: var(--sx-blue);
-      background: rgba(13, 148, 136, 0.06);
-      color: var(--sx-blue-deep);
+      border-color: var(--sx-blue); background: rgba(13, 148, 136, 0.06); color: var(--sx-blue-deep);
     }
 
-    .eta-pill.accent-blue .pill-icon {
-      background: var(--sx-blue);
-      border-color: var(--sx-ink);
-      color: #fff;
-    }
+    .eta-pill.accent-blue .pill-icon { background: var(--sx-blue); border-color: var(--sx-ink); color: #fff; }
 
     .eta-pill.accent-lime {
-      border-color: var(--sx-lime-deep);
-      background: rgba(190, 242, 100, 0.15);
-      color: #4d7c0f;
+      border-color: var(--sx-lime-deep); background: rgba(190, 242, 100, 0.15); color: #4d7c0f;
     }
 
-    .eta-pill.accent-lime .pill-icon {
-      background: var(--sx-lime);
-      border-color: var(--sx-ink);
-      color: var(--sx-ink);
-    }
+    .eta-pill.accent-lime .pill-icon { background: var(--sx-lime); border-color: var(--sx-ink); color: var(--sx-ink); }
 
     .countdown-inline {
-      font-variant-numeric: tabular-nums;
-      font-weight: 800;
-      color: var(--sx-ink);
-      background: var(--sx-panel);
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1.5px solid var(--sx-line-strong);
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-      margin-left: 6px;
+      font-variant-numeric: tabular-nums; font-weight: 800; color: var(--sx-ink);
+      background: var(--sx-panel); padding: 4px 8px; border-radius: 6px;
+      border: 1.5px solid var(--sx-line-strong); box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); margin-left: 6px;
     }
 
     .status-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 16px 22px;
-      border: 2px solid var(--sx-line);
-      border-radius: var(--radius-md);
-      background: var(--sx-panel-soft);
-      box-shadow:
-        inset 0 2px 4px rgba(26, 29, 31, 0.06),
-        0 4px 0 var(--sx-depth);
-      position: relative;
-      z-index: 2;
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 16px 22px; border: 2px solid var(--sx-line); border-radius: var(--radius-md);
+      background: var(--sx-panel-soft); box-shadow: inset 0 2px 4px rgba(26, 29, 31, 0.06), 0 4px 0 var(--sx-depth);
+      position: relative; z-index: 2; flex-wrap: wrap;
     }
 
-    .status-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .status-left { display: flex; align-items: center; gap: 10px; }
 
     .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--sx-orange);
-      border: 2px solid var(--sx-ink);
-      box-shadow: 0 2px 0 var(--sx-orange-deep);
+      width: 10px; height: 10px; border-radius: 50%; background: var(--sx-orange);
+      border: 2px solid var(--sx-ink); box-shadow: 0 2px 0 var(--sx-orange-deep);
       animation: pulseDot 1.8s ease-in-out infinite;
     }
 
@@ -452,174 +238,73 @@
 
     .status-text {
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--sx-ink);
+      font-size: 13px; font-weight: 700; letter-spacing: -0.01em; color: var(--sx-ink);
     }
 
     .progress-track {
-      flex: 1;
-      min-width: 120px;
-      height: 8px;
-      border-radius: 8px;
-      background: var(--sx-line);
-      overflow: hidden;
-      position: relative;
+      flex: 1; min-width: 120px; height: 8px; border-radius: 8px;
+      background: var(--sx-line); overflow: hidden; position: relative;
     }
 
     .progress-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 8px;
+      height: 100%; width: 0%; border-radius: 8px;
       background: linear-gradient(90deg, var(--sx-blue), var(--sx-lime));
       transition: width 0.6s ease;
     }
 
     .progress-percent {
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--sx-blue);
-      min-width: 42px;
-      text-align: right;
-      font-variant-numeric: tabular-nums;
+      font-size: 13px; font-weight: 800; color: var(--sx-blue);
+      min-width: 42px; text-align: right; font-variant-numeric: tabular-nums;
     }
 
     .footer-note {
-      margin-top: 32px;
-      font-size: 12px;
-      color: #858b93;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      position: relative;
-      z-index: 2;
+      margin-top: 32px; font-size: 12px; color: #858b93;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; z-index: 2;
     }
 
-    .footer-note svg {
-      width: 14px;
-      height: 14px;
-      stroke-width: 2;
-      opacity: 0.6;
-    }
+    .footer-note svg { width: 14px; height: 14px; stroke-width: 2; opacity: 0.6; }
 
     .toast-message {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      z-index: 999;
-      padding: 14px 22px;
-      border: 2px solid var(--sx-line);
-      border-radius: var(--radius-md);
-      background: var(--sx-panel);
-      box-shadow:
-        var(--clay-hi),
-        0 5px 0 var(--sx-depth),
-        var(--clay-2);
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(100px);
+      z-index: 999; padding: 14px 22px; border: 2px solid var(--sx-line); border-radius: var(--radius-md);
+      background: var(--sx-panel); box-shadow: var(--clay-hi), 0 5px 0 var(--sx-depth), var(--clay-2);
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--sx-ink);
-      opacity: 0;
+      font-size: 13px; font-weight: 700; color: var(--sx-ink); opacity: 0;
       transition: transform 0.4s var(--ease-spring), opacity 0.4s ease;
-      white-space: nowrap;
-      pointer-events: none;
+      white-space: nowrap; pointer-events: none;
     }
 
-    .toast-message.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    .toast-message.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
     .toast-message .toast-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--sx-lime);
-      border: 1.5px solid var(--sx-ink);
-      margin-right: 8px;
-      vertical-align: middle;
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--sx-lime); border: 1.5px solid var(--sx-ink);
+      margin-right: 8px; vertical-align: middle;
     }
 
     @media (max-width: 640px) {
-      .migration-card {
-        padding: 36px 22px 32px;
-        border-radius: var(--radius-lg);
-      }
-
-      .server-node {
-        width: 56px;
-        height: 56px;
-        border-radius: 15px;
-      }
-
-      .server-node svg {
-        width: 22px;
-        height: 22px;
-      }
-
-      .server-node .node-label {
-        font-size: 8px;
-        bottom: -18px;
-      }
-
-      .migration-path {
-        max-width: 80px;
-      }
-
-      .eta-row {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .eta-pill {
-        width: 100%;
-        justify-content: center;
-        padding: 12px 14px;
-        font-size: 12.5px;
-      }
-
-      .status-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        padding: 16px;
-      }
-
-      .status-left {
-        justify-content: center;
-      }
-
-      .progress-percent {
-        text-align: center;
-      }
+      .migration-card { padding: 36px 22px 32px; border-radius: var(--radius-lg); }
+      .server-node { width: 56px; height: 56px; border-radius: 15px; }
+      .server-node svg { width: 22px; height: 22px; }
+      .server-node .node-label { font-size: 8px; bottom: -18px; }
+      .migration-path { max-width: 80px; }
+      .eta-row { flex-direction: column; gap: 10px; }
+      .eta-pill { width: 100%; justify-content: center; padding: 12px 14px; font-size: 12.5px; }
+      .status-bar { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px; }
+      .status-left { justify-content: center; }
+      .progress-percent { text-align: center; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-
-      .migration-path::before {
-        width: 100% !important;
-        opacity: 0.5 !important;
-      }
-
-      .data-packet {
-        display: none !important;
-      }
-
-      .status-dot {
-        animation: none !important;
-      }
+      .migration-path::before { width: 100% !important; opacity: 0.5 !important; }
+      .data-packet { display: none !important; }
+      .status-dot { animation: none !important; }
     }
   </style>
 </head>
@@ -644,12 +329,13 @@
       </div>
 
       <h1 class="heading" id="mainHeading">
-        Migrasi <span class="accent">Server</span> Sedang Berlangsung
+        Pemulihan <span class="accent">&</span> Peningkatan Jaringan
       </h1>
 
       <p class="subtext" id="subtext">
-        Kami sedang memindahkan sistem ke server baru yang lebih cepat dan stabil.
-        Layanan akan kembali normal pukul <strong>03:00 WIB</strong>.
+        Kami sedang melakukan pemulihan koneksi pada jaringan pusat data kami. 
+        Bersamaan dengan itu, kami juga meningkatkan sistem ke server baru yang lebih stabil. 
+        Mohon tunggu, proses ini berjalan secara otomatis.
       </p>
 
       <div class="migration-visual" id="migrationVisual">
@@ -688,7 +374,7 @@
               <path d="M12 6v6l4 2" />
             </svg>
           </span>
-          Kembali pukul <strong>03:00 WIB</strong>
+          Status: <strong>Sedang Berlangsung</strong>
         </div>
 
         <div class="eta-pill accent-lime" id="etaCountdownPill">
@@ -704,14 +390,14 @@
               <path d="M16.24 7.76l2.83-2.83" />
             </svg>
           </span>
-          Sisa waktu: <span class="countdown-inline" id="etaRemainingText">00:00:00</span>
+          Waktu Proses: <span class="countdown-inline" id="etaRemainingText">00:00:00</span>
         </div>
       </div>
 
       <div class="status-bar" id="statusBar">
         <div class="status-left">
           <span class="status-dot"></span>
-          <span class="status-text" id="statusText">Memindahkan data...</span>
+          <span class="status-text" id="statusText">Memulai pemulihan...</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
@@ -743,9 +429,6 @@
 
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const targetHour = 3;
-      const targetMinute = 0;
-
       const etaRemainingText = document.getElementById('etaRemainingText');
       const progressFill = document.getElementById('progressFill');
       const progressPercent = document.getElementById('progressPercent');
@@ -755,92 +438,48 @@
       const sourceNode = document.getElementById('sourceNode');
       const targetNode = document.getElementById('targetNode');
 
-      // Karena Anda mungkin mengetes ini di siang/sore hari, kita buat simulasi agar progress bar langsung berjalan.
-      // Sistem akan mengecek: jika sekarang sudah lewat jam 03:00, kita akan "pura-pura" waktu sekarang adalah jam 00:30.
-      let now = new Date();
-      const actualHour = now.getHours();
-      
-      // Simulasi: Jika sekarang di atas jam 03:00 pagi, kita set jam ke 00:30
-      if (actualHour >= 3) {
-        now.setHours(0, 30, 0, 0);
-      }
-
-      const migrationStartTime = new Date(now);
-      migrationStartTime.setHours(0, 0, 0, 0);
-
-      function getTargetTime(baseNow) {
-        const target = new Date(baseNow);
-        target.setHours(targetHour, targetMinute, 0, 0);
-        
-        // Jika waktu simulasi sudah lewat dari target, tambah 1 hari
-        if (target <= baseNow) {
-          target.setDate(target.getDate() + 1);
-        }
-        return target;
-      }
+      // Waktu mulai dihitung sejak halaman ini dibuka
+      const startTime = new Date();
 
       function pad(n) {
         return String(n).padStart(2, '0');
       }
 
-      let isOvertime = false;
-
       function updateCountdown() {
-        // Gunakan waktu yang sudah disimulasikan (jika sore, pura-pura jam 00:30)
-        let currentNow = new Date();
-        if (actualHour >= 3) {
-            currentNow.setHours(0, 30, 0, 0);
-            // Tambahkan detik agar berjalan
-            const timeDiff = (new Date() - new Date().setHours(0,30,0,0));
-            currentNow.setSeconds(currentNow.getSeconds() + Math.floor(timeDiff / 1000));
-        }
+        const now = new Date();
+        const diff = now - startTime; // Hitung mundur MAJU (elapsed time)
 
-        const target = getTargetTime(currentNow);
-        const diff = target - currentNow;
-
-        // --- SISTEM PENGAMAN JIKA LEWAT JAM 03:00 (Di dunia nyata) ---
-        if (diff <= 0) {
-          if (!isOvertime) {
-            isOvertime = true;
-            etaRemainingText.textContent = '00:00:00';
-            progressFill.style.width = '99%';
-            progressPercent.textContent = '99%';
-            statusText.textContent = 'Verifikasi akhir... Mohon tunggu';
-            
-            if (!reduceMotion && typeof gsap !== 'undefined') {
-              gsap.to(targetNode, { borderColor: '#fb923c', backgroundColor: 'rgba(251, 146, 60, 0.15)', duration: 0.6, repeat: -1, yoyo: true });
-            }
-          }
-          return;
-        }
-
-        // --- JIKA MASIH SEBELUM JAM 03:00 (BERJALAN NORMAL) ---
         const totalSeconds = Math.floor(diff / 1000);
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
 
+        // Tampilkan waktu berjalan
         etaRemainingText.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 
-        const totalDuration = target - migrationStartTime;
-        const elapsed = currentNow - migrationStartTime;
-        let progress = Math.min(99, Math.max(0, Math.round((elapsed / totalDuration) * 100)));
+        // Simulasi Progress Bar yang terus bertambah (Maksimal 99%)
+        // Misal: setiap 1 detik nambah 0.1%, jadi dalam 100 detik baru 10%.
+        // Angka ini bisa disesuaikan agar tidak terlalu cepat atau lambat.
+        let progress = Math.min(99, Math.max(0, Math.floor((totalSeconds / 1800) * 100))); 
 
         progressFill.style.width = progress + '%';
         progressPercent.textContent = progress + '%';
 
-        if (progress < 25) {
-          statusText.textContent = 'Memulai migrasi...';
-        } else if (progress < 50) {
-          statusText.textContent = 'Memindahkan data...';
-        } else if (progress < 75) {
-          statusText.textContent = 'Sinkronisasi database...';
+        // Ganti-ganti teks status
+        if (progress < 20) {
+          statusText.textContent = 'Memulihkan koneksi pusat data...';
+        } else if (progress < 45) {
+          statusText.textContent = 'Mengalihkan lalu lintas data...';
+        } else if (progress < 70) {
+          statusText.textContent = 'Sinkronisasi server baru...';
+        } else if (progress < 90) {
+          statusText.textContent = 'Memverifikasi rute jaringan...';
         } else {
-          statusText.textContent = 'Verifikasi sistem...';
+          statusText.textContent = 'Menyelesaikan proses akhir...';
         }
 
         if (!reduceMotion) {
-          const sourceActive = (Math.floor(currentNow.getTime() / 1000) % 4) < 2;
+          const sourceActive = (Math.floor(now.getTime() / 1000) % 4) < 2;
           sourceNode.classList.toggle('active-source', sourceActive);
           targetNode.classList.toggle('active-target', !sourceActive);
         }
@@ -858,24 +497,22 @@
       }
 
       const toastMessages = [
-        'Sinkronisasi data selesai',
-        'Memindahkan database pengguna...',
-        'Memverifikasi konfigurasi server...',
-        'Menguji koneksi jaringan...',
-        'Mengoptimalkan performa...',
-        'Memindahkan aset media...',
-        'Memeriksa integritas data...'
+        'Memulihkan koneksi pusat data...',
+        'Mengalihkan lalu lintas data ke server baru...',
+        'Memverifikasi rute jaringan utama...',
+        'Sinkronisasi database ke server baru...',
+        'Menguji konektivitas sistem...',
+        'Mengoptimalkan performa server...'
       ];
 
       let toastIndex = 0;
       setInterval(() => {
-        if (isOvertime) return; 
         toastIndex = (toastIndex + 1) % toastMessages.length;
         showToast(toastMessages[toastIndex]);
       }, 6000);
 
       setTimeout(() => {
-        showToast('Migrasi server sedang berlangsung...');
+        showToast('Proses pemulihan sedang berlangsung...');
       }, 1500);
 
       // ANIMASI MASUK (GSAP)
@@ -891,40 +528,13 @@
 
         const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-        tl.fromTo(card,
-          { y: 40, opacity: 0, scale: 0.98 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.6, clearProps: 'transform,opacity' }
-        )
-        .fromTo(iconBadge,
-          { scale: 0, rotation: -15 },
-          { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)' },
-          '-=0.3'
-        )
-        .fromTo([heading, subtext],
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, clearProps: 'transform,opacity' },
-          '-=0.2'
-        )
-        .fromTo(migrationVisual,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
-          '-=0.2'
-        )
-        .fromTo(etaRow,
-          { y: 15, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
-          '-=0.15'
-        )
-        .fromTo(statusBar,
-          { y: 15, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
-          '-=0.15'
-        )
-        .fromTo(footerNote,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.4, clearProps: 'opacity' },
-          '-=0.1'
-        );
+        tl.fromTo(card, { y: 40, opacity: 0, scale: 0.98 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, clearProps: 'transform,opacity' })
+        .fromTo(iconBadge, { scale: 0, rotation: -15 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)' }, '-=0.3')
+        .fromTo([heading, subtext], { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, clearProps: 'transform,opacity' }, '-=0.2')
+        .fromTo(migrationVisual, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' }, '-=0.2')
+        .fromTo(etaRow, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' }, '-=0.15')
+        .fromTo(statusBar, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' }, '-=0.15')
+        .fromTo(footerNote, { opacity: 0 }, { opacity: 1, duration: 0.4, clearProps: 'opacity' }, '-=0.1');
       }
     })();
   </script>
