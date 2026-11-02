@@ -3,31 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1112">
+  <meta name="theme-color" content="#f4f3ef">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Sportix sedang melakukan migrasi server terjadwal pada 3 November 2026 pukul 00.00–03.00 WIB.">
+
+  <meta
+    name="description"
+    content="Sportix sedang melakukan migrasi server terjadwal pada 3 November 2026 pukul 00.00 sampai 03.00 WIB."
+  >
 
   <title>Pemeliharaan Sistem | Sportix</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+    /* ============================================
+       SPORTIX / MAINTENANCE
+       EDITORIAL BRUTALISM
+
+       Standalone HTML
+       No Laravel / Vite required
+
+       Design:
+       - Solid surfaces
+       - Sharp borders
+       - Editorial typography
+       - Minimal motion
+       - Functional accents
+    ============================================ */
+
     :root {
-      color-scheme: dark;
+      color-scheme: light;
 
-      --bg: #0b1112;
-      --surface: #121c1c;
-      --surface-soft: #182524;
-      --text: #f1f6ef;
-      --muted: #9caea6;
-      --teal: #0d9488;
-      --lime: #bef264;
-      --line: rgba(216, 241, 226, .14);
+      /* Base colors */
+      --bg: #f4f3ef;
+      --bg-soft: #eae9e3;
+      --paper: #ffffff;
 
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
+      --ink: #151917;
+      --ink-soft: #343b36;
+
+      --text-muted: #69716c;
+      --border: #c9ccc5;
+      --border-hard: #151917;
+
+      /* Sportix accents */
+      --accent-pink: #ed4d82;
+      --accent-teal: #0d9488;
+
+      /* Dark visualization */
+      --dark: #121715;
+      --dark-soft: #202824;
+      --dark-border: #404b43;
+      --dark-muted: #a4b2a7;
+
+      /* Typography */
+      --font-display: "Space Grotesk", Arial, sans-serif;
+      --font-body: "DM Sans", Arial, sans-serif;
+
+      /* Layout */
+      --container: 1440px;
+      --page-gutter: clamp(20px, 4vw, 72px);
+
+      --ease-snappy: cubic-bezier(.2, .8, .4, 1);
     }
 
     *,
@@ -42,51 +85,17 @@
 
     body {
       margin: 0;
+      min-width: 320px;
       min-height: 100vh;
-      overflow-x: hidden;
+
       background: var(--bg);
-      color: var(--text);
+      color: var(--ink);
+
       font-family: var(--font-body);
       -webkit-font-smoothing: antialiased;
-    }
+      text-rendering: optimizeLegibility;
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        radial-gradient(
-          ellipse at 76% 34%,
-          rgba(13, 148, 136, .10),
-          transparent 45%
-        ),
-        radial-gradient(
-          ellipse at 12% 85%,
-          rgba(190, 242, 100, .035),
-          transparent 40%
-        );
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      opacity: .2;
-      background-image: radial-gradient(
-        rgba(219, 245, 229, .24) .55px,
-        transparent .55px
-      );
-      background-size: 7px 7px;
-      mask-image: linear-gradient(
-        90deg,
-        transparent,
-        #000 50%,
-        transparent
-      );
+      overflow-x: hidden;
     }
 
     a {
@@ -99,123 +108,186 @@
     }
 
     ::selection {
-      background: var(--lime);
-      color: #0b1112;
+      background: var(--accent-pink);
+      color: #fff;
     }
 
     :focus-visible {
-      outline: 2px solid var(--lime);
-      outline-offset: 5px;
+      outline: 3px solid var(--accent-pink);
+      outline-offset: 4px;
     }
 
-    .shell {
-      width: min(1400px, calc(100% - 64px));
-      min-height: 100svh;
+    .container {
+      width: min(
+        var(--container),
+        calc(100% - var(--page-gutter) * 2)
+      );
+
       margin-inline: auto;
-      display: flex;
-      flex-direction: column;
     }
 
-    /* header */
+    .mono {
+      font-family: var(--font-display);
+      font-variant-numeric: tabular-nums;
+    }
 
-    .header {
-      min-height: 96px;
+    /* ============================================
+       TOP UTILITY BAR
+    ============================================ */
+
+    .utility-bar {
+      border-bottom: 1px solid var(--border-hard);
+    }
+
+    .utility-inner {
+      min-height: 70px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      border-bottom: 1px solid var(--line);
+
+      gap: 24px;
     }
 
-    .header-index {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #8fa39a;
-      font-family: var(--font-display);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .header-index::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: var(--lime);
-    }
-
-    .header-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      color: #d4e3d8;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      flex: none;
-      border-radius: 50%;
-      background: var(--lime);
-      box-shadow: 0 0 0 5px rgba(190, 242, 100, .09);
-      animation: statusPulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes statusPulse {
-      50% {
-        box-shadow: 0 0 0 10px rgba(190, 242, 100, 0);
-      }
-    }
-
-    /* main */
-
-    .main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
-      align-items: center;
-      gap: clamp(35px, 5vw, 90px);
-      padding: 76px 0 90px;
-    }
-
-    .content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .eyebrow {
+    .utility-left {
       display: flex;
       align-items: center;
       gap: 14px;
-      color: var(--lime);
+    }
+
+    .utility-index {
+      width: 31px;
+      height: 31px;
+
+      display: grid;
+      place-items: center;
+
+      background: var(--ink);
+      color: var(--paper);
+
       font-family: var(--font-display);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: .18em;
+    }
+
+    .utility-name {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+
+      letter-spacing: .09em;
       text-transform: uppercase;
     }
 
-    .eyebrow::before {
-      content: "";
-      width: 32px;
-      height: 2px;
-      background: var(--lime);
+    .utility-right {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .utility-date {
+      color: var(--text-muted);
+
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    .utility-divider {
+      width: 1px;
+      height: 18px;
+
+      background: var(--border);
+    }
+
+    .maintenance-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+
+      background: var(--accent-pink);
+    }
+
+    /* ============================================
+       MAIN SECTION
+    ============================================ */
+
+    .main {
+      padding-top: clamp(56px, 7vw, 112px);
+      padding-bottom: clamp(55px, 7vw, 100px);
+    }
+
+    .main-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, .95fr)
+        minmax(0, 1.05fr);
+
+      gap: clamp(42px, 5.5vw, 95px);
+
+      align-items: center;
+    }
+
+    /* ============================================
+       EDITORIAL CONTENT
+    ============================================ */
+
+    .content {
+      min-width: 0;
+    }
+
+    .section-marker {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      margin-bottom: 30px;
+    }
+
+    .marker-line {
+      width: 34px;
+      height: 3px;
+
+      background: var(--accent-pink);
+    }
+
+    .marker-text {
+      color: var(--ink-soft);
+
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .1em;
     }
 
     .headline {
-      max-width: 750px;
-      margin: 32px 0 28px;
+      margin: 0;
+
       font-family: var(--font-display);
-      font-size: clamp(3.7rem, 6.6vw, 7.6rem);
-      font-weight: 600;
-      line-height: .97;
+      font-size: clamp(
+        3.8rem,
+        6.3vw,
+        7.4rem
+      );
+
+      line-height: .98;
+      font-weight: 700;
       letter-spacing: -.085em;
+
+      overflow-wrap: normal;
     }
 
     .headline-line {
@@ -223,543 +295,1050 @@
     }
 
     .headline-accent {
-      color: var(--lime);
-    }
-
-    .lead {
-      max-width: 520px;
-      margin: 0;
-      color: #aebfb5;
-      font-size: 15px;
-      line-height: 1.9;
-    }
-
-    /* brutalist notice */
-
-    .notice {
       position: relative;
-      max-width: 550px;
-      margin-top: 38px;
-      padding: 22px 24px;
-      border: 1px solid rgba(190, 242, 100, .3);
-      border-left: 4px solid var(--lime);
-      background: rgba(190, 242, 100, .045);
+      display: inline-block;
+
+      color: var(--accent-pink);
     }
 
-    .notice-label {
+    .headline-dot {
+      color: var(--ink);
+    }
+
+    .headline-caption {
+      margin-top: 32px;
+
       display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 11px;
-      color: var(--lime);
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .caption-index {
+      flex: none;
+
+      padding-top: 3px;
+
+      color: var(--accent-pink);
+
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .description {
+      max-width: 480px;
+      margin: 0;
+
+      color: var(--ink-soft);
+
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    /* ============================================
+       SCHEDULE STRIP
+    ============================================ */
+
+    .schedule {
+      margin-top: 42px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      border-top: 1px solid var(--border-hard);
+      border-bottom: 1px solid var(--border-hard);
+    }
+
+    .schedule-item {
+      padding: 19px 16px 19px 0;
+    }
+
+    .schedule-item + .schedule-item {
+      padding-left: 23px;
+
+      border-left: 1px solid var(--border);
+    }
+
+    .schedule-label {
+      display: block;
+      margin-bottom: 10px;
+
+      color: var(--text-muted);
+
       font-family: var(--font-display);
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: .14em;
+
       text-transform: uppercase;
+      letter-spacing: .1em;
     }
 
-    .notice-label svg {
-      width: 16px;
-      height: 16px;
+    .schedule-value {
+      display: block;
+
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2vw, 29px);
+      font-weight: 700;
+
+      letter-spacing: -.045em;
     }
 
-    .notice p {
+    .schedule-value small {
+      color: var(--text-muted);
+
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    /* ============================================
+       SUPPORT NOTICE
+    ============================================ */
+
+    .support-notice {
+      margin-top: 31px;
+
+      display: grid;
+      grid-template-columns: 28px 1fr;
+
+      gap: 15px;
+    }
+
+    .notice-symbol {
+      width: 26px;
+      height: 26px;
+
+      display: grid;
+      place-items: center;
+
+      background: var(--accent-pink);
+      color: #fff;
+
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .notice-heading {
+      margin: 0 0 8px;
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .notice-text {
+      max-width: 470px;
       margin: 0;
-      color: #c3d2c9;
+
+      color: var(--text-muted);
+
       font-size: 13px;
       line-height: 1.8;
     }
 
-    .notice strong {
-      color: var(--text);
-    }
-
-    .notice a {
-      color: var(--lime);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      overflow-wrap: anywhere;
-    }
-
-    /* actions */
+    /* ============================================
+       ACTION
+    ============================================ */
 
     .actions {
       display: flex;
-      align-items: center;
       flex-wrap: wrap;
-      gap: 22px;
-      margin-top: 34px;
+      align-items: center;
+
+      gap: 15px;
+
+      margin-top: 29px;
     }
 
-    .button-primary {
+    .action-primary {
+      min-height: 52px;
+
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      min-height: 53px;
-      padding: 0 20px;
-      background: var(--lime);
-      border: 1px solid var(--lime);
-      color: #0b1712;
-      font-size: 13px;
+
+      gap: 28px;
+      padding: 0 17px 0 20px;
+
+      background: var(--ink);
+      border: 1px solid var(--ink);
+
+      color: #fff;
+
+      font-family: var(--font-display);
+      font-size: 12px;
       font-weight: 700;
+
       transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+        background .18s var(--ease-snappy),
+        color .18s var(--ease-snappy),
+        transform .18s var(--ease-snappy);
     }
 
-    .button-primary:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 5px 5px 0 rgba(190, 242, 100, .22);
-      background: #d2ff86;
+    .action-primary:hover {
+      background: var(--accent-pink);
+      border-color: var(--accent-pink);
+
+      transform: translateY(-2px);
     }
 
-    .button-primary svg {
+    .action-primary svg {
       width: 17px;
       height: 17px;
-      transition: transform .25s ease;
     }
 
-    .button-primary:hover svg {
-      transform: translate(3px, -3px);
-    }
+    .action-secondary {
+      color: var(--text-muted);
 
-    .schedule {
-      color: #98aa9f;
       font-size: 12px;
-      line-height: 1.6;
+      font-weight: 600;
+
+      text-decoration: underline;
+      text-underline-offset: 4px;
+
+      transition: color .18s ease;
     }
 
-    /* visual */
+    .action-secondary:hover {
+      color: var(--accent-pink);
+    }
 
-    .visual {
+    /* ============================================
+       VISUAL COLUMN
+    ============================================ */
+
+    .visual-column {
       min-width: 0;
-      position: relative;
     }
 
-    .visual-frame {
+    /* Minimal technical brutalism */
+    .migration-board {
       position: relative;
-      isolation: isolate;
+
       overflow: hidden;
-      min-height: 500px;
-      display: flex;
-      flex-direction: column;
-      padding: 27px;
-      border: 1px solid rgba(211, 245, 222, .23);
-      border-radius: 24px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(35, 62, 56, .42),
-          rgba(12, 22, 22, .85) 65%
-        );
-      box-shadow:
-        0 25px 75px rgba(0, 0, 0, .22),
-        inset 0 1px 0 rgba(255, 255, 255, .12);
+
+      background: var(--dark);
+      color: #fff;
+
+      border: 1px solid var(--dark);
+
+      padding: clamp(22px, 2.7vw, 39px);
     }
 
-    /* liquid glass reflection */
-
-    .visual-frame::before {
+    /* Small restrained glass reflection */
+    .migration-board::before {
       content: "";
+
       position: absolute;
-      z-index: -1;
-      top: -55%;
-      left: -25%;
-      width: 110%;
-      height: 100%;
+      top: -200px;
+      right: -260px;
+
+      width: 510px;
+      height: 510px;
+
+      border: 1px solid rgba(255, 255, 255, .055);
       border-radius: 50%;
-      transform: rotate(-20deg);
-      background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, .075),
-        transparent 70%
-      );
+
       pointer-events: none;
     }
 
-    .visual-frame::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      opacity: .25;
-      pointer-events: none;
-      background-image:
-        linear-gradient(
-          rgba(173, 220, 195, .09) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(173, 220, 195, .09) 1px,
-          transparent 1px
-        );
-      background-size: 38px 38px;
-      mask-image: radial-gradient(
-        ellipse at center,
-        #000,
-        transparent 76%
-      );
-    }
-
-    .visual-top,
-    .visual-bottom {
+    .board-header {
       position: relative;
-      z-index: 3;
+      z-index: 2;
+
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      color: #a9bdb0;
+      align-items: flex-start;
+
+      gap: 16px;
+
+      padding-bottom: 23px;
+
+      border-bottom: 1px solid var(--dark-border);
+    }
+
+    .board-kicker {
+      color: var(--dark-muted);
+
       font-family: var(--font-display);
       font-size: 10px;
       font-weight: 600;
+
+      text-transform: uppercase;
       letter-spacing: .13em;
+    }
+
+    .board-title {
+      margin: 8px 0 0;
+
+      font-family: var(--font-display);
+      font-size: clamp(21px, 2.5vw, 31px);
+      font-weight: 600;
+
+      letter-spacing: -.045em;
+    }
+
+    .board-tag {
+      flex: none;
+
+      padding: 8px 10px;
+
+      border: 1px solid #646d64;
+
+      color: #c8d0c9;
+
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 600;
+
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* ============================================
+       NODE TOPOLOGY
+    ============================================ */
+
+    .topology {
+      position: relative;
+
+      padding: 66px 0 60px;
+    }
+
+    .topology-grid {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+      grid-template-columns:
+        minmax(100px, 1fr)
+        minmax(45px, .9fr)
+        minmax(100px, 1fr);
+
+      align-items: center;
+
+      gap: clamp(9px, 2vw, 26px);
+    }
+
+    .node {
+      position: relative;
+      min-width: 0;
+
+      padding: 18px;
+
+      border: 1px solid #626e64;
+
+      background: #19211d;
+    }
+
+    .node-source {
+      color: #c5cec6;
+    }
+
+    .node-target {
+      border-color: var(--accent-pink);
+      background: #231c20;
+    }
+
+    .node-target::before {
+      content: "";
+
+      position: absolute;
+      top: -1px;
+      left: -1px;
+
+      width: 38px;
+      height: 4px;
+
+      background: var(--accent-pink);
+    }
+
+    .node-index {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 8px;
+
+      margin-bottom: 29px;
+
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .node-index span:last-child {
+      opacity: .55;
+    }
+
+    .node-target .node-index {
+      color: #ffc1d6;
+    }
+
+    .node-rack {
+      display: grid;
+      gap: 7px;
+    }
+
+    .rack-line {
+      height: 27px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 9px;
+      padding: 0 9px;
+
+      background: #111714;
+      border: 1px solid #49544b;
+    }
+
+    .node-target .rack-line {
+      border-color: #65515b;
+      background: #181316;
+    }
+
+    .rack-led {
+      width: 5px;
+      height: 5px;
+
+      flex: none;
+
+      background: #78887c;
+    }
+
+    .node-target .rack-led {
+      background: var(--accent-pink);
+    }
+
+    .rack-detail {
+      height: 2px;
+      width: 48%;
+
+      background: #5b6b5e;
+    }
+
+    .node-target .rack-detail {
+      background: #925b70;
+    }
+
+    .node-footer {
+      margin-top: 19px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 7px;
+
+      color: #aeb9ae;
+
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 600;
+
+      letter-spacing: .05em;
       text-transform: uppercase;
     }
 
-    .visual-top strong {
-      color: var(--lime);
-      font-weight: 600;
+    .node-target .node-footer {
+      color: #e2b7c7;
     }
 
-    .visual-bottom {
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-    }
+    /* ============================================
+       TRANSFER CORRIDOR
+    ============================================ */
 
-    .visual-bottom span:last-child {
-      color: #d1e2d5;
-    }
+    .corridor {
+      min-width: 0;
 
-    /* network stage */
-
-    .network-stage {
-      position: relative;
-      flex: 1;
-      min-height: 345px;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 25px 0;
+      flex-direction: column;
+      align-items: stretch;
+
+      gap: 14px;
     }
 
-    .network-glow {
-      position: absolute;
-      width: 65%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: rgba(13, 148, 136, .16);
-      filter: blur(65px);
-      pointer-events: none;
+    .corridor-label {
+      color: #839188;
+
+      font-family: var(--font-display);
+      font-size: 8px;
+      font-weight: 700;
+
+      text-align: center;
+      letter-spacing: .09em;
+      text-transform: uppercase;
     }
 
-    .network-svg {
+    .corridor-track {
       position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 660px;
-      overflow: visible;
+
+      height: 21px;
     }
 
-    .server-old,
-    .server-new {
-      transform-box: fill-box;
-      transform-origin: center;
+    .corridor-track::before {
+      content: "";
+
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+
+      height: 1px;
+
+      background: repeating-linear-gradient(
+        to right,
+        #77867a 0,
+        #77867a 5px,
+        transparent 5px,
+        transparent 10px
+      );
+    }
+
+    .corridor-track::after {
+      content: "";
+
+      position: absolute;
+      right: 0;
+      top: calc(50% - 4px);
+
+      width: 8px;
+      height: 8px;
+
+      border-right: 1px solid #abb8ac;
+      border-top: 1px solid #abb8ac;
+
+      transform: rotate(45deg);
     }
 
     .packet {
-      filter: drop-shadow(0 0 7px rgba(190, 242, 100, .9));
+      position: absolute;
+      z-index: 2;
+
+      top: 6px;
+      left: 0;
+
+      width: 9px;
+      height: 9px;
+
+      background: var(--accent-pink);
+
+      opacity: 0;
+
+      animation: packetTravel 2.25s linear infinite;
     }
 
-    /* glass floating panel */
+    .packet-secondary {
+      width: 6px;
+      height: 6px;
 
-    .glass-label {
-      position: absolute;
-      z-index: 4;
-      left: 50%;
-      bottom: 19px;
-      transform: translateX(-50%);
+      top: 8px;
+
+      background: #e3e8df;
+
+      animation-duration: 2.8s;
+      animation-delay: .8s;
+    }
+
+    @keyframes packetTravel {
+      0% {
+        left: 0;
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      88% {
+        opacity: 1;
+      }
+
+      100% {
+        left: calc(100% - 10px);
+        opacity: 0;
+      }
+    }
+
+    .gsap-ready .packet {
+      animation: none;
+      left: 0;
+    }
+
+    .transfer-label {
       display: flex;
+      justify-content: center;
+
+      margin-top: 15px;
+    }
+
+    .transfer-label span {
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      width: max-content;
-      max-width: 90%;
-      padding: 12px 17px;
-      border: 1px solid rgba(230, 255, 235, .2);
-      border-radius: 12px;
-      background: rgba(31, 53, 47, .5);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .12),
-        0 12px 30px rgba(0, 0, 0, .15);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      color: #e2eee4;
-      font-family: var(--font-display);
-      font-size: 11px;
-      white-space: nowrap;
-    }
+      gap: 8px;
 
-    .glass-label::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      flex: none;
-      border-radius: 50%;
-      background: var(--lime);
-    }
+      color: #c4cec4;
 
-    /* metrics */
-
-    .metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .metric {
-      position: relative;
-      overflow: hidden;
-      min-width: 0;
-      padding: 25px 24px;
-      border: 1px solid rgba(215, 243, 223, .16);
-      border-radius: 16px;
-      background: linear-gradient(
-        145deg,
-        rgba(37, 57, 50, .65),
-        rgba(19, 31, 29, .85)
-      );
-      box-shadow:
-        inset 2px 2px 3px rgba(255, 255, 255, .035),
-        inset -5px -5px 12px rgba(0, 0, 0, .15),
-        0 10px 28px rgba(0, 0, 0, .12);
-    }
-
-    .metric::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 45px;
-      height: 45px;
-      border-top: 1px solid rgba(190, 242, 100, .3);
-      border-right: 1px solid rgba(190, 242, 100, .3);
-      border-top-right-radius: 16px;
-      pointer-events: none;
-    }
-
-    .metric-label {
-      margin-bottom: 13px;
-      color: #9aafa1;
       font-family: var(--font-display);
       font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .metric-value {
-      color: #f0f7ee;
-      font-family: var(--font-display);
-      font-size: clamp(25px, 3vw, 39px);
-      font-weight: 600;
-      letter-spacing: -.06em;
-      line-height: 1.2;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .metric-value small {
-      color: #9eb3a4;
-      font-family: var(--font-body);
-      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0;
     }
 
-    .metric-caption {
-      margin-top: 10px;
-      color: #82998b;
-      font-size: 11px;
-      line-height: 1.5;
+    .transfer-label span::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      background: var(--accent-pink);
     }
 
-    /* footer */
+    /* ============================================
+       BOARD FOOTER
+    ============================================ */
 
-    .footer {
+    .board-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      padding: 27px 0 34px;
-      border-top: 1px solid var(--line);
-      color: #879b8f;
+
+      gap: 15px;
+
+      padding-top: 20px;
+
+      border-top: 1px solid var(--dark-border);
+    }
+
+    .board-footer-left,
+    .board-footer-right {
+      color: #a6b4a9;
+
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .board-footer-right {
+      color: #e3e8e0;
+    }
+
+    /* ============================================
+       ESTIMATED RESTORATION
+    ============================================ */
+
+    .restoration {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      margin-top: 1px;
+
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .restoration-item {
+      min-width: 0;
+      padding: 27px 28px;
+    }
+
+    .restoration-item + .restoration-item {
+      border-left: 1px solid #444a45;
+    }
+
+    .restoration-label {
+      margin-bottom: 13px;
+
+      color: #adb7ad;
+
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .restoration-value {
+      font-family: var(--font-display);
+      font-size: clamp(29px, 3.2vw, 46px);
+      font-weight: 700;
+
+      letter-spacing: -.065em;
+      line-height: 1.1;
+
+      font-variant-numeric: tabular-nums;
+    }
+
+    .restoration-value small {
+      color: #a5b0a5;
+
+      font-size: 12px;
+      font-weight: 500;
+
+      letter-spacing: 0;
+    }
+
+    .restoration-caption {
+      margin-top: 10px;
+
+      color: #9da79d;
+
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       BOTTOM EDITORIAL BAND
+    ============================================ */
+
+    .bottom-band {
+      border-top: 1px solid var(--border-hard);
+      border-bottom: 1px solid var(--border-hard);
+
+      background: var(--bg-soft);
+    }
+
+    .bottom-inner {
+      min-height: 90px;
+
+      display: grid;
+      grid-template-columns: 1fr auto;
+
+      align-items: center;
+      gap: 28px;
+    }
+
+    .bottom-message {
+      display: flex;
+      align-items: baseline;
+      gap: 17px;
+    }
+
+    .bottom-number {
+      color: var(--accent-pink);
+
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .bottom-message p {
+      margin: 0;
+
+      color: var(--ink-soft);
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .bottom-reference {
+      color: var(--text-muted);
+
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 600;
+
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+
+    .footer {
+      padding: 26px 0 36px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 22px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-copyright {
+      color: var(--ink);
+
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .footer-tagline {
+      color: var(--text-muted);
+
       font-size: 12px;
     }
 
-    .footer strong {
-      color: #c1d1c5;
-      font-weight: 600;
+    .footer-contact {
+      color: var(--text-muted);
+
+      font-size: 12px;
     }
 
-    .footer a {
+    .footer-contact a {
+      color: var(--ink);
+
+      font-weight: 700;
+
       text-decoration: underline;
       text-underline-offset: 4px;
-      overflow-wrap: anywhere;
     }
 
-    /* responsive */
+    .footer-contact a:hover {
+      color: var(--accent-pink);
+    }
 
-    @media (max-width: 1050px) {
-      .main {
+    /* ============================================
+       RESPONSIVE / TABLET
+    ============================================ */
+
+    @media (max-width: 1100px) {
+      .main-grid {
         grid-template-columns: 1fr;
-        gap: 55px;
-        padding: 65px 0 75px;
+        gap: 60px;
       }
 
-      .headline {
-        max-width: 800px;
-        font-size: clamp(4rem, 9vw, 7rem);
-      }
-
-      .visual {
-        width: 100%;
+      .content {
         max-width: 760px;
       }
+
+      .headline {
+        font-size: clamp(4.5rem, 9vw, 7.5rem);
+      }
+
+      .visual-column {
+        max-width: 900px;
+        width: 100%;
+      }
     }
 
+    /* ============================================
+       RESPONSIVE / MOBILE
+    ============================================ */
+
     @media (max-width: 640px) {
-      .shell {
-        width: calc(100% - 32px);
+      .utility-inner {
+        min-height: 64px;
       }
 
-      .header {
-        min-height: 75px;
+      .utility-name {
+        font-size: 10px;
       }
 
-      .header-index {
-        font-size: 9px;
-        letter-spacing: .08em;
+      .utility-date,
+      .utility-divider {
+        display: none;
       }
 
-      .header-index::before {
-        width: 17px;
-      }
-
-      .header-status {
-        font-size: 9px;
-        letter-spacing: .05em;
+      .maintenance-status {
+        font-size: 10px;
       }
 
       .main {
-        gap: 42px;
-        padding: 48px 0 58px;
+        padding-top: 55px;
+        padding-bottom: 66px;
+      }
+
+      .main-grid {
+        gap: 45px;
+      }
+
+      .section-marker {
+        margin-bottom: 25px;
+      }
+
+      .marker-text {
+        font-size: 10px;
       }
 
       .headline {
-        margin: 26px 0;
-        font-size: clamp(3.3rem, 13vw, 5.2rem);
-        letter-spacing: -.075em;
+        font-size: clamp(3.2rem, 12vw, 5.3rem);
+        line-height: 1;
       }
 
-      .lead {
+      .headline-caption {
+        margin-top: 26px;
+        gap: 12px;
+      }
+
+      .description {
         font-size: 14px;
-        line-height: 1.85;
+        line-height: 1.8;
       }
 
-      .notice {
-        margin-top: 30px;
-        padding: 19px 18px;
+      .schedule {
+        margin-top: 32px;
+      }
+
+      .schedule-item {
+        padding: 17px 12px 17px 0;
+      }
+
+      .schedule-item + .schedule-item {
+        padding-left: 15px;
+      }
+
+      .schedule-value {
+        font-size: 22px;
+      }
+
+      .schedule-label {
+        font-size: 9px;
+      }
+
+      .support-notice {
+        margin-top: 27px;
       }
 
       .actions {
         align-items: flex-start;
         flex-direction: column;
-        gap: 17px;
       }
 
-      .visual-frame {
-        min-height: 365px;
-        padding: 17px;
-        border-radius: 18px;
+      .migration-board {
+        padding: 19px 16px;
       }
 
-      .visual-top,
-      .visual-bottom {
-        font-size: 8px;
-        letter-spacing: .06em;
-      }
-
-      .network-stage {
-        min-height: 270px;
-        padding: 15px 0;
-      }
-
-      .glass-label {
-        bottom: 10px;
-        padding: 10px 12px;
+      .board-kicker {
         font-size: 9px;
       }
 
-      .metrics {
+      .board-title {
+        font-size: 22px;
+      }
+
+      .board-tag {
+        font-size: 8px;
+        padding: 7px;
+      }
+
+      .topology {
+        padding: 48px 0 44px;
+      }
+
+      .topology-grid {
+        grid-template-columns:
+          minmax(0, 1fr)
+          minmax(35px, .5fr)
+          minmax(0, 1fr);
+
         gap: 9px;
       }
 
-      .metric {
-        padding: 20px 14px;
-        border-radius: 12px;
+      .node {
+        padding: 12px 9px;
       }
 
-      .metric-label {
-        min-height: 27px;
+      .node-index {
+        font-size: 8px;
+        margin-bottom: 19px;
+      }
+
+      .rack-line {
+        height: 23px;
+        padding: 0 6px;
+        gap: 6px;
+      }
+
+      .node-footer {
+        font-size: 7px;
+      }
+
+      .corridor-label {
+        font-size: 7px;
+        letter-spacing: 0;
+      }
+
+      .restoration-item {
+        padding: 23px 16px;
+      }
+
+      .restoration-value {
+        font-size: clamp(24px, 7vw, 34px);
+      }
+
+      .restoration-label {
+        min-height: 26px;
         font-size: 9px;
-        letter-spacing: .06em;
       }
 
-      .metric-value {
-        font-size: clamp(23px, 6vw, 30px);
+      .bottom-inner {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 22px 0;
       }
 
-      .metric-caption {
-        font-size: 10px;
+      .bottom-message {
+        gap: 12px;
       }
 
-      .footer {
+      .footer-inner {
         flex-direction: column;
         align-items: flex-start;
-        line-height: 1.8;
+        gap: 14px;
       }
     }
 
     @media (max-width: 380px) {
-      .header-index {
+      .utility-name {
+        max-width: 140px;
+        line-height: 1.4;
+      }
+
+      .headline {
+        font-size: 3.15rem;
+      }
+
+      .board-header {
+        flex-wrap: wrap;
+      }
+
+      .node-index span:last-child {
         display: none;
       }
 
-      .header {
-        justify-content: flex-end;
+      .rack-detail {
+        width: 37%;
       }
 
-      .visual-frame {
-        min-height: 315px;
-      }
-
-      .network-stage {
-        min-height: 225px;
+      .board-footer-left,
+      .board-footer-right {
+        font-size: 8px;
       }
     }
+
+    /* ============================================
+       REDUCED MOTION
+    ============================================ */
 
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
       *::after {
+        scroll-behavior: auto !important;
+
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
+
         transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
+      }
+
+      .packet {
+        animation: none !important;
+        opacity: 0 !important;
       }
     }
   </style>
@@ -767,502 +1346,383 @@
 
 <body>
 
-  <div class="shell">
+  <!-- ==========================================
+       HEADER
+  =========================================== -->
 
-    <!-- HEADER -->
-    <header class="header">
+  <header class="utility-bar">
+    <div class="container utility-inner">
 
-      <div class="header-index">
-        Infrastructure / 001
+      <div class="utility-left">
+
+        <span class="utility-index" aria-hidden="true">
+          01
+        </span>
+
+        <span class="utility-name">
+          System / Maintenance
+        </span>
+
       </div>
 
-      <div class="header-status">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Pemeliharaan Terjadwal</span>
+      <div class="utility-right">
+
+        <span class="utility-date">
+          03.11.2026
+        </span>
+
+        <span class="utility-divider" aria-hidden="true"></span>
+
+        <span class="maintenance-status">
+
+          <span
+            class="status-indicator"
+            aria-hidden="true"
+          ></span>
+
+          Pemeliharaan Terjadwal
+
+        </span>
+
       </div>
 
-    </header>
+    </div>
+  </header>
 
-    <!-- MAIN -->
-    <main class="main">
+  <!-- ==========================================
+       MAIN CONTENT
+  =========================================== -->
 
-      <!-- CONTENT -->
-      <section class="content" aria-labelledby="headline">
+  <main class="main">
 
-        <div class="eyebrow">
-          System Migration / 2026
+    <div class="container main-grid">
+
+      <!-- LEFT / CONTENT -->
+
+      <section class="content" aria-labelledby="main-heading">
+
+        <div class="section-marker">
+
+          <span class="marker-line" aria-hidden="true"></span>
+
+          <span class="marker-text">
+            Sportix / Infrastructure Update
+          </span>
+
         </div>
 
-        <h1 class="headline" id="headline">
-          <span class="headline-line">Sedang</span>
-          <span class="headline-line">berpindah</span>
-          <span class="headline-line">ke <span class="headline-accent">level baru.</span></span>
+        <h1 class="headline" id="main-heading">
+
+          <span class="headline-line">
+            Kami
+          </span>
+
+          <span class="headline-line">
+            sedang
+          </span>
+
+          <span class="headline-line headline-accent">
+            pindah<span class="headline-dot">.</span>
+          </span>
+
         </h1>
 
-        <p class="lead">
-          Kami sedang memigrasikan server Sportix untuk
-          menghadirkan pengalaman yang lebih stabil,
-          cepat, dan responsif. Layanan akan kembali
-          setelah proses pemeliharaan selesai.
-        </p>
+        <div class="headline-caption">
 
-        <div class="notice">
+          <span class="caption-index">
+            / 01
+          </span>
 
-          <div class="notice-label">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="9"/>
-              <path d="M12 7v5"/>
-              <path d="M12 16h.01"/>
-            </svg>
-
-            Informasi Penting
-          </div>
-
-          <p>
-            <strong>
-              Mengalami kendala transaksi atau pembayaran?
-            </strong>
-            <br>
-            Jika Anda melakukan transaksi selama periode
-            pemeliharaan dan mengalami kendala, silakan
-            hubungi tim dukungan kami melalui
-            <a href="mailto:support@madebyrizky.id">
-              support@madebyrizky.id
-            </a>.
-            Kami akan membantu melakukan pengecekan
-            dan penanganan lebih lanjut.
+          <p class="description">
+            Sportix sedang melakukan migrasi server untuk
+            meningkatkan stabilitas dan performa layanan.
+            Selama proses berlangsung, akses website dan
+            transaksi mungkin tidak tersedia untuk sementara.
           </p>
 
         </div>
+
+        <!-- MAINTENANCE SCHEDULE -->
+
+        <div class="schedule">
+
+          <div class="schedule-item">
+
+            <span class="schedule-label">
+              Mulai Pemeliharaan
+            </span>
+
+            <span class="schedule-value">
+              00.00 <small>WIB</small>
+            </span>
+
+          </div>
+
+          <div class="schedule-item">
+
+            <span class="schedule-label">
+              Estimasi Selesai
+            </span>
+
+            <span class="schedule-value">
+              03.00 <small>WIB</small>
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- SUPPORT NOTICE -->
+
+        <div class="support-notice">
+
+          <span class="notice-symbol" aria-hidden="true">
+            !
+          </span>
+
+          <div>
+
+            <h2 class="notice-heading">
+              Ada kendala dengan transaksi Anda?
+            </h2>
+
+            <p class="notice-text">
+              Jika Anda melakukan transaksi selama periode
+              pemeliharaan dan mengalami kendala, tim dukungan
+              kami siap membantu melakukan pengecekan
+              dan penanganan lebih lanjut.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- ACTIONS -->
 
         <div class="actions">
 
           <a
             href="mailto:support@madebyrizky.id?subject=Bantuan%20Transaksi%20Sportix"
-            class="button-primary"
+            class="action-primary"
           >
-            Hubungi Dukungan
+
+            Hubungi Tim Dukungan
 
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              stroke-linecap="square"
               aria-hidden="true"
             >
-              <path d="M5 19 19 5"/>
-              <path d="M8 5h11v11"/>
+              <path d="M5 19L19 5"></path>
+              <path d="M9 5H19V15"></path>
             </svg>
+
           </a>
 
-          <div class="schedule">
-            3 November 2026<br>
-            00.00–03.00 WIB
-          </div>
+          <a
+            href="mailto:support@madebyrizky.id"
+            class="action-secondary"
+          >
+            support@madebyrizky.id
+          </a>
 
         </div>
 
       </section>
 
-      <!-- VISUAL -->
+      <!-- RIGHT / VISUAL -->
+
       <section
-        class="visual"
-        aria-label="Visualisasi ilustratif migrasi server Sportix"
+        class="visual-column"
+        aria-label="Visualisasi migrasi server"
       >
 
-        <div class="visual-frame">
+        <!-- TECHNICAL DIAGRAM -->
 
-          <div class="visual-top">
-            <span>Server Infrastructure</span>
-            <strong>Migration Sequence</strong>
-          </div>
+        <div class="migration-board">
 
-          <div class="network-stage">
+          <div class="board-header">
 
-            <div class="network-glow"></div>
+            <div>
 
-            <svg
-              class="network-svg"
-              viewBox="0 0 640 380"
-              role="img"
-              aria-label="Ilustrasi perpindahan data dari server lama menuju server baru"
-            >
+              <div class="board-kicker">
+                Infrastructure / Diagram 01
+              </div>
 
-              <defs>
+              <h2 class="board-title">
+                Server migration.
+              </h2>
 
-                <!-- clay body gradient -->
-                <linearGradient
-                  id="clayBody"
-                  x1="0"
-                  y1="0"
-                  x2="1"
-                  y2="1"
-                >
-                  <stop offset="0%" stop-color="#38594d"/>
-                  <stop offset="45%" stop-color="#203a32"/>
-                  <stop offset="100%" stop-color="#10231f"/>
-                </linearGradient>
+            </div>
 
-                <linearGradient
-                  id="clayNew"
-                  x1="0"
-                  y1="0"
-                  x2="1"
-                  y2="1"
-                >
-                  <stop offset="0%" stop-color="#456e54"/>
-                  <stop offset="48%" stop-color="#234a3a"/>
-                  <stop offset="100%" stop-color="#112b24"/>
-                </linearGradient>
-
-                <linearGradient
-                  id="connectionGradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="0%"
-                >
-                  <stop offset="0%" stop-color="#547d6d"/>
-                  <stop offset="50%" stop-color="#0d9488"/>
-                  <stop offset="100%" stop-color="#bef264"/>
-                </linearGradient>
-
-                <filter
-                  id="clayShadow"
-                  x="-50%"
-                  y="-50%"
-                  width="200%"
-                  height="200%"
-                >
-                  <feDropShadow
-                    dx="0"
-                    dy="14"
-                    stdDeviation="13"
-                    flood-color="#000000"
-                    flood-opacity=".32"
-                  />
-                </filter>
-
-                <filter
-                  id="packetGlow"
-                  x="-200%"
-                  y="-200%"
-                  width="500%"
-                  height="500%"
-                >
-                  <feGaussianBlur
-                    stdDeviation="4"
-                    result="blur"
-                  />
-                  <feMerge>
-                    <feMergeNode in="blur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-
-              </defs>
-
-              <!-- orbital rings -->
-              <circle
-                class="orbit orbit-one"
-                cx="320"
-                cy="184"
-                r="150"
-                fill="none"
-                stroke="#9dc9a5"
-                stroke-opacity=".11"
-                stroke-width="1"
-                stroke-dasharray="3 10"
-              />
-
-              <circle
-                class="orbit orbit-two"
-                cx="320"
-                cy="184"
-                r="112"
-                fill="none"
-                stroke="#9dc9a5"
-                stroke-opacity=".09"
-              />
-
-              <circle
-                cx="320"
-                cy="184"
-                r="64"
-                fill="none"
-                stroke="#9dc9a5"
-                stroke-opacity=".06"
-              />
-
-              <!-- connection -->
-              <path
-                id="dataPath"
-                d="M211 184 C270 184 370 184 429 184"
-                fill="none"
-                stroke="url(#connectionGradient)"
-                stroke-width="2"
-                stroke-dasharray="5 9"
-                stroke-linecap="round"
-              />
-
-              <!-- OLD SERVER -->
-              <g
-                class="server-old"
-                transform="translate(75 96)"
-                filter="url(#clayShadow)"
-              >
-
-                <!-- clay server body -->
-                <rect
-                  x="0"
-                  y="0"
-                  width="136"
-                  height="176"
-                  rx="22"
-                  fill="url(#clayBody)"
-                  stroke="#739789"
-                  stroke-opacity=".55"
-                  stroke-width="1.5"
-                />
-
-                <!-- soft highlight -->
-                <path
-                  d="M22 8 H111"
-                  stroke="#c8e3cf"
-                  stroke-opacity=".18"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                />
-
-                <!-- rack slots -->
-                <g>
-                  <rect
-                    x="18" y="28"
-                    width="100" height="32"
-                    rx="9"
-                    fill="#11221d"
-                    stroke="#4d7160"
-                  />
-
-                  <rect
-                    x="18" y="72"
-                    width="100" height="32"
-                    rx="9"
-                    fill="#11221d"
-                    stroke="#4d7160"
-                  />
-
-                  <rect
-                    x="18" y="116"
-                    width="100" height="32"
-                    rx="9"
-                    fill="#11221d"
-                    stroke="#4d7160"
-                  />
-                </g>
-
-                <!-- old status lights -->
-                <g fill="#789587">
-                  <circle cx="36" cy="44" r="4"/>
-                  <circle cx="36" cy="88" r="4"/>
-                  <circle cx="36" cy="132" r="4"/>
-                </g>
-
-                <g
-                  stroke="#567264"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                >
-                  <path d="M51 44h46"/>
-                  <path d="M51 88h46"/>
-                  <path d="M51 132h46"/>
-                </g>
-
-              </g>
-
-              <!-- NEW SERVER -->
-              <g
-                class="server-new"
-                transform="translate(429 96)"
-                filter="url(#clayShadow)"
-              >
-
-                <!-- clay server body -->
-                <rect
-                  x="0"
-                  y="0"
-                  width="136"
-                  height="176"
-                  rx="22"
-                  fill="url(#clayNew)"
-                  stroke="#bef264"
-                  stroke-opacity=".7"
-                  stroke-width="1.5"
-                />
-
-                <!-- reflection -->
-                <path
-                  d="M22 8 H111"
-                  stroke="#e4ffce"
-                  stroke-opacity=".34"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                />
-
-                <!-- rack slots -->
-                <g>
-                  <rect
-                    x="18" y="28"
-                    width="100" height="32"
-                    rx="9"
-                    fill="#10271e"
-                    stroke="#729f70"
-                  />
-
-                  <rect
-                    x="18" y="72"
-                    width="100" height="32"
-                    rx="9"
-                    fill="#10271e"
-                    stroke="#729f70"
-                  />
-
-                  <rect
-                    x="18" y="116"
-                    width="100" height="32"
-                    rx="9"
-                    fill="#10271e"
-                    stroke="#729f70"
-                  />
-                </g>
-
-                <!-- animated lights -->
-                <g fill="#bef264">
-                  <circle class="server-light" cx="36" cy="44" r="4"/>
-                  <circle class="server-light" cx="36" cy="88" r="4"/>
-                  <circle class="server-light" cx="36" cy="132" r="4"/>
-                </g>
-
-                <g
-                  stroke="#84ac77"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                >
-                  <path d="M51 44h46"/>
-                  <path d="M51 88h46"/>
-                  <path d="M51 132h46"/>
-                </g>
-
-              </g>
-
-              <!-- moving packets -->
-              <g class="packet" filter="url(#packetGlow)">
-                <circle
-                  class="packet-core"
-                  cx="211"
-                  cy="184"
-                  r="5"
-                  fill="#bef264"
-                />
-                <circle
-                  class="packet-inner"
-                  cx="211"
-                  cy="184"
-                  r="2"
-                  fill="#ffffff"
-                />
-              </g>
-
-              <!-- labels -->
-              <g
-                font-family="Space Grotesk, sans-serif"
-                font-size="12"
-                font-weight="600"
-                text-anchor="middle"
-                letter-spacing="1.6"
-              >
-                <text
-                  x="143"
-                  y="310"
-                  fill="#a3b9aa"
-                >
-                  SOURCE NODE
-                </text>
-
-                <text
-                  x="497"
-                  y="310"
-                  fill="#c9f39b"
-                >
-                  TARGET NODE
-                </text>
-              </g>
-
-              <text
-                x="320"
-                y="155"
-                text-anchor="middle"
-                font-family="Space Grotesk, sans-serif"
-                font-size="10"
-                font-weight="600"
-                letter-spacing="2"
-                fill="#7eae96"
-              >
-                DATA TRANSFER
-              </text>
-
-            </svg>
-
-            <div class="glass-label">
-              Migrasi Infrastruktur Berlangsung*
+            <div class="board-tag">
+              Illustration
             </div>
 
           </div>
 
-          <div class="visual-bottom">
-            <span>*Visualisasi Ilustratif</span>
-            <span>Sportix / Infrastructure</span>
+          <!-- NETWORK TOPOLOGY -->
+
+          <div class="topology">
+
+            <div class="topology-grid">
+
+              <!-- SOURCE NODE -->
+
+              <div class="node node-source">
+
+                <div class="node-index">
+                  <span>NODE / 01</span>
+                  <span>OLD</span>
+                </div>
+
+                <div class="node-rack">
+
+                  <div class="rack-line">
+                    <span class="rack-led"></span>
+                    <span class="rack-detail"></span>
+                  </div>
+
+                  <div class="rack-line">
+                    <span class="rack-led"></span>
+                    <span class="rack-detail"></span>
+                  </div>
+
+                  <div class="rack-line">
+                    <span class="rack-led"></span>
+                    <span class="rack-detail"></span>
+                  </div>
+
+                </div>
+
+                <div class="node-footer">
+                  <span>Source</span>
+                  <span>01</span>
+                </div>
+
+              </div>
+
+              <!-- TRANSFER CORRIDOR -->
+
+              <div class="corridor" aria-hidden="true">
+
+                <div class="corridor-label">
+                  Transfer
+                </div>
+
+                <div class="corridor-track">
+
+                  <span class="packet packet-primary"></span>
+
+                </div>
+
+                <div class="corridor-track">
+
+                  <span class="packet packet-secondary"></span>
+
+                </div>
+
+                <div class="corridor-label">
+                  Data
+                </div>
+
+              </div>
+
+              <!-- DESTINATION NODE -->
+
+              <div class="node node-target">
+
+                <div class="node-index">
+                  <span>NODE / 02</span>
+                  <span>NEW</span>
+                </div>
+
+                <div class="node-rack">
+
+                  <div class="rack-line">
+                    <span class="rack-led target-led"></span>
+                    <span class="rack-detail"></span>
+                  </div>
+
+                  <div class="rack-line">
+                    <span class="rack-led target-led"></span>
+                    <span class="rack-detail"></span>
+                  </div>
+
+                  <div class="rack-line">
+                    <span class="rack-led target-led"></span>
+                    <span class="rack-detail"></span>
+                  </div>
+
+                </div>
+
+                <div class="node-footer">
+                  <span>Destination</span>
+                  <span>02</span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="transfer-label">
+
+              <span>
+                Ilustrasi perpindahan data
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="board-footer">
+
+            <span class="board-footer-left">
+              Source → Destination
+            </span>
+
+            <span class="board-footer-right">
+              Sportix / 2026
+            </span>
+
           </div>
 
         </div>
 
-        <!-- METRICS -->
-        <div class="metrics">
+        <!-- RESTORATION COUNTDOWN -->
 
-          <div class="metric">
+        <div class="restoration">
 
-            <div class="metric-label">
+          <div class="restoration-item">
+
+            <div class="restoration-label">
               Estimasi Layanan Kembali
             </div>
 
-            <div class="metric-value">
+            <div class="restoration-value">
               03.00 <small>WIB</small>
             </div>
 
-            <div class="metric-caption">
+            <div class="restoration-caption">
               Selasa, 3 November 2026
             </div>
 
           </div>
 
-          <div class="metric">
+          <div class="restoration-item">
 
-            <div class="metric-label" id="countLabel">
+            <div
+              class="restoration-label"
+              id="countdown-label"
+            >
               Sisa Waktu Terjadwal
             </div>
 
             <div
-              class="metric-value"
+              class="restoration-value"
               id="countdown"
               role="timer"
               aria-live="off"
@@ -1271,10 +1731,10 @@
             </div>
 
             <div
-              class="metric-caption"
-              id="countCaption"
+              class="restoration-caption"
+              id="countdown-caption"
             >
-              Estimasi, bukan status server real-time
+              Berdasarkan jadwal pemeliharaan
             </div>
 
           </div>
@@ -1283,28 +1743,78 @@
 
       </section>
 
-    </main>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
+  </main>
 
-      <span>
-        © <span id="year">2026</span> Sportix.
-        <strong>Two Paths, One Play.</strong>
+  <!-- ==========================================
+       INFORMATION BAND
+  =========================================== -->
+
+  <section class="bottom-band" aria-label="Informasi pemeliharaan">
+
+    <div class="container bottom-inner">
+
+      <div class="bottom-message">
+
+        <span class="bottom-number">
+          / 02
+        </span>
+
+        <p>
+          Terima kasih telah menunggu. Kami akan membuka
+          kembali akses layanan setelah migrasi selesai
+          dan sistem dinyatakan siap digunakan.
+        </p>
+
+      </div>
+
+      <span class="bottom-reference">
+        Scheduled Maintenance
       </span>
 
-      <span>
+    </div>
+
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+  =========================================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-inner">
+
+      <div class="footer-left">
+
+        <span class="footer-copyright">
+          © <span id="copyright-year">2026</span> Sportix
+        </span>
+
+        <span class="footer-tagline">
+          Two Paths, One Play.
+        </span>
+
+      </div>
+
+      <div class="footer-contact">
+
         Butuh bantuan?
         <a href="mailto:support@madebyrizky.id">
           support@madebyrizky.id
         </a>
-      </span>
 
-    </footer>
+      </div>
 
-  </div>
+    </div>
 
-  <!-- GSAP -->
+  </footer>
+
+  <!-- ==========================================
+       GSAP
+       External CDN, progressive enhancement
+  =========================================== -->
+
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
     defer
@@ -1312,225 +1822,357 @@
 
   <script>
     (() => {
-      'use strict';
+      "use strict";
 
-      /*
-       * sportix maintenance
-       * timezone: asia/jakarta (wib)
-       */
+      /* ========================================
+         CONFIG
+      ======================================== */
 
-      const MAINTENANCE = {
-        start: Date.parse('2026-11-03T00:00:00+07:00'),
-        end: Date.parse('2026-11-03T03:00:00+07:00')
+      const CONFIG = {
+        maintenanceStart: "2026-11-03T00:00:00+07:00",
+        maintenanceEnd: "2026-11-03T03:00:00+07:00",
+
+        motion: {
+          packetDuration: 1.9,
+          packetDelay: 0.8
+        }
       };
 
-      const countdown = document.getElementById('countdown');
-      const countLabel = document.getElementById('countLabel');
-      const countCaption = document.getElementById('countCaption');
+      const startTime = Date.parse(
+        CONFIG.maintenanceStart
+      );
 
-      document.getElementById('year').textContent =
-        new Date().getFullYear();
+      const endTime = Date.parse(
+        CONFIG.maintenanceEnd
+      );
 
-      /*
-       * countdown
-       */
+      /* ========================================
+         DOM
+      ======================================== */
+
+      const countdownEl = document.getElementById(
+        "countdown"
+      );
+
+      const countdownLabel = document.getElementById(
+        "countdown-label"
+      );
+
+      const countdownCaption = document.getElementById(
+        "countdown-caption"
+      );
+
+      const yearEl = document.getElementById(
+        "copyright-year"
+      );
+
+      /* ========================================
+         COUNTDOWN
+      ======================================== */
+
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
 
       function updateCountdown() {
         const now = Date.now();
 
-        if (now >= MAINTENANCE.end) {
-          countdown.textContent = '00:00:00';
-          countLabel.textContent = 'Jadwal Pemeliharaan Berakhir';
-          countCaption.textContent =
-            'Layanan mungkin masih dalam tahap verifikasi';
+        if (now >= endTime) {
+          countdownEl.textContent = "00:00:00";
+
+          countdownLabel.textContent =
+            "Jadwal Telah Berakhir";
+
+          countdownCaption.textContent =
+            "Menunggu konfirmasi layanan kembali";
+
           return;
         }
 
-        const diff = Math.max(0, MAINTENANCE.end - now);
+        const remaining = Math.max(
+          0,
+          endTime - now
+        );
 
-        const hours = Math.floor(diff / 3600000);
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
+        const hours = Math.floor(
+          remaining / 3600000
+        );
 
-        countdown.textContent = [
-          hours,
-          minutes,
-          seconds
-        ]
-          .map(value => String(value).padStart(2, '0'))
-          .join(':');
+        const minutes = Math.floor(
+          (remaining % 3600000) / 60000
+        );
 
-        if (now < MAINTENANCE.start) {
-          countLabel.textContent = 'Menuju Estimasi Selesai';
-          countCaption.textContent =
-            'Pemeliharaan dimulai pukul 00.00 WIB';
+        const seconds = Math.floor(
+          (remaining % 60000) / 1000
+        );
+
+        countdownEl.textContent = [
+          pad(hours),
+          pad(minutes),
+          pad(seconds)
+        ].join(":");
+
+        if (now < startTime) {
+          countdownLabel.textContent =
+            "Menuju Estimasi Selesai";
+
+          countdownCaption.textContent =
+            "Pemeliharaan dimulai pukul 00.00 WIB";
         } else {
-          countLabel.textContent = 'Sisa Waktu Terjadwal';
-          countCaption.textContent =
-            'Estimasi, bukan status server real-time';
+          countdownLabel.textContent =
+            "Sisa Waktu Terjadwal";
+
+          countdownCaption.textContent =
+            "Berdasarkan jadwal pemeliharaan";
         }
       }
 
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
+      /* ========================================
+         MOTION PREFERENCES
+      ======================================== */
 
-      /*
-       * GSAP motion
-       */
+      const motionQuery = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
 
-      function initAnimations() {
-        if (
-          !window.gsap ||
-          window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
-          ).matches
-        ) {
+      function motionAllowed() {
+        return !motionQuery.matches;
+      }
+
+      /* ========================================
+         GSAP
+      ======================================== */
+
+      let animationContext = null;
+
+      function initGSAP() {
+        if (!window.gsap || !motionAllowed()) {
           return;
         }
 
         const gsap = window.gsap;
 
-        // entrance timeline
-        const intro = gsap.timeline({
-          defaults: {
-            ease: 'power3.out'
-          }
-        });
+        document.documentElement.classList.add(
+          "gsap-ready"
+        );
 
-        intro
-          .from('.header-index, .header-status', {
-            opacity: 0,
-            y: -12,
-            duration: .65,
-            stagger: .1
-          })
-          .from('.eyebrow', {
-            opacity: 0,
-            y: 16,
-            duration: .65
-          }, '-=.25')
-          .from('.headline-line', {
-            opacity: 0,
-            y: 55,
-            duration: .95,
-            stagger: .12
-          }, '-=.35')
-          .from('.lead', {
-            opacity: 0,
-            y: 20,
-            duration: .75
-          }, '-=.45')
-          .from('.notice, .actions', {
-            opacity: 0,
-            y: 18,
-            duration: .7,
-            stagger: .12
-          }, '-=.35')
-          .from('.visual-frame', {
-            opacity: 0,
-            y: 30,
-            scale: .97,
-            duration: 1.1
-          }, '-=1.1')
-          .from('.metric', {
-            opacity: 0,
-            y: 18,
-            duration: .65,
-            stagger: .12
-          }, '-=.55');
+        animationContext = gsap.context(() => {
 
-        // packet movement
-        const packetMotion = gsap.timeline({
-          repeat: -1,
-          repeatDelay: .35
-        });
+          /* ------------------------------------
+             INTRO ENTRANCE
+          ------------------------------------ */
 
-        packetMotion
-          .set('.packet', {
-            opacity: 0
-          })
-          .set('.packet-core, .packet-inner', {
-            attr: {
-              cx: 211
+          const intro = gsap.timeline({
+            defaults: {
+              ease: "power3.out"
             }
-          })
-          .to('.packet', {
-            opacity: 1,
-            duration: .2
-          })
-          .to('.packet-core, .packet-inner', {
-            attr: {
-              cx: 429
-            },
-            duration: 2.5,
-            ease: 'power1.inOut'
-          }, 0)
-          .to('.packet', {
-            opacity: 0,
-            duration: .3
-          }, 2.25);
+          });
 
-        // target server lights
-        gsap.to('.server-light', {
-          opacity: .22,
-          duration: .65,
-          stagger: .17,
-          yoyo: true,
-          repeat: -1,
-          ease: 'sine.inOut'
-        });
+          intro
+            .from(".utility-inner", {
+              opacity: 0,
+              y: -12,
+              duration: 0.55
+            })
 
-        // gentle server breathing
-        gsap.to('.server-new', {
-          y: -5,
-          duration: 2.8,
-          yoyo: true,
-          repeat: -1,
-          ease: 'sine.inOut'
-        });
+            .from(".section-marker", {
+              opacity: 0,
+              y: 16,
+              duration: 0.6
+            }, "-=0.25")
 
-        gsap.to('.server-old', {
-          opacity: .72,
-          duration: 3.2,
-          yoyo: true,
-          repeat: -1,
-          ease: 'sine.inOut'
-        });
+            .from(".headline-line", {
+              opacity: 0,
+              y: 38,
+              duration: 0.8,
+              stagger: 0.1
+            }, "-=0.3")
 
-        // subtle network movement
-        gsap.to('.orbit-one', {
-          rotation: 360,
-          svgOrigin: '320 184',
-          duration: 65,
-          repeat: -1,
-          ease: 'none'
-        });
+            .from(".headline-caption", {
+              opacity: 0,
+              y: 18,
+              duration: 0.65
+            }, "-=0.35")
 
-        gsap.to('.orbit-two', {
-          rotation: -360,
-          svgOrigin: '320 184',
-          duration: 90,
-          repeat: -1,
-          ease: 'none'
-        });
+            .from(".schedule", {
+              opacity: 0,
+              y: 15,
+              duration: 0.65
+            }, "-=0.3")
 
-        // soft ambient glow
-        gsap.to('.network-glow', {
-          scale: 1.18,
-          opacity: .55,
-          duration: 4,
-          yoyo: true,
-          repeat: -1,
-          ease: 'sine.inOut'
+            .from(".support-notice, .actions", {
+              opacity: 0,
+              y: 14,
+              duration: 0.6,
+              stagger: 0.1
+            }, "-=0.3")
+
+            .from(".migration-board", {
+              opacity: 0,
+              y: 26,
+              duration: 0.85
+            }, 0.35)
+
+            .from(".restoration", {
+              opacity: 0,
+              y: 15,
+              duration: 0.65
+            }, "-=0.45");
+
+          /* ------------------------------------
+             DATA PACKETS
+
+             Actual container width is measured
+             at the start of every loop.
+
+             No fixed SVG coordinates.
+             No node transform conflicts.
+          ------------------------------------ */
+
+          function movePacket(
+            selector,
+            duration,
+            delay
+          ) {
+            const packet = document.querySelector(
+              selector
+            );
+
+            if (!packet) {
+              return;
+            }
+
+            const track = packet.closest(
+              ".corridor-track"
+            );
+
+            if (!track) {
+              return;
+            }
+
+            const timeline = gsap.timeline({
+              repeat: -1,
+              repeatDelay: 0.45,
+              repeatRefresh: true,
+              delay
+            });
+
+            timeline
+              .set(packet, {
+                x: 0,
+                autoAlpha: 0
+              })
+
+              .to(packet, {
+                autoAlpha: 1,
+                duration: 0.12,
+                ease: "none"
+              })
+
+              .to(packet, {
+                x: () => Math.max(
+                  0,
+                  track.clientWidth -
+                  packet.offsetWidth
+                ),
+                duration,
+                ease: "none"
+              }, 0)
+
+              .to(packet, {
+                autoAlpha: 0,
+                duration: 0.16,
+                ease: "none"
+              }, duration - 0.16);
+
+            return timeline;
+          }
+
+          movePacket(
+            ".packet-primary",
+            CONFIG.motion.packetDuration,
+            0
+          );
+
+          movePacket(
+            ".packet-secondary",
+            CONFIG.motion.packetDuration + 0.35,
+            CONFIG.motion.packetDelay
+          );
+
+          /* ------------------------------------
+             DESTINATION LED FEEDBACK
+             Illustrative only
+          ------------------------------------ */
+
+          gsap.to(".target-led", {
+            opacity: 0.35,
+            stagger: 0.18,
+            duration: 0.55,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true
+          });
+
         });
       }
 
-      if (document.readyState === 'complete') {
-        initAnimations();
+      /* ========================================
+         REDUCED MOTION CHANGE
+      ======================================== */
+
+      function handleMotionChange() {
+        if (animationContext) {
+          animationContext.revert();
+          animationContext = null;
+        }
+
+        document.documentElement.classList.remove(
+          "gsap-ready"
+        );
+
+        if (motionAllowed()) {
+          initGSAP();
+        }
+      }
+
+      /* ========================================
+         INITIALIZATION
+      ======================================== */
+
+      function init() {
+        if (yearEl) {
+          yearEl.textContent =
+            new Date().getFullYear();
+        }
+
+        updateCountdown();
+
+        setInterval(
+          updateCountdown,
+          1000
+        );
+
+        initGSAP();
+
+        if (typeof motionQuery.addEventListener === "function") {
+          motionQuery.addEventListener(
+            "change",
+            handleMotionChange
+          );
+        } else if (typeof motionQuery.addListener === "function") {
+          motionQuery.addListener(
+            handleMotionChange
+          );
+        }
+      }
+
+      if (document.readyState === "complete") {
+        init();
       } else {
         window.addEventListener(
-          'load',
-          initAnimations,
+          "load",
+          init,
           { once: true }
         );
       }
