@@ -23,6 +23,7 @@
       --sx-panel-soft: #ebe9e2;
       --sx-line: #d6d8cf;
       --sx-depth: #c8ccc0;
+      --sx-line-strong: #b3b8ac;
       --clay-hi: inset 0 2px 0 rgba(255, 255, 255, 0.9);
       --clay-1: 0 1px 2px rgba(26, 29, 31, 0.05), 0 6px 14px -8px rgba(26, 29, 31, 0.16);
       --clay-2: 0 2px 4px rgba(26, 29, 31, 0.05), 0 14px 30px -14px rgba(26, 29, 31, 0.22);
@@ -754,15 +755,27 @@
       const sourceNode = document.getElementById('sourceNode');
       const targetNode = document.getElementById('targetNode');
 
-      const migrationStartTime = new Date();
+      // Karena Anda mungkin mengetes ini di siang/sore hari, kita buat simulasi agar progress bar langsung berjalan.
+      // Sistem akan mengecek: jika sekarang sudah lewat jam 03:00, kita akan "pura-pura" waktu sekarang adalah jam 00:30.
+      let now = new Date();
+      const actualHour = now.getHours();
+      
+      // Simulasi: Jika sekarang di atas jam 03:00 pagi, kita set jam ke 00:30
+      if (actualHour >= 3) {
+        now.setHours(0, 30, 0, 0);
+      }
+
+      const migrationStartTime = new Date(now);
       migrationStartTime.setHours(0, 0, 0, 0);
 
-      function getTargetTime() {
-        const now = new Date();
-        const target = new Date(now);
+      function getTargetTime(baseNow) {
+        const target = new Date(baseNow);
         target.setHours(targetHour, targetMinute, 0, 0);
-        // Jika sudah lewat jam 3 pagi, kita biarkan target di hari yang sama
-        // agar sistem mendeteksi 'diff <= 0' dan memicu mode pengaman.
+        
+        // Jika waktu simulasi sudah lewat dari target, tambah 1 hari
+        if (target <= baseNow) {
+          target.setDate(target.getDate() + 1);
+        }
         return target;
       }
 
@@ -773,34 +786,29 @@
       let isOvertime = false;
 
       function updateCountdown() {
-        const now = new Date();
-        const target = getTargetTime();
-        const diff = target - now;
+        // Gunakan waktu yang sudah disimulasikan (jika sore, pura-pura jam 00:30)
+        let currentNow = new Date();
+        if (actualHour >= 3) {
+            currentNow.setHours(0, 30, 0, 0);
+            // Tambahkan detik agar berjalan
+            const timeDiff = (new Date() - new Date().setHours(0,30,0,0));
+            currentNow.setSeconds(currentNow.getSeconds() + Math.floor(timeDiff / 1000));
+        }
 
-        // --- SISTEM PENGAMAN JIKA LEWAT JAM 03:00 ---
+        const target = getTargetTime(currentNow);
+        const diff = target - currentNow;
+
+        // --- SISTEM PENGAMAN JIKA LEWAT JAM 03:00 (Di dunia nyata) ---
         if (diff <= 0) {
           if (!isOvertime) {
             isOvertime = true;
-            // Teks berubah menjadi verifikasi akhir, progres mentok di 99%
             etaRemainingText.textContent = '00:00:00';
             progressFill.style.width = '99%';
             progressPercent.textContent = '99%';
             statusText.textContent = 'Verifikasi akhir... Mohon tunggu';
             
-            // Animasi visual node berganti ke warna oranye (warning)
             if (!reduceMotion && typeof gsap !== 'undefined') {
-              gsap.to(targetNode, { 
-                borderColor: '#fb923c', 
-                backgroundColor: 'rgba(251, 146, 60, 0.15)', 
-                duration: 0.6, 
-                repeat: -1, 
-                yoyo: true 
-              });
-              gsap.to(sourceNode, { 
-                borderColor: '#d6d8cf', 
-                backgroundColor: '#ebe9e2', 
-                duration: 0.6
-              });
+              gsap.to(targetNode, { borderColor: '#fb923c', backgroundColor: 'rgba(251, 146, 60, 0.15)', duration: 0.6, repeat: -1, yoyo: true });
             }
           }
           return;
@@ -815,7 +823,7 @@
         etaRemainingText.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 
         const totalDuration = target - migrationStartTime;
-        const elapsed = now - migrationStartTime;
+        const elapsed = currentNow - migrationStartTime;
         let progress = Math.min(99, Math.max(0, Math.round((elapsed / totalDuration) * 100)));
 
         progressFill.style.width = progress + '%';
@@ -832,7 +840,7 @@
         }
 
         if (!reduceMotion) {
-          const sourceActive = (Math.floor(now.getTime() / 1000) % 4) < 2;
+          const sourceActive = (Math.floor(currentNow.getTime() / 1000) % 4) < 2;
           sourceNode.classList.toggle('active-source', sourceActive);
           targetNode.classList.toggle('active-target', !sourceActive);
         }
@@ -861,7 +869,6 @@
 
       let toastIndex = 0;
       setInterval(() => {
-        // Jika sudah lewat jam 3, pesan toast tidak perlu berputar terus
         if (isOvertime) return; 
         toastIndex = (toastIndex + 1) % toastMessages.length;
         showToast(toastMessages[toastIndex]);
@@ -871,6 +878,7 @@
         showToast('Migrasi server sedang berlangsung...');
       }, 1500);
 
+      // ANIMASI MASUK (GSAP)
       if (!reduceMotion && typeof gsap !== 'undefined') {
         const card = document.getElementById('migrationCard');
         const iconBadge = document.getElementById('iconBadge');
@@ -904,4 +912,21 @@
         )
         .fromTo(etaRow,
           { y: 15, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity'
+          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
+          '-=0.15'
+        )
+        .fromTo(statusBar,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
+          '-=0.15'
+        )
+        .fromTo(footerNote,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.4, clearProps: 'opacity' },
+          '-=0.1'
+        );
+      }
+    })();
+  </script>
+</body>
+</html>
