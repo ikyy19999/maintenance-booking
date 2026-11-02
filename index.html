@@ -2,2183 +2,956 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f3ef">
-  <meta name="robots" content="noindex, nofollow">
-
-  <meta
-    name="description"
-    content="Sportix sedang melakukan migrasi server terjadwal pada 3 November 2026 pukul 00.00 sampai 03.00 WIB."
-  >
-
-  <title>Pemeliharaan Sistem | Sportix</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sportix — Migrasi Server</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ============================================
-       SPORTIX / MAINTENANCE
-       EDITORIAL BRUTALISM
-
-       Standalone HTML
-       No Laravel / Vite required
-
-       Design:
-       - Solid surfaces
-       - Sharp borders
-       - Editorial typography
-       - Minimal motion
-       - Functional accents
-    ============================================ */
-
     :root {
-      color-scheme: light;
-
-      /* Base colors */
-      --bg: #f4f3ef;
-      --bg-soft: #eae9e3;
-      --paper: #ffffff;
-
-      --ink: #151917;
-      --ink-soft: #343b36;
-
-      --text-muted: #69716c;
-      --border: #c9ccc5;
-      --border-hard: #151917;
-
-      /* Sportix accents */
-      --accent-pink: #ed4d82;
-      --accent-teal: #0d9488;
-
-      /* Dark visualization */
-      --dark: #121715;
-      --dark-soft: #202824;
-      --dark-border: #404b43;
-      --dark-muted: #a4b2a7;
-
-      /* Typography */
-      --font-display: "Space Grotesk", Arial, sans-serif;
-      --font-body: "DM Sans", Arial, sans-serif;
-
-      /* Layout */
-      --container: 1440px;
-      --page-gutter: clamp(20px, 4vw, 72px);
-
-      --ease-snappy: cubic-bezier(.2, .8, .4, 1);
+      --sx-blue: #0d9488;
+      --sx-blue-deep: #0a7a70;
+      --sx-lime: #bef264;
+      --sx-lime-deep: #84cc16;
+      --sx-orange: #fb923c;
+      --sx-orange-deep: #ea580c;
+      --sx-yellow: #facc15;
+      --sx-yellow-deep: #ca8a04;
+      --sx-coral: #f87171;
+      --sx-mint: #34d399;
+      --sx-ink: #1a1d1f;
+      --sx-bg: #f5f3ee;
+      --sx-panel: #ffffff;
+      --sx-panel-soft: #ebe9e2;
+      --sx-line: #d6d8cf;
+      --sx-line-strong: #b3b8ac;
+      --sx-depth: #c8ccc0;
+      --clay-hi: inset 0 2px 0 rgba(255, 255, 255, 0.9);
+      --clay-1: 0 1px 2px rgba(26, 29, 31, 0.05), 0 6px 14px -8px rgba(26, 29, 31, 0.16);
+      --clay-2: 0 2px 4px rgba(26, 29, 31, 0.05), 0 14px 30px -14px rgba(26, 29, 31, 0.22);
+      --clay-3: 0 4px 8px rgba(26, 29, 31, 0.05), 0 30px 60px -26px rgba(26, 29, 31, 0.3);
+      --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 26px;
+      --radius-xl: 32px;
     }
 
-    *,
-    *::before,
-    *::after {
+    * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html {
+      min-height: 100%;
+      background: var(--sx-bg);
       scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
-      min-width: 320px;
       min-height: 100vh;
-
-      background: var(--bg);
-      color: var(--ink);
-
-      font-family: var(--font-body);
-      -webkit-font-smoothing: antialiased;
+      background: var(--sx-bg);
+      color: var(--sx-ink);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      font-weight: 420;
+      line-height: 1.55;
+      letter-spacing: -0.006em;
       text-rendering: optimizeLegibility;
-
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    ::selection {
-      background: var(--accent-pink);
-      color: #fff;
-    }
-
-    :focus-visible {
-      outline: 3px solid var(--accent-pink);
-      outline-offset: 4px;
-    }
-
-    .container {
-      width: min(
-        var(--container),
-        calc(100% - var(--page-gutter) * 2)
-      );
-
-      margin-inline: auto;
-    }
-
-    .mono {
-      font-family: var(--font-display);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* ============================================
-       TOP UTILITY BAR
-    ============================================ */
-
-    .utility-bar {
-      border-bottom: 1px solid var(--border-hard);
-    }
-
-    .utility-inner {
-      min-height: 70px;
-
+    .migration-shell {
+      flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-
-      gap: 24px;
-    }
-
-    .utility-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .utility-index {
-      width: 31px;
-      height: 31px;
-
-      display: grid;
-      place-items: center;
-
-      background: var(--ink);
-      color: var(--paper);
-
-      font-family: var(--font-display);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .utility-name {
-      font-family: var(--font-display);
-      font-size: 11px;
-      font-weight: 700;
-
-      letter-spacing: .09em;
-      text-transform: uppercase;
-    }
-
-    .utility-right {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-    }
-
-    .utility-date {
-      color: var(--text-muted);
-
-      font-family: var(--font-display);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .04em;
-    }
-
-    .utility-divider {
-      width: 1px;
-      height: 18px;
-
-      background: var(--border);
-    }
-
-    .maintenance-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      color: var(--ink);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .status-indicator {
-      width: 8px;
-      height: 8px;
-
-      background: var(--accent-pink);
-    }
-
-    /* ============================================
-       MAIN SECTION
-    ============================================ */
-
-    .main {
-      padding-top: clamp(56px, 7vw, 112px);
-      padding-bottom: clamp(55px, 7vw, 100px);
-    }
-
-    .main-grid {
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, .95fr)
-        minmax(0, 1.05fr);
-
-      gap: clamp(42px, 5.5vw, 95px);
-
-      align-items: center;
-    }
-
-    /* ============================================
-       EDITORIAL CONTENT
-    ============================================ */
-
-    .content {
-      min-width: 0;
-    }
-
-    .section-marker {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      margin-bottom: 30px;
-    }
-
-    .marker-line {
-      width: 34px;
-      height: 3px;
-
-      background: var(--accent-pink);
-    }
-
-    .marker-text {
-      color: var(--ink-soft);
-
-      font-family: var(--font-display);
-      font-size: 11px;
-      font-weight: 700;
-
-      text-transform: uppercase;
-      letter-spacing: .1em;
-    }
-
-    .headline {
-      margin: 0;
-
-      font-family: var(--font-display);
-      font-size: clamp(
-        3.8rem,
-        6.3vw,
-        7.4rem
-      );
-
-      line-height: .98;
-      font-weight: 700;
-      letter-spacing: -.085em;
-
-      overflow-wrap: normal;
-    }
-
-    .headline-line {
-      display: block;
-    }
-
-    .headline-accent {
+      justify-content: center;
+      padding: 32px 20px 48px;
       position: relative;
-      display: inline-block;
-
-      color: var(--accent-pink);
+      z-index: 1;
     }
 
-    .headline-dot {
-      color: var(--ink);
+    .migration-shell::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(13, 148, 136, 0.06), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 80%, rgba(190, 242, 100, 0.08), transparent 55%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .headline-caption {
-      margin-top: 32px;
-
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-    }
-
-    .caption-index {
-      flex: none;
-
-      padding-top: 3px;
-
-      color: var(--accent-pink);
-
-      font-family: var(--font-display);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .description {
-      max-width: 480px;
-      margin: 0;
-
-      color: var(--ink-soft);
-
-      font-size: 15px;
-      line-height: 1.85;
-    }
-
-    /* ============================================
-       SCHEDULE STRIP
-    ============================================ */
-
-    .schedule {
-      margin-top: 42px;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      border-top: 1px solid var(--border-hard);
-      border-bottom: 1px solid var(--border-hard);
-    }
-
-    .schedule-item {
-      padding: 19px 16px 19px 0;
-    }
-
-    .schedule-item + .schedule-item {
-      padding-left: 23px;
-
-      border-left: 1px solid var(--border);
-    }
-
-    .schedule-label {
-      display: block;
-      margin-bottom: 10px;
-
-      color: var(--text-muted);
-
-      font-family: var(--font-display);
-      font-size: 10px;
-      font-weight: 700;
-
-      text-transform: uppercase;
-      letter-spacing: .1em;
-    }
-
-    .schedule-value {
-      display: block;
-
-      font-family: var(--font-display);
-      font-size: clamp(20px, 2vw, 29px);
-      font-weight: 700;
-
-      letter-spacing: -.045em;
-    }
-
-    .schedule-value small {
-      color: var(--text-muted);
-
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0;
-    }
-
-    /* ============================================
-       SUPPORT NOTICE
-    ============================================ */
-
-    .support-notice {
-      margin-top: 31px;
-
-      display: grid;
-      grid-template-columns: 28px 1fr;
-
-      gap: 15px;
-    }
-
-    .notice-symbol {
-      width: 26px;
-      height: 26px;
-
-      display: grid;
-      place-items: center;
-
-      background: var(--accent-pink);
-      color: #fff;
-
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .notice-heading {
-      margin: 0 0 8px;
-
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .notice-text {
-      max-width: 470px;
-      margin: 0;
-
-      color: var(--text-muted);
-
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    /* ============================================
-       ACTION
-    ============================================ */
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-
-      gap: 15px;
-
-      margin-top: 29px;
-    }
-
-    .action-primary {
-      min-height: 52px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 28px;
-      padding: 0 17px 0 20px;
-
-      background: var(--ink);
-      border: 1px solid var(--ink);
-
-      color: #fff;
-
-      font-family: var(--font-display);
-      font-size: 12px;
-      font-weight: 700;
-
-      transition:
-        background .18s var(--ease-snappy),
-        color .18s var(--ease-snappy),
-        transform .18s var(--ease-snappy);
-    }
-
-    .action-primary:hover {
-      background: var(--accent-pink);
-      border-color: var(--accent-pink);
-
-      transform: translateY(-2px);
-    }
-
-    .action-primary svg {
-      width: 17px;
-      height: 17px;
-    }
-
-    .action-secondary {
-      color: var(--text-muted);
-
-      font-size: 12px;
-      font-weight: 600;
-
-      text-decoration: underline;
-      text-underline-offset: 4px;
-
-      transition: color .18s ease;
-    }
-
-    .action-secondary:hover {
-      color: var(--accent-pink);
-    }
-
-    /* ============================================
-       VISUAL COLUMN
-    ============================================ */
-
-    .visual-column {
-      min-width: 0;
-    }
-
-    /* Minimal technical brutalism */
-    .migration-board {
+    .migration-card {
       position: relative;
-
+      z-index: 2;
+      width: 100%;
+      max-width: 780px;
+      padding: 52px 44px 46px;
+      border: 2px solid var(--sx-line);
+      border-radius: var(--radius-xl);
+      background: var(--sx-panel);
+      box-shadow:
+        var(--clay-hi),
+        0 8px 0 var(--sx-depth),
+        var(--clay-3);
+      text-align: center;
       overflow: hidden;
-
-      background: var(--dark);
-      color: #fff;
-
-      border: 1px solid var(--dark);
-
-      padding: clamp(22px, 2.7vw, 39px);
     }
 
-    /* Small restrained glass reflection */
-    .migration-board::before {
-      content: "";
-
+    .migration-card::before {
+      content: '';
       position: absolute;
-      top: -200px;
-      right: -260px;
-
-      width: 510px;
-      height: 510px;
-
-      border: 1px solid rgba(255, 255, 255, .055);
+      top: -70px;
+      right: -50px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-
+      background: var(--sx-lime);
+      opacity: 0.18;
       pointer-events: none;
     }
 
-    .board-header {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      gap: 16px;
-
-      padding-bottom: 23px;
-
-      border-bottom: 1px solid var(--dark-border);
-    }
-
-    .board-kicker {
-      color: var(--dark-muted);
-
-      font-family: var(--font-display);
-      font-size: 10px;
-      font-weight: 600;
-
-      text-transform: uppercase;
-      letter-spacing: .13em;
-    }
-
-    .board-title {
-      margin: 8px 0 0;
-
-      font-family: var(--font-display);
-      font-size: clamp(21px, 2.5vw, 31px);
-      font-weight: 600;
-
-      letter-spacing: -.045em;
-    }
-
-    .board-tag {
-      flex: none;
-
-      padding: 8px 10px;
-
-      border: 1px solid #646d64;
-
-      color: #c8d0c9;
-
-      font-family: var(--font-display);
-      font-size: 9px;
-      font-weight: 600;
-
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
-    /* ============================================
-       NODE TOPOLOGY
-    ============================================ */
-
-    .topology {
-      position: relative;
-
-      padding: 66px 0 60px;
-    }
-
-    .topology-grid {
-      position: relative;
-      z-index: 2;
-
-      display: grid;
-      grid-template-columns:
-        minmax(100px, 1fr)
-        minmax(45px, .9fr)
-        minmax(100px, 1fr);
-
-      align-items: center;
-
-      gap: clamp(9px, 2vw, 26px);
-    }
-
-    .node {
-      position: relative;
-      min-width: 0;
-
-      padding: 18px;
-
-      border: 1px solid #626e64;
-
-      background: #19211d;
-    }
-
-    .node-source {
-      color: #c5cec6;
-    }
-
-    .node-target {
-      border-color: var(--accent-pink);
-      background: #231c20;
-    }
-
-    .node-target::before {
-      content: "";
-
+    .migration-card::after {
+      content: '';
       position: absolute;
-      top: -1px;
-      left: -1px;
-
-      width: 38px;
-      height: 4px;
-
-      background: var(--accent-pink);
+      bottom: -60px;
+      left: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: var(--sx-orange);
+      opacity: 0.12;
+      pointer-events: none;
     }
 
-    .node-index {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 8px;
-
-      margin-bottom: 29px;
-
-      font-family: var(--font-display);
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .node-index span:last-child {
-      opacity: .55;
-    }
-
-    .node-target .node-index {
-      color: #ffc1d6;
-    }
-
-    .node-rack {
-      display: grid;
-      gap: 7px;
-    }
-
-    .rack-line {
-      height: 27px;
-
-      display: flex;
-      align-items: center;
-
-      gap: 9px;
-      padding: 0 9px;
-
-      background: #111714;
-      border: 1px solid #49544b;
-    }
-
-    .node-target .rack-line {
-      border-color: #65515b;
-      background: #181316;
-    }
-
-    .rack-led {
-      width: 5px;
-      height: 5px;
-
-      flex: none;
-
-      background: #78887c;
-    }
-
-    .node-target .rack-led {
-      background: var(--accent-pink);
-    }
-
-    .rack-detail {
-      height: 2px;
-      width: 48%;
-
-      background: #5b6b5e;
-    }
-
-    .node-target .rack-detail {
-      background: #925b70;
-    }
-
-    .node-footer {
-      margin-top: 19px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 7px;
-
-      color: #aeb9ae;
-
-      font-family: var(--font-display);
-      font-size: 9px;
-      font-weight: 600;
-
-      letter-spacing: .05em;
-      text-transform: uppercase;
-    }
-
-    .node-target .node-footer {
-      color: #e2b7c7;
-    }
-
-    /* ============================================
-       TRANSFER CORRIDOR
-    ============================================ */
-
-    .corridor {
-      min-width: 0;
-
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-
-      gap: 14px;
-    }
-
-    .corridor-label {
-      color: #839188;
-
-      font-family: var(--font-display);
-      font-size: 8px;
-      font-weight: 700;
-
-      text-align: center;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-    }
-
-    .corridor-track {
-      position: relative;
-
-      height: 21px;
-    }
-
-    .corridor-track::before {
-      content: "";
-
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-
-      height: 1px;
-
-      background: repeating-linear-gradient(
-        to right,
-        #77867a 0,
-        #77867a 5px,
-        transparent 5px,
-        transparent 10px
-      );
-    }
-
-    .corridor-track::after {
-      content: "";
-
-      position: absolute;
-      right: 0;
-      top: calc(50% - 4px);
-
-      width: 8px;
-      height: 8px;
-
-      border-right: 1px solid #abb8ac;
-      border-top: 1px solid #abb8ac;
-
-      transform: rotate(45deg);
-    }
-
-    .packet {
-      position: absolute;
-      z-index: 2;
-
-      top: 6px;
-      left: 0;
-
-      width: 9px;
-      height: 9px;
-
-      background: var(--accent-pink);
-
-      opacity: 0;
-
-      animation: packetTravel 2.25s linear infinite;
-    }
-
-    .packet-secondary {
-      width: 6px;
-      height: 6px;
-
-      top: 8px;
-
-      background: #e3e8df;
-
-      animation-duration: 2.8s;
-      animation-delay: .8s;
-    }
-
-    @keyframes packetTravel {
-      0% {
-        left: 0;
-        opacity: 0;
-      }
-
-      10% {
-        opacity: 1;
-      }
-
-      88% {
-        opacity: 1;
-      }
-
-      100% {
-        left: calc(100% - 10px);
-        opacity: 0;
-      }
-    }
-
-    .gsap-ready .packet {
-      animation: none;
-      left: 0;
-    }
-
-    .transfer-label {
+    .logo-row {
       display: flex;
       justify-content: center;
-
-      margin-top: 15px;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 2;
     }
 
-    .transfer-label span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      color: #c4cec4;
-
-      font-family: var(--font-display);
-      font-size: 10px;
-      font-weight: 500;
-    }
-
-    .transfer-label span::before {
-      content: "";
-
-      width: 6px;
-      height: 6px;
-
-      background: var(--accent-pink);
-    }
-
-    /* ============================================
-       BOARD FOOTER
-    ============================================ */
-
-    .board-footer {
+    .brand-logo-text {
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--sx-blue);
       display: flex;
-      justify-content: space-between;
       align-items: center;
-
-      gap: 15px;
-
-      padding-top: 20px;
-
-      border-top: 1px solid var(--dark-border);
+      gap: 10px;
     }
 
-    .board-footer-left,
-    .board-footer-right {
-      color: #a6b4a9;
-
-      font-family: var(--font-display);
-      font-size: 10px;
-      font-weight: 600;
-
-      letter-spacing: .07em;
-      text-transform: uppercase;
+    .brand-logo-text .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--sx-lime);
+      border: 2px solid var(--sx-ink);
+      display: inline-block;
     }
 
-    .board-footer-right {
-      color: #e3e8e0;
-    }
-
-    /* ============================================
-       ESTIMATED RESTORATION
-    ============================================ */
-
-    .restoration {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      margin-top: 1px;
-
-      background: var(--ink);
+    .icon-badge {
+      width: 76px;
+      height: 76px;
+      border: 2px solid var(--sx-ink);
+      border-radius: 22px;
+      background: var(--sx-blue);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.4),
+        0 5px 0 var(--sx-blue-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 26px;
+      position: relative;
+      z-index: 2;
       color: #fff;
     }
 
-    .restoration-item {
-      min-width: 0;
-      padding: 27px 28px;
+    .icon-badge svg {
+      width: 34px;
+      height: 34px;
+      stroke-width: 1.8;
     }
 
-    .restoration-item + .restoration-item {
-      border-left: 1px solid #444a45;
-    }
-
-    .restoration-label {
-      margin-bottom: 13px;
-
-      color: #adb7ad;
-
-      font-family: var(--font-display);
-      font-size: 10px;
-      font-weight: 700;
-
-      text-transform: uppercase;
-      letter-spacing: .09em;
-    }
-
-    .restoration-value {
-      font-family: var(--font-display);
-      font-size: clamp(29px, 3.2vw, 46px);
-      font-weight: 700;
-
-      letter-spacing: -.065em;
+    .heading {
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.045em;
       line-height: 1.1;
+      color: var(--sx-ink);
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 2;
+    }
 
+    .heading .accent {
+      color: var(--sx-blue);
+    }
+
+    .subtext {
+      font-size: clamp(14px, 1.6vw, 16px);
+      color: #5b616c;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .migration-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .server-node {
+      width: 68px;
+      height: 68px;
+      border: 2px solid var(--sx-line);
+      border-radius: 18px;
+      background: var(--sx-panel-soft);
+      box-shadow:
+        inset 0 2px 3px rgba(26, 29, 31, 0.06),
+        0 3px 0 var(--sx-depth);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sx-ink);
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .server-node svg {
+      width: 28px;
+      height: 28px;
+      stroke-width: 1.8;
+    }
+
+    .server-node.active-source {
+      border-color: var(--sx-blue);
+      background: rgba(13, 148, 136, 0.08);
+      box-shadow:
+        inset 0 2px 3px rgba(13, 148, 136, 0.1),
+        0 3px 0 var(--sx-blue-deep);
+      color: var(--sx-blue);
+    }
+
+    .server-node.active-target {
+      border-color: var(--sx-lime-deep);
+      background: rgba(190, 242, 100, 0.15);
+      box-shadow:
+        inset 0 2px 3px rgba(132, 204, 22, 0.1),
+        0 3px 0 var(--sx-lime-deep);
+      color: #4d7c0f;
+    }
+
+    .server-node .node-label {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #858b93;
+      white-space: nowrap;
+    }
+
+    .migration-path {
+      flex: 1;
+      max-width: 130px;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--sx-line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .migration-path::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--sx-blue), var(--sx-lime));
+      animation: migrateProgress 3.5s ease-in-out infinite;
+    }
+
+    @keyframes migrateProgress {
+      0% { width: 0%; opacity: 1; }
+      45% { width: 100%; opacity: 1; }
+      55% { width: 100%; opacity: 0; }
+      56% { width: 0%; opacity: 0; }
+      100% { width: 0%; opacity: 1; }
+    }
+
+    .data-packet {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--sx-lime);
+      border: 1.5px solid var(--sx-ink);
+      box-shadow: 0 2px 0 var(--sx-lime-deep);
+      animation: packetMove 3.5s ease-in-out infinite;
+      z-index: 3;
+    }
+
+    @keyframes packetMove {
+      0% { left: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      45% { left: 100%; opacity: 1; }
+      50% { left: 100%; opacity: 0; }
+      55% { left: 0%; opacity: 0; }
+      60% { opacity: 1; }
+      100% { left: 0%; opacity: 1; }
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .countdown-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 8px 14px;
+      border: 2px solid var(--sx-line);
+      border-radius: var(--radius-md);
+      background: var(--sx-panel-soft);
+      box-shadow:
+        inset 0 2px 4px rgba(26, 29, 31, 0.06),
+        0 4px 0 var(--sx-depth);
+      transition: border-color 0.2s;
+    }
+
+    .countdown-num {
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 4.5vw, 38px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--sx-ink);
       font-variant-numeric: tabular-nums;
     }
 
-    .restoration-value small {
-      color: #a5b0a5;
-
-      font-size: 12px;
-      font-weight: 500;
-
-      letter-spacing: 0;
-    }
-
-    .restoration-caption {
-      margin-top: 10px;
-
-      color: #9da79d;
-
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    /* ============================================
-       BOTTOM EDITORIAL BAND
-    ============================================ */
-
-    .bottom-band {
-      border-top: 1px solid var(--border-hard);
-      border-bottom: 1px solid var(--border-hard);
-
-      background: var(--bg-soft);
-    }
-
-    .bottom-inner {
-      min-height: 90px;
-
-      display: grid;
-      grid-template-columns: 1fr auto;
-
-      align-items: center;
-      gap: 28px;
-    }
-
-    .bottom-message {
-      display: flex;
-      align-items: baseline;
-      gap: 17px;
-    }
-
-    .bottom-number {
-      color: var(--accent-pink);
-
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .bottom-message p {
-      margin: 0;
-
-      color: var(--ink-soft);
-
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .bottom-reference {
-      color: var(--text-muted);
-
-      font-family: var(--font-display);
-      font-size: 10px;
-      font-weight: 600;
-
-      letter-spacing: .08em;
+    .countdown-label {
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: 9.5px;
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #858b93;
+      margin-top: 6px;
     }
 
-    /* ============================================
-       FOOTER
-    ============================================ */
-
-    .footer {
-      padding: 26px 0 36px;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 22px;
-    }
-
-    .footer-left {
+    .eta-row {
       display: flex;
       align-items: center;
+      justify-content: center;
+      gap: 12px;
       flex-wrap: wrap;
-      gap: 18px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
     }
 
-    .footer-copyright {
-      color: var(--ink);
-
-      font-family: var(--font-display);
-      font-size: 12px;
+    .eta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border: 2px solid var(--sx-line);
+      border-radius: 30px;
+      background: var(--sx-panel);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.9),
+        0 3px 0 var(--sx-depth);
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12.5px;
       font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--sx-ink);
     }
 
-    .footer-tagline {
-      color: var(--text-muted);
-
-      font-size: 12px;
+    .eta-pill .pill-icon {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: var(--sx-yellow);
+      border: 1.5px solid var(--sx-ink);
+      box-shadow: 0 2px 0 var(--sx-yellow-deep);
+      flex-shrink: 0;
     }
 
-    .footer-contact {
-      color: var(--text-muted);
-
-      font-size: 12px;
+    .eta-pill .pill-icon svg {
+      width: 11px;
+      height: 11px;
+      stroke-width: 2.5;
+      color: var(--sx-ink);
     }
 
-    .footer-contact a {
-      color: var(--ink);
+    .eta-pill.accent-blue {
+      border-color: var(--sx-blue);
+      background: rgba(13, 148, 136, 0.06);
+      color: var(--sx-blue-deep);
+    }
 
+    .eta-pill.accent-blue .pill-icon {
+      background: var(--sx-blue);
+      border-color: var(--sx-ink);
+      color: #fff;
+    }
+
+    .eta-pill.accent-lime {
+      border-color: var(--sx-lime-deep);
+      background: rgba(190, 242, 100, 0.12);
+      color: #4d7c0f;
+    }
+
+    .eta-pill.accent-lime .pill-icon {
+      background: var(--sx-lime);
+      border-color: var(--sx-ink);
+      color: var(--sx-ink);
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 2px solid var(--sx-line);
+      border-radius: var(--radius-md);
+      background: var(--sx-panel-soft);
+      box-shadow:
+        inset 0 2px 4px rgba(26, 29, 31, 0.06),
+        0 4px 0 var(--sx-depth);
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--sx-orange);
+      border: 2px solid var(--sx-ink);
+      box-shadow: 0 2px 0 var(--sx-orange-deep);
+      animation: pulseDot 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.7; }
+    }
+
+    .status-text {
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12.5px;
       font-weight: 700;
-
-      text-decoration: underline;
-      text-underline-offset: 4px;
+      letter-spacing: -0.01em;
+      color: var(--sx-ink);
     }
 
-    .footer-contact a:hover {
-      color: var(--accent-pink);
+    .progress-track {
+      flex: 1;
+      min-width: 100px;
+      height: 8px;
+      border-radius: 8px;
+      background: var(--sx-line);
+      overflow: hidden;
+      position: relative;
     }
 
-    /* ============================================
-       RESPONSIVE / TABLET
-    ============================================ */
-
-    @media (max-width: 1100px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-        gap: 60px;
-      }
-
-      .content {
-        max-width: 760px;
-      }
-
-      .headline {
-        font-size: clamp(4.5rem, 9vw, 7.5rem);
-      }
-
-      .visual-column {
-        max-width: 900px;
-        width: 100%;
-      }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--sx-blue), var(--sx-lime));
+      transition: width 0.6s ease;
     }
 
-    /* ============================================
-       RESPONSIVE / MOBILE
-    ============================================ */
+    .progress-percent {
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--sx-blue);
+      min-width: 38px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #858b93;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-note svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2;
+      opacity: 0.6;
+    }
+
+    .toast-message {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      z-index: 999;
+      padding: 14px 22px;
+      border: 2px solid var(--sx-line);
+      border-radius: var(--radius-md);
+      background: var(--sx-panel);
+      box-shadow:
+        var(--clay-hi),
+        0 5px 0 var(--sx-depth),
+        var(--clay-2);
+      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sx-ink);
+      opacity: 0;
+      transition: transform 0.4s var(--ease-spring), opacity 0.4s ease;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .toast-message.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-message .toast-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sx-lime);
+      border: 1.5px solid var(--sx-ink);
+      margin-right: 8px;
+      vertical-align: middle;
+    }
 
     @media (max-width: 640px) {
-      .utility-inner {
-        min-height: 64px;
+      .migration-card {
+        padding: 34px 22px 30px;
+        border-radius: var(--radius-lg);
       }
 
-      .utility-name {
-        font-size: 10px;
-      }
-
-      .utility-date,
-      .utility-divider {
-        display: none;
-      }
-
-      .maintenance-status {
-        font-size: 10px;
-      }
-
-      .main {
-        padding-top: 55px;
-        padding-bottom: 66px;
-      }
-
-      .main-grid {
-        gap: 45px;
-      }
-
-      .section-marker {
-        margin-bottom: 25px;
-      }
-
-      .marker-text {
-        font-size: 10px;
-      }
-
-      .headline {
-        font-size: clamp(3.2rem, 12vw, 5.3rem);
-        line-height: 1;
-      }
-
-      .headline-caption {
-        margin-top: 26px;
-        gap: 12px;
-      }
-
-      .description {
-        font-size: 14px;
-        line-height: 1.8;
-      }
-
-      .schedule {
-        margin-top: 32px;
-      }
-
-      .schedule-item {
-        padding: 17px 12px 17px 0;
-      }
-
-      .schedule-item + .schedule-item {
-        padding-left: 15px;
-      }
-
-      .schedule-value {
-        font-size: 22px;
-      }
-
-      .schedule-label {
-        font-size: 9px;
-      }
-
-      .support-notice {
-        margin-top: 27px;
-      }
-
-      .actions {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .migration-board {
-        padding: 19px 16px;
-      }
-
-      .board-kicker {
-        font-size: 9px;
-      }
-
-      .board-title {
-        font-size: 22px;
-      }
-
-      .board-tag {
-        font-size: 8px;
-        padding: 7px;
-      }
-
-      .topology {
-        padding: 48px 0 44px;
-      }
-
-      .topology-grid {
-        grid-template-columns:
-          minmax(0, 1fr)
-          minmax(35px, .5fr)
-          minmax(0, 1fr);
-
-        gap: 9px;
-      }
-
-      .node {
-        padding: 12px 9px;
-      }
-
-      .node-index {
-        font-size: 8px;
-        margin-bottom: 19px;
-      }
-
-      .rack-line {
-        height: 23px;
-        padding: 0 6px;
+      .countdown-grid {
+        grid-template-columns: repeat(4, 1fr);
         gap: 6px;
       }
 
-      .node-footer {
-        font-size: 7px;
+      .countdown-block {
+        padding: 12px 4px 10px;
+        border-radius: var(--radius-sm);
       }
 
-      .corridor-label {
-        font-size: 7px;
-        letter-spacing: 0;
+      .countdown-num {
+        font-size: clamp(24px, 7vw, 32px);
       }
 
-      .restoration-item {
-        padding: 23px 16px;
+      .countdown-label {
+        font-size: 8px;
+        letter-spacing: 0.04em;
       }
 
-      .restoration-value {
-        font-size: clamp(24px, 7vw, 34px);
+      .server-node {
+        width: 56px;
+        height: 56px;
+        border-radius: 15px;
       }
 
-      .restoration-label {
-        min-height: 26px;
-        font-size: 9px;
+      .server-node svg {
+        width: 22px;
+        height: 22px;
       }
 
-      .bottom-inner {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 22px 0;
+      .server-node .node-label {
+        font-size: 8px;
+        bottom: -17px;
       }
 
-      .bottom-message {
-        gap: 12px;
+      .migration-path {
+        max-width: 80px;
       }
 
-      .footer-inner {
+      .eta-row {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
+        gap: 8px;
+      }
+
+      .eta-pill {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .status-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .status-left {
+        justify-content: center;
+      }
+
+      .progress-percent {
+        text-align: center;
       }
     }
 
     @media (max-width: 380px) {
-      .utility-name {
-        max-width: 140px;
-        line-height: 1.4;
+      .migration-card {
+        padding: 26px 16px 24px;
       }
 
-      .headline {
-        font-size: 3.15rem;
+      .countdown-num {
+        font-size: 22px;
       }
 
-      .board-header {
-        flex-wrap: wrap;
-      }
-
-      .node-index span:last-child {
-        display: none;
-      }
-
-      .rack-detail {
-        width: 37%;
-      }
-
-      .board-footer-left,
-      .board-footer-right {
-        font-size: 8px;
+      .heading {
+        font-size: 24px;
       }
     }
-
-    /* ============================================
-       REDUCED MOTION
-    ============================================ */
 
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
       *::after {
-        scroll-behavior: auto !important;
-
-        animation-duration: .01ms !important;
+        animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-
-        transition-duration: .01ms !important;
+        transition-duration: 0.01ms !important;
       }
 
-      .packet {
+      .migration-path::before {
+        width: 100% !important;
+        opacity: 0.5 !important;
+      }
+
+      .data-packet {
+        display: none !important;
+      }
+
+      .status-dot {
         animation: none !important;
-        opacity: 0 !important;
       }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- ==========================================
-       HEADER
-  =========================================== -->
+  <main class="migration-shell">
+    <div class="migration-card" id="migrationCard">
 
-  <header class="utility-bar">
-    <div class="container utility-inner">
-
-      <div class="utility-left">
-
-        <span class="utility-index" aria-hidden="true">
-          01
+      <div class="logo-row">
+        <span class="brand-logo-text">
+          <span class="logo-dot"></span>
+          SPORTIX
         </span>
-
-        <span class="utility-name">
-          System / Maintenance
-        </span>
-
       </div>
 
-      <div class="utility-right">
-
-        <span class="utility-date">
-          03.11.2026
-        </span>
-
-        <span class="utility-divider" aria-hidden="true"></span>
-
-        <span class="maintenance-status">
-
-          <span
-            class="status-indicator"
-            aria-hidden="true"
-          ></span>
-
-          Pemeliharaan Terjadwal
-
-        </span>
-
+      <div class="icon-badge" id="iconBadge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 1 1-9-9" />
+          <path d="M21 3v6h-6" />
+          <path d="M12 7v5l3 2" />
+        </svg>
       </div>
 
-    </div>
-  </header>
+      <h1 class="heading" id="mainHeading">
+        Migrasi <span class="accent">Server</span> Sedang Berlangsung
+      </h1>
 
-  <!-- ==========================================
-       MAIN CONTENT
-  =========================================== -->
+      <p class="subtext" id="subtext">
+        Kami sedang memindahkan sistem ke server baru yang lebih cepat dan stabil.
+        Layanan akan kembali normal pukul <strong>03:00</strong>.
+      </p>
 
-  <main class="main">
-
-    <div class="container main-grid">
-
-      <!-- LEFT / CONTENT -->
-
-      <section class="content" aria-labelledby="main-heading">
-
-        <div class="section-marker">
-
-          <span class="marker-line" aria-hidden="true"></span>
-
-          <span class="marker-text">
-            Sportix / Infrastructure Update
-          </span>
-
+      <div class="migration-visual" id="migrationVisual">
+        <div class="server-node active-source" id="sourceNode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" />
+            <rect x="2" y="14" width="20" height="8" rx="2" />
+            <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none" />
+            <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none" />
+          </svg>
+          <span class="node-label">Lama</span>
         </div>
 
-        <h1 class="headline" id="main-heading">
-
-          <span class="headline-line">
-            Kami
-          </span>
-
-          <span class="headline-line">
-            sedang
-          </span>
-
-          <span class="headline-line headline-accent">
-            pindah<span class="headline-dot">.</span>
-          </span>
-
-        </h1>
-
-        <div class="headline-caption">
-
-          <span class="caption-index">
-            / 01
-          </span>
-
-          <p class="description">
-            Sportix sedang melakukan migrasi server untuk
-            meningkatkan stabilitas dan performa layanan.
-            Selama proses berlangsung, akses website dan
-            transaksi mungkin tidak tersedia untuk sementara.
-          </p>
-
+        <div class="migration-path" id="migrationPath">
+          <div class="data-packet" id="dataPacket"></div>
         </div>
 
-        <!-- MAINTENANCE SCHEDULE -->
-
-        <div class="schedule">
-
-          <div class="schedule-item">
-
-            <span class="schedule-label">
-              Mulai Pemeliharaan
-            </span>
-
-            <span class="schedule-value">
-              00.00 <small>WIB</small>
-            </span>
-
-          </div>
-
-          <div class="schedule-item">
-
-            <span class="schedule-label">
-              Estimasi Selesai
-            </span>
-
-            <span class="schedule-value">
-              03.00 <small>WIB</small>
-            </span>
-
-          </div>
-
+        <div class="server-node" id="targetNode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" />
+            <rect x="2" y="14" width="20" height="8" rx="2" />
+            <circle cx="6" cy="6" r="1" fill="currentColor" stroke="none" />
+            <circle cx="6" cy="18" r="1" fill="currentColor" stroke="none" />
+            <path d="M17 10v4" />
+            <path d="M15 12h4" />
+          </svg>
+          <span class="node-label">Baru</span>
         </div>
+      </div>
 
-        <!-- SUPPORT NOTICE -->
-
-        <div class="support-notice">
-
-          <span class="notice-symbol" aria-hidden="true">
-            !
-          </span>
-
-          <div>
-
-            <h2 class="notice-heading">
-              Ada kendala dengan transaksi Anda?
-            </h2>
-
-            <p class="notice-text">
-              Jika Anda melakukan transaksi selama periode
-              pemeliharaan dan mengalami kendala, tim dukungan
-              kami siap membantu melakukan pengecekan
-              dan penanganan lebih lanjut.
-            </p>
-
-          </div>
-
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="countdown-block">
+          <span class="countdown-num" id="hoursNum">00</span>
+          <span class="countdown-label">Jam</span>
         </div>
+        <div class="countdown-block">
+          <span class="countdown-num" id="minutesNum">00</span>
+          <span class="countdown-label">Menit</span>
+        </div>
+        <div class="countdown-block">
+          <span class="countdown-num" id="secondsNum">00</span>
+          <span class="countdown-label">Detik</span>
+        </div>
+        <div class="countdown-block">
+          <span class="countdown-num" id="totalPercentNum">0%</span>
+          <span class="countdown-label">Progres</span>
+        </div>
+      </div>
 
-        <!-- ACTIONS -->
-
-        <div class="actions">
-
-          <a
-            href="mailto:support@madebyrizky.id?subject=Bantuan%20Transaksi%20Sportix"
-            class="action-primary"
-          >
-
-            Hubungi Tim Dukungan
-
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="square"
-              aria-hidden="true"
-            >
-              <path d="M5 19L19 5"></path>
-              <path d="M9 5H19V15"></path>
+      <div class="eta-row" id="etaRow">
+        <div class="eta-pill accent-blue">
+          <span class="pill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
             </svg>
-
-          </a>
-
-          <a
-            href="mailto:support@madebyrizky.id"
-            class="action-secondary"
-          >
-            support@madebyrizky.id
-          </a>
-
+          </span>
+          Kembali pukul <strong>03:00 WIB</strong>
         </div>
 
-      </section>
-
-      <!-- RIGHT / VISUAL -->
-
-      <section
-        class="visual-column"
-        aria-label="Visualisasi migrasi server"
-      >
-
-        <!-- TECHNICAL DIAGRAM -->
-
-        <div class="migration-board">
-
-          <div class="board-header">
-
-            <div>
-
-              <div class="board-kicker">
-                Infrastructure / Diagram 01
-              </div>
-
-              <h2 class="board-title">
-                Server migration.
-              </h2>
-
-            </div>
-
-            <div class="board-tag">
-              Illustration
-            </div>
-
-          </div>
-
-          <!-- NETWORK TOPOLOGY -->
-
-          <div class="topology">
-
-            <div class="topology-grid">
-
-              <!-- SOURCE NODE -->
-
-              <div class="node node-source">
-
-                <div class="node-index">
-                  <span>NODE / 01</span>
-                  <span>OLD</span>
-                </div>
-
-                <div class="node-rack">
-
-                  <div class="rack-line">
-                    <span class="rack-led"></span>
-                    <span class="rack-detail"></span>
-                  </div>
-
-                  <div class="rack-line">
-                    <span class="rack-led"></span>
-                    <span class="rack-detail"></span>
-                  </div>
-
-                  <div class="rack-line">
-                    <span class="rack-led"></span>
-                    <span class="rack-detail"></span>
-                  </div>
-
-                </div>
-
-                <div class="node-footer">
-                  <span>Source</span>
-                  <span>01</span>
-                </div>
-
-              </div>
-
-              <!-- TRANSFER CORRIDOR -->
-
-              <div class="corridor" aria-hidden="true">
-
-                <div class="corridor-label">
-                  Transfer
-                </div>
-
-                <div class="corridor-track">
-
-                  <span class="packet packet-primary"></span>
-
-                </div>
-
-                <div class="corridor-track">
-
-                  <span class="packet packet-secondary"></span>
-
-                </div>
-
-                <div class="corridor-label">
-                  Data
-                </div>
-
-              </div>
-
-              <!-- DESTINATION NODE -->
-
-              <div class="node node-target">
-
-                <div class="node-index">
-                  <span>NODE / 02</span>
-                  <span>NEW</span>
-                </div>
-
-                <div class="node-rack">
-
-                  <div class="rack-line">
-                    <span class="rack-led target-led"></span>
-                    <span class="rack-detail"></span>
-                  </div>
-
-                  <div class="rack-line">
-                    <span class="rack-led target-led"></span>
-                    <span class="rack-detail"></span>
-                  </div>
-
-                  <div class="rack-line">
-                    <span class="rack-led target-led"></span>
-                    <span class="rack-detail"></span>
-                  </div>
-
-                </div>
-
-                <div class="node-footer">
-                  <span>Destination</span>
-                  <span>02</span>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="transfer-label">
-
-              <span>
-                Ilustrasi perpindahan data
-              </span>
-
-            </div>
-
-          </div>
-
-          <div class="board-footer">
-
-            <span class="board-footer-left">
-              Source → Destination
-            </span>
-
-            <span class="board-footer-right">
-              Sportix / 2026
-            </span>
-
-          </div>
-
+        <div class="eta-pill accent-lime" id="etaCountdownPill">
+          <span class="pill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4" />
+              <path d="M12 18v4" />
+              <path d="M4.93 4.93l2.83 2.83" />
+              <path d="M16.24 16.24l2.83 2.83" />
+              <path d="M2 12h4" />
+              <path d="M18 12h4" />
+              <path d="M4.93 19.07l2.83-2.83" />
+              <path d="M16.24 7.76l2.83-2.83" />
+            </svg>
+          </span>
+          Sisa waktu: <strong id="etaRemainingText">—</strong>
         </div>
+      </div>
 
-        <!-- RESTORATION COUNTDOWN -->
-
-        <div class="restoration">
-
-          <div class="restoration-item">
-
-            <div class="restoration-label">
-              Estimasi Layanan Kembali
-            </div>
-
-            <div class="restoration-value">
-              03.00 <small>WIB</small>
-            </div>
-
-            <div class="restoration-caption">
-              Selasa, 3 November 2026
-            </div>
-
-          </div>
-
-          <div class="restoration-item">
-
-            <div
-              class="restoration-label"
-              id="countdown-label"
-            >
-              Sisa Waktu Terjadwal
-            </div>
-
-            <div
-              class="restoration-value"
-              id="countdown"
-              role="timer"
-              aria-live="off"
-            >
-              --:--:--
-            </div>
-
-            <div
-              class="restoration-caption"
-              id="countdown-caption"
-            >
-              Berdasarkan jadwal pemeliharaan
-            </div>
-
-          </div>
-
+      <div class="status-bar" id="statusBar">
+        <div class="status-left">
+          <span class="status-dot"></span>
+          <span class="status-text" id="statusText">Memindahkan data...</span>
         </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-percent" id="progressPercent">0%</span>
+      </div>
 
-      </section>
+      <div class="footer-note" id="footerNote">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+          <path d="M12 8v4" />
+          <path d="M12 16h.01" />
+        </svg>
+        Terima kasih atas kesabaran Anda. Tim teknis kami sedang bekerja.
+      </div>
 
     </div>
-
   </main>
 
-  <!-- ==========================================
-       INFORMATION BAND
-  =========================================== -->
+  <div class="toast-message" id="toastMessage">
+    <span class="toast-dot"></span>
+    <span id="toastText">Sinkronisasi data selesai</span>
+  </div>
 
-  <section class="bottom-band" aria-label="Informasi pemeliharaan">
-
-    <div class="container bottom-inner">
-
-      <div class="bottom-message">
-
-        <span class="bottom-number">
-          / 02
-        </span>
-
-        <p>
-          Terima kasih telah menunggu. Kami akan membuka
-          kembali akses layanan setelah migrasi selesai
-          dan sistem dinyatakan siap digunakan.
-        </p>
-
-      </div>
-
-      <span class="bottom-reference">
-        Scheduled Maintenance
-      </span>
-
-    </div>
-
-  </section>
-
-  <!-- ==========================================
-       FOOTER
-  =========================================== -->
-
-  <footer class="footer">
-
-    <div class="container footer-inner">
-
-      <div class="footer-left">
-
-        <span class="footer-copyright">
-          © <span id="copyright-year">2026</span> Sportix
-        </span>
-
-        <span class="footer-tagline">
-          Two Paths, One Play.
-        </span>
-
-      </div>
-
-      <div class="footer-contact">
-
-        Butuh bantuan?
-        <a href="mailto:support@madebyrizky.id">
-          support@madebyrizky.id
-        </a>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-  <!-- ==========================================
-       GSAP
-       External CDN, progressive enhancement
-  =========================================== -->
-
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-    defer
-  ></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script>
-    (() => {
-      "use strict";
+    (function() {
+      'use strict';
 
-      /* ========================================
-         CONFIG
-      ======================================== */
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const CONFIG = {
-        maintenanceStart: "2026-11-03T00:00:00+07:00",
-        maintenanceEnd: "2026-11-03T03:00:00+07:00",
+      const targetHour = 3;
+      const targetMinute = 0;
 
-        motion: {
-          packetDuration: 1.9,
-          packetDelay: 0.8
+      const hoursEl = document.getElementById('hoursNum');
+      const minutesEl = document.getElementById('minutesNum');
+      const secondsEl = document.getElementById('secondsNum');
+      const totalPercentEl = document.getElementById('totalPercentNum');
+      const etaRemainingText = document.getElementById('etaRemainingText');
+      const progressFill = document.getElementById('progressFill');
+      const progressPercent = document.getElementById('progressPercent');
+      const statusText = document.getElementById('statusText');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastText = document.getElementById('toastText');
+      const sourceNode = document.getElementById('sourceNode');
+      const targetNode = document.getElementById('targetNode');
+
+      const migrationStartTime = new Date();
+      migrationStartTime.setHours(0, 30, 0, 0);
+
+      function getTargetTime() {
+        const now = new Date();
+        const target = new Date(now);
+        target.setHours(targetHour, targetMinute, 0, 0);
+        if (target <= now) {
+          target.setDate(target.getDate() + 1);
         }
-      };
+        return target;
+      }
 
-      const startTime = Date.parse(
-        CONFIG.maintenanceStart
-      );
-
-      const endTime = Date.parse(
-        CONFIG.maintenanceEnd
-      );
-
-      /* ========================================
-         DOM
-      ======================================== */
-
-      const countdownEl = document.getElementById(
-        "countdown"
-      );
-
-      const countdownLabel = document.getElementById(
-        "countdown-label"
-      );
-
-      const countdownCaption = document.getElementById(
-        "countdown-caption"
-      );
-
-      const yearEl = document.getElementById(
-        "copyright-year"
-      );
-
-      /* ========================================
-         COUNTDOWN
-      ======================================== */
-
-      function pad(value) {
-        return String(value).padStart(2, "0");
+      function pad(n) {
+        return String(n).padStart(2, '0');
       }
 
       function updateCountdown() {
-        const now = Date.now();
+        const now = new Date();
+        const target = getTargetTime();
+        const diff = target - now;
 
-        if (now >= endTime) {
-          countdownEl.textContent = "00:00:00";
-
-          countdownLabel.textContent =
-            "Jadwal Telah Berakhir";
-
-          countdownCaption.textContent =
-            "Menunggu konfirmasi layanan kembali";
-
-          return;
-        }
-
-        const remaining = Math.max(
-          0,
-          endTime - now
-        );
-
-        const hours = Math.floor(
-          remaining / 3600000
-        );
-
-        const minutes = Math.floor(
-          (remaining % 3600000) / 60000
-        );
-
-        const seconds = Math.floor(
-          (remaining % 60000) / 1000
-        );
-
-        countdownEl.textContent = [
-          pad(hours),
-          pad(minutes),
-          pad(seconds)
-        ].join(":");
-
-        if (now < startTime) {
-          countdownLabel.textContent =
-            "Menuju Estimasi Selesai";
-
-          countdownCaption.textContent =
-            "Pemeliharaan dimulai pukul 00.00 WIB";
-        } else {
-          countdownLabel.textContent =
-            "Sisa Waktu Terjadwal";
-
-          countdownCaption.textContent =
-            "Berdasarkan jadwal pemeliharaan";
-        }
-      }
-
-      /* ========================================
-         MOTION PREFERENCES
-      ======================================== */
-
-      const motionQuery = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      );
-
-      function motionAllowed() {
-        return !motionQuery.matches;
-      }
-
-      /* ========================================
-         GSAP
-      ======================================== */
-
-      let animationContext = null;
-
-      function initGSAP() {
-        if (!window.gsap || !motionAllowed()) {
-          return;
-        }
-
-        const gsap = window.gsap;
-
-        document.documentElement.classList.add(
-          "gsap-ready"
-        );
-
-        animationContext = gsap.context(() => {
-
-          /* ------------------------------------
-             INTRO ENTRANCE
-          ------------------------------------ */
-
-          const intro = gsap.timeline({
-            defaults: {
-              ease: "power3.out"
-            }
-          });
-
-          intro
-            .from(".utility-inner", {
-              opacity: 0,
-              y: -12,
-              duration: 0.55
-            })
-
-            .from(".section-marker", {
-              opacity: 0,
-              y: 16,
-              duration: 0.6
-            }, "-=0.25")
-
-            .from(".headline-line", {
-              opacity: 0,
-              y: 38,
-              duration: 0.8,
-              stagger: 0.1
-            }, "-=0.3")
-
-            .from(".headline-caption", {
-              opacity: 0,
-              y: 18,
-              duration: 0.65
-            }, "-=0.35")
-
-            .from(".schedule", {
-              opacity: 0,
-              y: 15,
-              duration: 0.65
-            }, "-=0.3")
-
-            .from(".support-notice, .actions", {
-              opacity: 0,
-              y: 14,
-              duration: 0.6,
-              stagger: 0.1
-            }, "-=0.3")
-
-            .from(".migration-board", {
-              opacity: 0,
-              y: 26,
-              duration: 0.85
-            }, 0.35)
-
-            .from(".restoration", {
-              opacity: 0,
-              y: 15,
-              duration: 0.65
-            }, "-=0.45");
-
-          /* ------------------------------------
-             DATA PACKETS
-
-             Actual container width is measured
-             at the start of every loop.
-
-             No fixed SVG coordinates.
-             No node transform conflicts.
-          ------------------------------------ */
-
-          function movePacket(
-            selector,
-            duration,
-            delay
-          ) {
-            const packet = document.querySelector(
-              selector
-            );
-
-            if (!packet) {
-              return;
-            }
-
-            const track = packet.closest(
-              ".corridor-track"
-            );
-
-            if (!track) {
-              return;
-            }
-
-            const timeline = gsap.timeline({
-              repeat: -1,
-              repeatDelay: 0.45,
-              repeatRefresh: true,
-              delay
-            });
-
-            timeline
-              .set(packet, {
-                x: 0,
-                autoAlpha: 0
-              })
-
-              .to(packet, {
-                autoAlpha: 1,
-                duration: 0.12,
-                ease: "none"
-              })
-
-              .to(packet, {
-                x: () => Math.max(
-                  0,
-                  track.clientWidth -
-                  packet.offsetWidth
-                ),
-                duration,
-                ease: "none"
-              }, 0)
-
-              .to(packet, {
-                autoAlpha: 0,
-                duration: 0.16,
-                ease: "none"
-              }, duration - 0.16);
-
-            return timeline;
+        if (diff <= 0) {
+          hoursEl.textContent = '00';
+          minutesEl.textContent = '00';
+          secondsEl.textContent = '00';
+          etaRemainingText.textContent = 'Layanan tersedia';
+          progressFill.style.width = '100%';
+          progressPercent.textContent = '100%';
+          totalPercentEl.textContent = '100%';
+          statusText.textContent = 'Migrasi selesai!';
+          if (!reduceMotion && typeof gsap !== 'undefined') {
+            gsap.to(targetNode, { borderColor: '#84cc16', backgroundColor: 'rgba(190,242,100,0.2)', duration: 0.5, repeat: 3, yoyo: true });
           }
-
-          movePacket(
-            ".packet-primary",
-            CONFIG.motion.packetDuration,
-            0
-          );
-
-          movePacket(
-            ".packet-secondary",
-            CONFIG.motion.packetDuration + 0.35,
-            CONFIG.motion.packetDelay
-          );
-
-          /* ------------------------------------
-             DESTINATION LED FEEDBACK
-             Illustrative only
-          ------------------------------------ */
-
-          gsap.to(".target-led", {
-            opacity: 0.35,
-            stagger: 0.18,
-            duration: 0.55,
-            ease: "sine.inOut",
-            repeat: -1,
-            yoyo: true
-          });
-
-        });
-      }
-
-      /* ========================================
-         REDUCED MOTION CHANGE
-      ======================================== */
-
-      function handleMotionChange() {
-        if (animationContext) {
-          animationContext.revert();
-          animationContext = null;
+          return;
         }
 
-        document.documentElement.classList.remove(
-          "gsap-ready"
-        );
+        const totalSeconds = Math.floor(diff / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
 
-        if (motionAllowed()) {
-          initGSAP();
+        hoursEl.textContent = pad(hours);
+        minutesEl.textContent = pad(minutes);
+        secondsEl.textContent = pad(seconds);
+
+        const remainingStr = (hours > 0 ? hours + ' jam ' : '') +
+          (minutes > 0 ? minutes + ' menit ' : '') +
+          seconds + ' detik';
+        etaRemainingText.textContent = remainingStr;
+
+        const totalDuration = target - migrationStartTime;
+        const elapsed = now - migrationStartTime;
+        let progress = Math.min(100, Math.max(0, Math.round((elapsed / totalDuration) * 100)));
+
+        progressFill.style.width = progress + '%';
+        progressPercent.textContent = progress + '%';
+        totalPercentEl.textContent = progress + '%';
+
+        if (progress < 25) {
+          statusText.textContent = 'Memulai migrasi...';
+        } else if (progress < 50) {
+          statusText.textContent = 'Memindahkan data...';
+        } else if (progress < 75) {
+          statusText.textContent = 'Sinkronisasi database...';
+        } else if (progress < 95) {
+          statusText.textContent = 'Verifikasi sistem...';
+        } else {
+          statusText.textContent = 'Hampir selesai...';
+        }
+
+        if (!reduceMotion) {
+          const sourceActive = (Math.floor(now.getTime() / 1000) % 4) < 2;
+          sourceNode.classList.toggle('active-source', sourceActive);
+          targetNode.classList.toggle('active-target', !sourceActive);
         }
       }
 
-      /* ========================================
-         INITIALIZATION
-      ======================================== */
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
 
-      function init() {
-        if (yearEl) {
-          yearEl.textContent =
-            new Date().getFullYear();
-        }
-
-        updateCountdown();
-
-        setInterval(
-          updateCountdown,
-          1000
-        );
-
-        initGSAP();
-
-        if (typeof motionQuery.addEventListener === "function") {
-          motionQuery.addEventListener(
-            "change",
-            handleMotionChange
-          );
-        } else if (typeof motionQuery.addListener === "function") {
-          motionQuery.addListener(
-            handleMotionChange
-          );
-        }
+      function showToast(text) {
+        toastText.textContent = text;
+        toastMessage.classList.add('show');
+        setTimeout(() => {
+          toastMessage.classList.remove('show');
+        }, 3500);
       }
 
-      if (document.readyState === "complete") {
-        init();
-      } else {
-        window.addEventListener(
-          "load",
-          init,
-          { once: true }
-        );
-      }
+      const toastMessages = [
+        'Sinkronisasi data selesai',
+        'Memindahkan database pengguna...',
+        'Memverifikasi konfigurasi server...',
+        'Menguji koneksi jaringan...',
+        'Mengoptimalkan performa...',
+        'Memindahkan aset media...',
+        'Memeriksa integritas data...'
+      ];
 
-    })();
-  </script>
+      let toastIndex = 0;
+      setInterval(() => {
+        toastIndex = (toastIndex + 1) % toastMessages.length;
+        showToast(toastMessages[toastIndex]);
+      }, 6000);
 
-</body>
-</html>
+      setTimeout(() => {
+        showToast('Migrasi server sedang berlangsung...');
+      }, 1500);
+
+      if (!reduceMotion && typeof gsap !== 'undefined') {
+        const card = document.getElementById('migrationCard');
+        const iconBadge = document.getElementById('iconBadge');
+        const heading = document
