@@ -754,8 +754,9 @@
       const sourceNode = document.getElementById('sourceNode');
       const targetNode = document.getElementById('targetNode');
 
+      // MIGRASI DIMULAI PUKUL 00:00
       const migrationStartTime = new Date();
-      migrationStartTime.setHours(0, 30, 0, 0);
+      migrationStartTime.setHours(0, 0, 0, 0);
 
       function getTargetTime() {
         const now = new Date();
@@ -794,6 +795,7 @@
 
         etaRemainingText.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 
+        // Hitung durasi dari jam 00:00 sampai jam 03:00
         const totalDuration = target - migrationStartTime;
         const elapsed = now - migrationStartTime;
         let progress = Math.min(100, Math.max(0, Math.round((elapsed / totalDuration) * 100)));
