@@ -17,14 +17,11 @@
       --sx-orange-deep: #ea580c;
       --sx-yellow: #facc15;
       --sx-yellow-deep: #ca8a04;
-      --sx-coral: #f87171;
-      --sx-mint: #34d399;
       --sx-ink: #1a1d1f;
       --sx-bg: #f5f3ee;
       --sx-panel: #ffffff;
       --sx-panel-soft: #ebe9e2;
       --sx-line: #d6d8cf;
-      --sx-line-strong: #b3b8ac;
       --sx-depth: #c8ccc0;
       --clay-hi: inset 0 2px 0 rgba(255, 255, 255, 0.9);
       --clay-1: 0 1px 2px rgba(26, 29, 31, 0.05), 0 6px 14px -8px rgba(26, 29, 31, 0.16);
@@ -72,7 +69,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 32px 20px 48px;
+      padding: 40px 20px 60px;
       position: relative;
       z-index: 1;
     }
@@ -92,8 +89,8 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 780px;
-      padding: 52px 44px 46px;
+      max-width: 720px;
+      padding: 52px 44px 48px;
       border: 2px solid var(--sx-line);
       border-radius: var(--radius-xl);
       background: var(--sx-panel);
@@ -185,10 +182,10 @@
 
     .heading {
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(28px, 5vw, 40px);
+      font-size: clamp(28px, 5vw, 38px);
       font-weight: 800;
       letter-spacing: -0.045em;
-      line-height: 1.1;
+      line-height: 1.15;
       color: var(--sx-ink);
       margin-bottom: 14px;
       position: relative;
@@ -200,7 +197,7 @@
     }
 
     .subtext {
-      font-size: clamp(14px, 1.6vw, 16px);
+      font-size: clamp(14px, 1.6vw, 15.5px);
       color: #5b616c;
       line-height: 1.7;
       max-width: 520px;
@@ -214,7 +211,7 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
-      margin-bottom: 30px;
+      margin-bottom: 36px;
       position: relative;
       z-index: 2;
     }
@@ -262,7 +259,7 @@
 
     .server-node .node-label {
       position: absolute;
-      bottom: -20px;
+      bottom: -22px;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
@@ -329,57 +326,13 @@
       100% { left: 0%; opacity: 1; }
     }
 
-    .countdown-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 28px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .countdown-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 8px 14px;
-      border: 2px solid var(--sx-line);
-      border-radius: var(--radius-md);
-      background: var(--sx-panel-soft);
-      box-shadow:
-        inset 0 2px 4px rgba(26, 29, 31, 0.06),
-        0 4px 0 var(--sx-depth);
-      transition: border-color 0.2s;
-    }
-
-    .countdown-num {
-      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(28px, 4.5vw, 38px);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--sx-ink);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .countdown-label {
-      font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 9.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #858b93;
-      margin-top: 6px;
-    }
-
     .eta-row {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
       position: relative;
       z-index: 2;
     }
@@ -387,8 +340,8 @@
     .eta-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 9px 16px;
+      gap: 10px;
+      padding: 12px 20px;
       border: 2px solid var(--sx-line);
       border-radius: 30px;
       background: var(--sx-panel);
@@ -396,19 +349,19 @@
         inset 0 2px 0 rgba(255, 255, 255, 0.9),
         0 3px 0 var(--sx-depth);
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 12.5px;
+      font-size: 13.5px;
       font-weight: 700;
       letter-spacing: -0.01em;
       color: var(--sx-ink);
     }
 
     .eta-pill .pill-icon {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 6px;
+      border-radius: 7px;
       background: var(--sx-yellow);
       border: 1.5px solid var(--sx-ink);
       box-shadow: 0 2px 0 var(--sx-yellow-deep);
@@ -416,8 +369,8 @@
     }
 
     .eta-pill .pill-icon svg {
-      width: 11px;
-      height: 11px;
+      width: 12px;
+      height: 12px;
       stroke-width: 2.5;
       color: var(--sx-ink);
     }
@@ -436,7 +389,7 @@
 
     .eta-pill.accent-lime {
       border-color: var(--sx-lime-deep);
-      background: rgba(190, 242, 100, 0.12);
+      background: rgba(190, 242, 100, 0.15);
       color: #4d7c0f;
     }
 
@@ -446,12 +399,24 @@
       color: var(--sx-ink);
     }
 
+    .countdown-inline {
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      color: var(--sx-ink);
+      background: var(--sx-panel);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1.5px solid var(--sx-line-strong);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+      margin-left: 6px;
+    }
+
     .status-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      padding: 16px 20px;
+      padding: 16px 22px;
       border: 2px solid var(--sx-line);
       border-radius: var(--radius-md);
       background: var(--sx-panel-soft);
@@ -486,7 +451,7 @@
 
     .status-text {
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: -0.01em;
       color: var(--sx-ink);
@@ -494,7 +459,7 @@
 
     .progress-track {
       flex: 1;
-      min-width: 100px;
+      min-width: 120px;
       height: 8px;
       border-radius: 8px;
       background: var(--sx-line);
@@ -512,22 +477,22 @@
 
     .progress-percent {
       font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
       color: var(--sx-blue);
-      min-width: 38px;
+      min-width: 42px;
       text-align: right;
       font-variant-numeric: tabular-nums;
     }
 
     .footer-note {
-      margin-top: 30px;
+      margin-top: 32px;
       font-size: 12px;
       color: #858b93;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       position: relative;
       z-index: 2;
     }
@@ -581,27 +546,8 @@
 
     @media (max-width: 640px) {
       .migration-card {
-        padding: 34px 22px 30px;
+        padding: 36px 22px 32px;
         border-radius: var(--radius-lg);
-      }
-
-      .countdown-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 6px;
-      }
-
-      .countdown-block {
-        padding: 12px 4px 10px;
-        border-radius: var(--radius-sm);
-      }
-
-      .countdown-num {
-        font-size: clamp(24px, 7vw, 32px);
-      }
-
-      .countdown-label {
-        font-size: 8px;
-        letter-spacing: 0.04em;
       }
 
       .server-node {
@@ -617,7 +563,7 @@
 
       .server-node .node-label {
         font-size: 8px;
-        bottom: -17px;
+        bottom: -18px;
       }
 
       .migration-path {
@@ -626,18 +572,21 @@
 
       .eta-row {
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
       }
 
       .eta-pill {
         width: 100%;
         justify-content: center;
+        padding: 12px 14px;
+        font-size: 12.5px;
       }
 
       .status-bar {
         flex-direction: column;
         align-items: stretch;
-        gap: 10px;
+        gap: 12px;
+        padding: 16px;
       }
 
       .status-left {
@@ -646,20 +595,6 @@
 
       .progress-percent {
         text-align: center;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .migration-card {
-        padding: 26px 16px 24px;
-      }
-
-      .countdown-num {
-        font-size: 22px;
-      }
-
-      .heading {
-        font-size: 24px;
       }
     }
 
@@ -713,7 +648,7 @@
 
       <p class="subtext" id="subtext">
         Kami sedang memindahkan sistem ke server baru yang lebih cepat dan stabil.
-        Layanan akan kembali normal pukul <strong>03:00</strong>.
+        Layanan akan kembali normal pukul <strong>03:00 WIB</strong>.
       </p>
 
       <div class="migration-visual" id="migrationVisual">
@@ -744,25 +679,6 @@
         </div>
       </div>
 
-      <div class="countdown-grid" id="countdownGrid">
-        <div class="countdown-block">
-          <span class="countdown-num" id="hoursNum">00</span>
-          <span class="countdown-label">Jam</span>
-        </div>
-        <div class="countdown-block">
-          <span class="countdown-num" id="minutesNum">00</span>
-          <span class="countdown-label">Menit</span>
-        </div>
-        <div class="countdown-block">
-          <span class="countdown-num" id="secondsNum">00</span>
-          <span class="countdown-label">Detik</span>
-        </div>
-        <div class="countdown-block">
-          <span class="countdown-num" id="totalPercentNum">0%</span>
-          <span class="countdown-label">Progres</span>
-        </div>
-      </div>
-
       <div class="eta-row" id="etaRow">
         <div class="eta-pill accent-blue">
           <span class="pill-icon">
@@ -787,7 +703,7 @@
               <path d="M16.24 7.76l2.83-2.83" />
             </svg>
           </span>
-          Sisa waktu: <strong id="etaRemainingText">—</strong>
+          Sisa waktu: <span class="countdown-inline" id="etaRemainingText">00:00:00</span>
         </div>
       </div>
 
@@ -829,10 +745,6 @@
       const targetHour = 3;
       const targetMinute = 0;
 
-      const hoursEl = document.getElementById('hoursNum');
-      const minutesEl = document.getElementById('minutesNum');
-      const secondsEl = document.getElementById('secondsNum');
-      const totalPercentEl = document.getElementById('totalPercentNum');
       const etaRemainingText = document.getElementById('etaRemainingText');
       const progressFill = document.getElementById('progressFill');
       const progressPercent = document.getElementById('progressPercent');
@@ -865,13 +777,9 @@
         const diff = target - now;
 
         if (diff <= 0) {
-          hoursEl.textContent = '00';
-          minutesEl.textContent = '00';
-          secondsEl.textContent = '00';
-          etaRemainingText.textContent = 'Layanan tersedia';
+          etaRemainingText.textContent = '00:00:00';
           progressFill.style.width = '100%';
           progressPercent.textContent = '100%';
-          totalPercentEl.textContent = '100%';
           statusText.textContent = 'Migrasi selesai!';
           if (!reduceMotion && typeof gsap !== 'undefined') {
             gsap.to(targetNode, { borderColor: '#84cc16', backgroundColor: 'rgba(190,242,100,0.2)', duration: 0.5, repeat: 3, yoyo: true });
@@ -884,14 +792,7 @@
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
 
-        hoursEl.textContent = pad(hours);
-        minutesEl.textContent = pad(minutes);
-        secondsEl.textContent = pad(seconds);
-
-        const remainingStr = (hours > 0 ? hours + ' jam ' : '') +
-          (minutes > 0 ? minutes + ' menit ' : '') +
-          seconds + ' detik';
-        etaRemainingText.textContent = remainingStr;
+        etaRemainingText.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 
         const totalDuration = target - migrationStartTime;
         const elapsed = now - migrationStartTime;
@@ -899,7 +800,6 @@
 
         progressFill.style.width = progress + '%';
         progressPercent.textContent = progress + '%';
-        totalPercentEl.textContent = progress + '%';
 
         if (progress < 25) {
           statusText.textContent = 'Memulai migrasi...';
@@ -954,4 +854,51 @@
       if (!reduceMotion && typeof gsap !== 'undefined') {
         const card = document.getElementById('migrationCard');
         const iconBadge = document.getElementById('iconBadge');
-        const heading = document
+        const heading = document.getElementById('mainHeading');
+        const subtext = document.getElementById('subtext');
+        const migrationVisual = document.getElementById('migrationVisual');
+        const etaRow = document.getElementById('etaRow');
+        const statusBar = document.getElementById('statusBar');
+        const footerNote = document.getElementById('footerNote');
+
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+        tl.fromTo(card,
+          { y: 40, opacity: 0, scale: 0.98 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.6, clearProps: 'transform,opacity' }
+        )
+        .fromTo(iconBadge,
+          { scale: 0, rotation: -15 },
+          { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)' },
+          '-=0.3'
+        )
+        .fromTo([heading, subtext],
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, clearProps: 'transform,opacity' },
+          '-=0.2'
+        )
+        .fromTo(migrationVisual,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
+          '-=0.2'
+        )
+        .fromTo(etaRow,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
+          '-=0.15'
+        )
+        .fromTo(statusBar,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, clearProps: 'transform,opacity' },
+          '-=0.15'
+        )
+        .fromTo(footerNote,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.4, clearProps: 'opacity' },
+          '-=0.1'
+        );
+      }
+    })();
+  </script>
+</body>
+</html>
